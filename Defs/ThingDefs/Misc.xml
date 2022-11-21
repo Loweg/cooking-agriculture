@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="ChunkBase">
+		<defName>CA_ChunkSalt</defName>
+		<label>rock salt chunk</label>
+		<graphicData>
+			<color>(161,120,122)</color>
+			<texPath>Things/Item/Chunk/ChunkStone</texPath>
+			<graphicClass>Graphic_Random</graphicClass>
+			<flipExtraRotation>80</flipExtraRotation>
+		</graphicData>
+		<statBases>
+			<Mass>18</Mass>
+			<BeautyOutdoors>0</BeautyOutdoors>
+		</statBases>
+		<soundDrop>ChunkRock_Drop</soundDrop>
+		<thingCategories>
+			<li>Chunks</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef ParentName="RockBase">
+		<defName>CA_SaltRock</defName>
+		<label>rock salt</label>
+		<description>Rock salt.</description>
+		<graphicData>
+			<color>(161,120,122)</color>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>350</MaxHitPoints>
+		</statBases>
+		<building>
+			<isResourceRock>true</isResourceRock>
+			<mineableThing>CA_ChunkSalt</mineableThing>
+			<mineableDropChance>1</mineableDropChance>
+			<mineableScatterCommonality>0.3</mineableScatterCommonality>
+			<mineableScatterLumpSizeRange>5~9</mineableScatterLumpSizeRange>
+		</building>
+	</ThingDef>
+</Defs>

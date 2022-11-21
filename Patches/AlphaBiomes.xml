@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Alpha Biomes</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName = "AB_FeraliskInfestedJungle"]/wildPlants</xpath>
+					<value>
+						<CA_BananaTree>0.01</CA_BananaTree>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName = "AB_MycoticJungle"]/wildPlants</xpath>
+					<value>
+						<CA_BananaTree>0.01</CA_BananaTree>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName = "AB_OcularForest"]/wildPlants</xpath>
+					<value>
+						<CA_AppleTree>0.01</CA_AppleTree>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName = "AB_GelatinousSuperorganism"]/wildPlants</xpath>
+					<value>
+						<CA_BananaTree>0.01</CA_BananaTree>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName = "AB_GallatrossGraveyard"]/wildPlants</xpath>
+					<value>
+						<CA_DateTree>0.01</CA_DateTree>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/BiomeDef[defName = "AB_TarPits"]/wildPlants</xpath>
+					<value>
+						<CA_DateTree>0.01</CA_DateTree>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>

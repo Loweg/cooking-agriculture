@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<WorkGiverDef>
+		<defName>CA_TakeFromSaltPan</defName>
+		<label>rake salt in salt pans</label>
+		<giverClass>CookingAgriculture.WorkGiver_TakeFromSaltPan</giverClass>
+		<workType>Hauling</workType>
+		<verb>rake salt</verb>
+		<gerund>raking salt in</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<canBeDoneByMechs>false</canBeDoneByMechs>
+	</WorkGiverDef>
+</Defs>

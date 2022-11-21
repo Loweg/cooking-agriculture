@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<!-- Fruit -->
+	<ThingDef Abstract="True" Name="CA_ResourceFruitBase" ParentName="OrganicProductBase">
+		<ingestible>
+			<preferability>RawTasty</preferability>
+			<tasteThought />
+			<foodType>VegetableOrFruit</foodType>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>RawVegetable_Eat</ingestSound>
+		</ingestible>
+		<statBases>
+			<Nutrition>0.05</Nutrition>
+			<FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+			<MarketValue>1.2</MarketValue>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>15</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<soundInteract>Grain_Drop</soundInteract>
+		<soundDrop>Grain_Drop</soundDrop>
+		<socialPropernessMatters>true</socialPropernessMatters>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceFruitBase">
+		<defName>CA_Apples</defName>
+		<label>apples</label>
+		<description>A red variety of apple.</description>
+		<graphicData>
+			<texPath>Resources/CA_Apples</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceFruitBase">
+		<defName>CA_Bananas</defName>
+		<label>bananas</label>
+		<description>A yellow fruit technically classified as a berry. Apparently monkeys love them.</description>
+		<graphicData>
+			<texPath>Resources/CA_Bananas</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceFruitBase">
+		<defName>CA_Cherries</defName>
+		<label>cherries</label>
+		<description>A small red fruit with a pit.</description>
+		<graphicData>
+			<texPath>Resources/CA_Cherries</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceFruitBase">
+		<defName>CA_Dates</defName>
+		<label>dates</label>
+		<description>Dates.</description>
+		<graphicData>
+			<texPath>Resources/CA_Dates</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<!-- Unprocessed -->
+	<ThingDef ParentName="RoughPlantBase">
+		<defName>CA_Wheat</defName>
+		<label>wheat</label>
+		<description>Unprocessed wheat that can be milled into flour or brewed into beer.</description>
+		<graphicData>
+			<texPath>Resources/CA_Wheat</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="RoughPlantBase">
+		<defName>CA_Sugarcane</defName>
+		<label>sugarcane</label>
+		<description>Raw sugarcane, ready to be processed into sugar.</description>
+		<graphicData>
+			<texPath>Resources/CA_Sugarcane</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<!-- Processed -->
+	<ThingDef ParentName="ResourceBase">
+		<defName>CA_Salt</defName>
+		<label>salt</label>
+		<description>Salt.</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Resources/CA_Salt</texPath>
+			<drawSize>0.90</drawSize>
+		</graphicData>
+		<stackLimit>75</stackLimit>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<MarketValue>6</MarketValue>
+			<Mass>0.02</Mass>
+			<Flammability>0.3</Flammability>
+			<DeteriorationRate>1.0</DeteriorationRate>
+		</statBases>
+		<thingCategories>
+			<li>Manufactured</li>
+		</thingCategories>
+	</ThingDef>
+</Defs>

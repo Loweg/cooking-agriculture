@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<ThingDef ParentName="BuildingBase">
+		<defName>CA_SaltPan</defName>
+		<label>salt pan</label>
+		<thingClass>CookingAgriculture.Building_SaltPan</thingClass>
+		<description>Salt Pan.</description>
+		<graphicData>
+			<texPath>Buildings/SaltPan/CA_SaltPan</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<expandHomeArea>false</expandHomeArea>
+			<deconstructible>true</deconstructible>
+		</building>
+		<placeWorkers>
+			<li>CookingAgriculture.PlaceWorker_SaltPan</li>
+		</placeWorkers>
+		<statBases>
+			<Flammability>0</Flammability>
+			<WorkToBuild>800</WorkToBuild>
+			<Beauty>-10</Beauty>
+		</statBases>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
+		<canOverlapZones>false</canOverlapZones>
+		<constructEffect>ConstructDirt</constructEffect>
+		<designationCategory>Production</designationCategory>
+		<fillPercent>0</fillPercent>
+		<passability>Standable</passability>
+		<pathCost>20</pathCost>
+		<rotatable>true</rotatable>
+		<size>(3,3)</size>
+		<terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
+		<tickerType>Rare</tickerType>
+		<useHitPoints>false</useHitPoints>
+	</ThingDef>
+</Defs>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<SaltPanReady>Ready for pickup.</SaltPanReady>
+	<SaltPanProgress>Progress: {0} ({1} left)</SaltPanProgress>
+	<SaltPanSpeed>Evaporation speed: {0}</SaltPanSpeed>
+	<SaltPanTooCold>Too cold. Not evaporating.</SaltPanTooCold>
+	<MustHaveOceanWater>Must have salt water.</MustHaveOceanWater>
+	<MustNotBlockOtherSaltPan>Must not block other salt pan.</MustNotBlockOtherSaltPan>
+</LanguageData>
