@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Factions Expanded - Medieval</li>
+		</mods>
+		<nomatch Class="PatchOperationSequence">
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<StuffCategoryDef>
+							<defName>CA_ChunkStone</defName>
+							<label>stone chunks</label>
+						</StuffCategoryDef>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[@Name="ChunkRockBase"]</xpath>
+					<value>
+						<stuffProps>
+							<categories>
+								<li>CA_ChunkStone</li>
+							</categories>
+						</stuffProps>
+					</value>
+				</li>
+			</operations>
+		</nomatch>
+		<match Class="PatchOperationReplace">
+			<xpath>/Defs/ThingDef[defName="CA_MillManual" or defName="CA_MillWind"]/stuffCategories</xpath>
+			<value>
+				<stuffCategories>
+					<li>VFEM_StoneChunks</li>
+				</stuffCategories>
+			</value>
+		</match>
+	</Operation>
+</Patch>

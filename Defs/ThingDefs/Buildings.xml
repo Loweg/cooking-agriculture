@@ -20,7 +20,7 @@
 		</placeWorkers>
 		<statBases>
 			<Flammability>0</Flammability>
-			<WorkToBuild>800</WorkToBuild>
+			<WorkToBuild>1600</WorkToBuild>
 			<Beauty>-10</Beauty>
 		</statBases>
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
@@ -35,5 +35,231 @@
 		<terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
 		<tickerType>Rare</tickerType>
 		<useHitPoints>false</useHitPoints>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>CA_SugarEvaporator</defName>
+		<label>sugar evaporator</label>
+		<description>Sugar evaporator.</description>
+		<thingClass>Building</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Furniture/Stool</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<altitudeLayer>Building</altitudeLayer>
+		<fillPercent>0.3</fillPercent>
+		<statBases>
+			<Mass>4</Mass>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<designationCategory>Production</designationCategory>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<comps>
+			<li Class="ProcessorFramework.CompProperties_Processor">
+				<showProductIcon>false</showProductIcon>
+				<capacity>25</capacity>
+				<independentProcesses>false</independentProcesses>
+				<parallelProcesses>false</parallelProcesses>
+				<processes>
+					<li>CA_SugarEvaporation</li>
+				</processes>
+			</li>
+		</comps>
+		<tickerType>Rare</tickerType>
+		<rotatable>false</rotatable>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<building>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+	</ThingDef>
+
+	<!-- Mills -->
+	<ThingDef ParentName="BenchBase">
+		<defName>CA_MillManual</defName>
+		<label>hand mill</label>
+		<thingClass>Building_WorkTable</thingClass>
+		<description>Hand mill.</description>
+		<graphicData>
+			<texPath>Buildings/MillManual/CA_MillManual</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(.9,.9)</drawSize>
+		</graphicData>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+		</building>
+		<costList>
+			<WoodLog>10</WoodLog>
+		</costList>
+		<costStuffCount>2</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>CA_ChunkStone</li>
+		</stuffCategories>
+		<inspectorTabs>
+			<li>ITab_Bills</li>
+		</inspectorTabs>
+		<placeWorkers>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>CA_MillingBasic</li>
+		</researchPrerequisites>
+		<statBases>
+			<Flammability>0</Flammability>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+		</statBases>
+		<altitudeLayer>Building</altitudeLayer>
+		<constructEffect>ConstructMetal</constructEffect>
+		<designationCategory>Production</designationCategory>
+		<fillPercent>0.5</fillPercent>
+		<hasInteractionCell>True</hasInteractionCell>
+		<interactionCellOffset>(0,0,-1)</interactionCellOffset>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<size>(1,1)</size>
+		<surfaceType>Item</surfaceType>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>CA_MillWind</defName>
+		<label>wind mill</label>
+		<description>Wind mill.</description>
+		<graphicData>
+			<texPath>Buildings/MillManual/CA_MillManual</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.8,1.8)</drawSize>
+		</graphicData>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<allowAutoroof>false</allowAutoroof>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<comps>
+			<li Class="ProcessorFramework.CompProperties_Processor">
+				<showProductIcon>false</showProductIcon>
+				<capacity>75</capacity>
+				<independentProcesses>false</independentProcesses>
+				<parallelProcesses>false</parallelProcesses>
+				<processes>
+					<li>CA_MillingWind</li>
+				</processes>
+			</li>
+		</comps>
+		<costList>
+			<WoodLog>200</WoodLog>
+		</costList>
+		<costStuffCount>2</costStuffCount>
+		<stuffCategories Inherit="False">
+			<li>CA_ChunkStone</li>
+		</stuffCategories>
+		<placeWorkers>
+			<li>PlaceWorker_WindTurbine</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>CA_MillingAutomatic</li>
+		</researchPrerequisites>
+		<statBases>
+			<Flammability>1.0</Flammability>
+			<MaxHitPoints>120</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+		</statBases>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<blockWind>true</blockWind>
+		<canOverlapZones>false</canOverlapZones>
+		<constructEffect>ConstructMetal</constructEffect>
+		<designationCategory>Production</designationCategory>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<fillPercent>0.5</fillPercent>
+		<passability>Impassable</passability>
+		<size>(2,2)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="BuildingBase">
+		<defName>CA_MillElectric</defName>
+		<label>grinding machine</label>
+		<description>Grinding machine.</description>
+		<graphicData>
+			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<comps>
+			<li Class="ProcessorFramework.CompProperties_Processor">
+				<showProductIcon>false</showProductIcon>
+				<capacity>75</capacity>
+				<independentProcesses>false</independentProcesses>
+				<parallelProcesses>false</parallelProcesses>
+				<processes>
+					<li>CA_MillingElectric</li>
+					<li>CA_SugarGrinding</li>
+					<li>CA_SugarEvaporationCentrifuge</li>
+				</processes>
+			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>50</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+		</comps>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<researchPrerequisites>
+			<li>CA_MillingElectric</li>
+		</researchPrerequisites>
+		<statBases>
+			<Flammability>0.2</Flammability>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Beauty>-5</Beauty>
+			<Mass>35</Mass>
+		</statBases>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<altitudeLayer>Building</altitudeLayer>
+		<blockWind>true</blockWind>
+		<canOverlapZones>false</canOverlapZones>
+		<constructEffect>ConstructMetal</constructEffect>
+		<designationCategory>Production</designationCategory>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<fillPercent>0.5</fillPercent>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<passability>Impassable</passability>
+		<size>(2,2)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<tickerType>Normal</tickerType>
 	</ThingDef>
 </Defs>

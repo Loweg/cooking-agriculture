@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CookingAgriculture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Mill.cs" />
     <Compile Include="SaltPan.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

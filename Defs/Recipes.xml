@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<RecipeDef>
-		<defName>MakeSaltFromChunk</defName>
+		<defName>CA_MakeSaltFromChunk</defName>
 		<label>make salt from rock salt</label>
 		<description>Salt.</description>
 		<jobString>Making salt from rock salt.</jobString>
@@ -26,4 +26,131 @@
 			<li>TableStonecutter</li>
 		</recipeUsers>
 	</RecipeDef>
+
+	<!-- Sugar -->
+	<RecipeDef>
+		<defName>CA_MakeSyrup</defName>
+		<label>make syrup</label>
+		<description>Make syrup.</description>
+		<jobString>Making syrup.</jobString>
+		<workAmount>800</workAmount>
+		<workSpeedStat>CookingSpeed</workSpeedStat>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Sugarcane</li>
+					</thingDefs>
+				</filter>
+				<count>25</count>
+			</li>
+		</ingredients>
+		<products>
+			<CA_Syrup>25</CA_Syrup>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_SugarEvaporation</defName>
+		<thingDef>CA_Sugar</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>CA_Syrup</li>
+			</thingDefs>
+		</ingredientFilter>
+		<processDays>0.67</processDays>
+		<temperatureIdeal>10~100</temperatureIdeal>
+		<temperatureSafe>-50~200</temperatureSafe>
+		<sunFactor>0.4~1.0</sunFactor>
+		<rainFactor>1~0</rainFactor>
+		<snowFactor>1~0</snowFactor>
+		<windFactor>0.8~1.0</windFactor>
+	</ProcessorFramework.ProcessDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_SugarEvaporationCentrifuge</defName>
+		<thingDef>CA_Sugar</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>CA_Syrup</li>
+			</thingDefs>
+		</ingredientFilter>
+		<processDays>0.5</processDays>
+		<usesTemperature>false</usesTemperature>
+		<unpoweredFactor>0.0</unpoweredFactor>
+		<powerUseFactor>8.0</powerUseFactor>
+	</ProcessorFramework.ProcessDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_SugarGrinding</defName>
+		<thingDef>CA_Syrup</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>CA_Sugarcane</li>
+			</thingDefs>
+		</ingredientFilter>
+		<efficiency>0.33333</efficiency>
+		<processDays>0.5</processDays>
+		<usesTemperature>false</usesTemperature>
+		<unpoweredFactor>0.0</unpoweredFactor>
+		<powerUseFactor>8.0</powerUseFactor>
+	</ProcessorFramework.ProcessDef>
+
+	<!-- Milling -->
+	<RecipeDef>
+		<defName>CA_MakeFlourAtQuern</defName>
+		<label>grind flour from wheat</label>
+		<description>Grind flour from wheat by hand at a quern.</description>
+		<jobString>Grinding flour.</jobString>
+		<workAmount>800</workAmount>
+		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Wheat</li>
+					</thingDefs>
+				</filter>
+				<count>20</count>
+			</li>
+		</ingredients>
+		<products>
+			<CA_Flour>20</CA_Flour>
+		</products>
+		<recipeUsers>
+			<li>CA_MillManual</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_MillingWind</defName>
+		<thingDef>CA_Flour</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>CA_Wheat</li>
+			</thingDefs>
+		</ingredientFilter>
+		<processDays>0.67</processDays>
+		<usesTemperature>false</usesTemperature>
+		<windFactor>0~1.0</windFactor>
+	</ProcessorFramework.ProcessDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_MillingElectric</defName>
+		<thingDef>CA_Flour</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>CA_Wheat</li>
+			</thingDefs>
+		</ingredientFilter>
+		<processDays>0.5</processDays>
+		<usesTemperature>false</usesTemperature>
+		<unpoweredFactor>0.0</unpoweredFactor>
+		<powerUseFactor>8.0</powerUseFactor>
+	</ProcessorFramework.ProcessDef>
 </Defs>

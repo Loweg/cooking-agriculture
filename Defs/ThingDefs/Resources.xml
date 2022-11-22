@@ -81,15 +81,7 @@
 	</ThingDef>
 
 	<!-- Processed -->
-	<ThingDef ParentName="ResourceBase">
-		<defName>CA_Salt</defName>
-		<label>salt</label>
-		<description>Salt.</description>
-		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
-			<texPath>Resources/CA_Salt</texPath>
-			<drawSize>0.90</drawSize>
-		</graphicData>
+	<ThingDef Abstract="True" Name="CA_ResourceProcessedBase" ParentName="ResourceBase">
 		<stackLimit>75</stackLimit>
 		<healthAffectsPrice>false</healthAffectsPrice>
 		<statBases>
@@ -97,10 +89,70 @@
 			<MarketValue>6</MarketValue>
 			<Mass>0.02</Mass>
 			<Flammability>0.3</Flammability>
-			<DeteriorationRate>1.0</DeteriorationRate>
+			<DeteriorationRate>2.0</DeteriorationRate>
 		</statBases>
 		<thingCategories>
 			<li>Manufactured</li>
 		</thingCategories>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceProcessedBase">
+		<defName>CA_Salt</defName>
+		<label>salt</label>
+		<description>Salt.</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Resources/CA_Salt</texPath>
+		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceProcessedBase">
+		<defName>CA_Flour</defName>
+		<label>flour</label>
+		<description>Flour.</description>
+		<graphicData>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<texPath>Resources/CA_Flour</texPath>
+		</graphicData>
+		<statBases>
+			<MarketValue>2</MarketValue>
+			<Mass>0.08</Mass>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceProcessedBase">
+		<defName>CA_Syrup</defName>
+		<label>syrup</label>
+		<description>Syrup.</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Item/Resource/Wort</texPath>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>10</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<stackLimit>25</stackLimit>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceProcessedBase">
+		<defName>CA_Sugar</defName>
+		<label>sugar</label>
+		<description>Sugar.</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Resources/CA_Sugar</texPath>
+		</graphicData>
 	</ThingDef>
 </Defs>
