@@ -72,21 +72,36 @@
 		<graphicData>
 			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
 		</graphicData>
-		<statBases>
-			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
-		</statBases>
-		<ingestible>
-			<foodType>VegetableOrFruit</foodType>
-		</ingestible>
 		<comps>
 			<li Class="CompProperties_Rottable">
 				<daysToRotStart>60</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
+		<ingestible>
+			<foodType>VegetableOrFruit</foodType>
+		</ingestible>
+		<statBases>
+			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
+		</statBases>
+		<thingCategories>
+			<li>Foods</li>
+		</thingCategories>
 	</ThingDef>
 
-	<ThingDef ParentName="PlantFoodRawBase">
+	<ThingDef Name="CA_ResourcePreservedFoodBase" ParentName="PlantFoodRawBase" Abstract="True">
+		<ingestible>
+			<preferability>RawTasty</preferability>
+			<tasteThought />
+			<foodType>VegetableOrFruit</foodType>
+		</ingestible>
+		<statBases>
+			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
+			<MarketValue>1.2</MarketValue>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_PickledVegetable</defName>
 		<label>pickles</label>
 		<description>Assorted pickled vegetables. Nice to eat, even when raw. Pickled foods never spoil, but don't restore as much nutrition as their unfermented counterparts.</description>
@@ -95,39 +110,51 @@
 		</graphicData>
 		<statBases>
 			<Nutrition>0.04</Nutrition>
-			<MarketValue>1.2</MarketValue>
 		</statBases>
-		<ingestible>
-			<preferability>RawTasty</preferability>
-			<tasteThought />
-			<foodType>VegetableOrFruit</foodType>
-		</ingestible>
 	</ThingDef>
 
-	<ThingDef ParentName="PlantFoodRawBase">
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_Cheese</defName>
 		<label>cheese</label>
 		<description>Cheese.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
 		</graphicData>
-		<statBases>
-			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
-		</statBases>
-		<ingestible>
-			<preferability>RawTasty</preferability>
-			<foodType>AnimalProduct, Fluid</foodType>
-			<babiesCanIngest>true</babiesCanIngest>
-		</ingestible>
 		<comps>
 			<li Class="CompProperties_Rottable">
 				<daysToRotStart>60</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
+		<ingestible>
+			<foodType>AnimalProduct, Fluid</foodType>
+			<babiesCanIngest>true</babiesCanIngest>
+		</ingestible>
+		<thingCategories>
+			<li>AnimalProductRaw</li>
+		</thingCategories>
 	</ThingDef>
 
-	<ThingDef ParentName="PlantFoodRawBase">
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
+		<defName>CA_Flatbread</defName>
+		<label>flatbread</label>
+		<description>Simple unrisen bread. Tastes bland, but not offensive. It lasts a very long time without refrigeration. Great for traveling.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<statBases>
+			<Mass>0.015</Mass>
+			<Nutrition>0.7</Nutrition>
+		</statBases>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_Jam</defName>
 		<label>jam</label>
 		<description>Fruit jam that is both filling and delicious. Jam lasts for ages.</description>
@@ -136,35 +163,31 @@
 		</graphicData>
 		<statBases>
 			<Nutrition>0.06</Nutrition>
-			<MarketValue>1.2</MarketValue>
 		</statBases>
-		<ingestible>
-			<preferability>RawTasty</preferability>
-			<tasteThought />
-			<foodType>VegetableOrFruit</foodType>
-		</ingestible>
 	</ThingDef>
 
-	<ThingDef ParentName="PlantFoodRawBase">
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_SmokedMeat</defName>
 		<label>smoked meat</label>
 		<description>Smoked meat.</description>
 		<graphicData>
 			<texPath>Resources/CA_Dates</texPath>
 		</graphicData>
-		<statBases>
-			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
-		</statBases>
-		<ingestible>
-			<preferability>RawTasty</preferability>
-			<foodType>Meat</foodType>
-		</ingestible>
 		<comps>
 			<li Class="CompProperties_Rottable">
 				<daysToRotStart>60</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
+		<ingestible>
+			<foodType>Meat</foodType>
+		</ingestible>
+		<statBases>
+			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
+		</statBases>
+		<thingCategories>
+			<li>MeatRaw</li>
+		</thingCategories>
 	</ThingDef>
 
 	<!-- Unprocessed -->
@@ -231,6 +254,9 @@
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
+		<thingCategories>
+			<li>PlantMatter</li>
+		</thingCategories>
 		<tickerType>Rare</tickerType>
 	</ThingDef>
 

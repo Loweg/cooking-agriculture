@@ -46,6 +46,42 @@
 	</RecipeDef>
 
 	<RecipeDef>
+		<defName>CA_MakeFlatbread</defName>
+		<label>make flatbread</label>
+		<description>Make flatbread.</description>
+		<jobString>Making flatbread.</jobString>
+		<workAmount>800</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Flour</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>CA_Flour</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<CA_Flatbread>25</CA_Flatbread>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+	</RecipeDef>
+
+	<RecipeDef>
 		<defName>CA_MakeJam</defName>
 		<label>make jam</label>
 		<description>Make jam.</description>
