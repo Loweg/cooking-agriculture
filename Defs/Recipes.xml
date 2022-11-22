@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<RecipeDef>
+		<defName>CA_MakeJam</defName>
+		<label>make jam</label>
+		<description>Make jam.</description>
+		<jobString>Making jam.</jobString>
+		<workAmount>800</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>CA_Fruit</li>
+					</categories>
+					<thingDefs>
+						<li>RawBerries</li>
+					</thingDefs>
+				</filter>
+				<count>1.0</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Sugar</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>CA_Fruit</li>
+			</categories>
+			<thingDefs>
+				<li>RawBerries</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<CA_Jam>25</CA_Jam>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+	</RecipeDef>
+
+	<!-- Salt -->
+	<RecipeDef>
 		<defName>CA_MakeSaltFromChunk</defName>
 		<label>make salt from rock salt</label>
 		<description>Salt.</description>
@@ -27,6 +78,73 @@
 		</recipeUsers>
 	</RecipeDef>
 
+	<RecipeDef>
+		<defName>CA_SaltVegetable</defName>
+		<label>salt vegetables</label>
+		<description>Salt vegetables.</description>
+		<jobString>Salting vegetables.</jobString>
+		<workAmount>800</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>PlantFoodRaw</li>
+					</categories>
+				</filter>
+				<count>1.0</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Salt</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>PlantFoodRaw</li>
+			</categories>
+			<disallowedCategories>
+				<li>CA_Fruit</li>
+			</disallowedCategories>
+			<disallowedThingDefs>
+				<li>RawBerries</li>
+				<li>CA_Jam</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_PickledVegetable</li>
+			</disallowedThingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<CA_SaltedVegetable>25</CA_SaltedVegetable>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+	</RecipeDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_Pickling</defName>
+		<thingDef>CA_PickledVegetable</thingDef>
+		<ingredientFilter>
+			<thingDefs>
+				<li>CA_SaltedVegetable</li>
+			</thingDefs>
+		</ingredientFilter>
+		<processDays>3</processDays>
+		<bonusOutputs>
+			<CA_Vinegar>(1.0, 10)</CA_Vinegar>
+		</bonusOutputs>
+	</ProcessorFramework.ProcessDef>
+
 	<!-- Sugar -->
 	<RecipeDef>
 		<defName>CA_MakeSyrup</defName>
@@ -34,7 +152,6 @@
 		<description>Make syrup.</description>
 		<jobString>Making syrup.</jobString>
 		<workAmount>800</workAmount>
-		<workSpeedStat>CookingSpeed</workSpeedStat>
 		<ingredients>
 			<li>
 				<filter>
@@ -53,6 +170,10 @@
 			<li>ElectricStove</li>
 			<li>FueledStove</li>
 		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
 	</RecipeDef>
 
 	<ProcessorFramework.ProcessDef>

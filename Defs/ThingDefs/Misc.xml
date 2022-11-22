@@ -37,4 +37,12 @@
 			<mineableScatterLumpSizeRange>5~9</mineableScatterLumpSizeRange>
 		</building>
 	</ThingDef>
+
+	<ThingCategoryDef>
+		<defName>CA_Fruit</defName>
+		<label>raw fruits</label>
+		<parent>PlantFoodRaw</parent>
+		<resourceReadoutRoot>true</resourceReadoutRoot>
+		<iconPath>Resources/CA_Apples</iconPath>
+	</ThingCategoryDef>
 </Defs>
