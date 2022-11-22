@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<RecipeDef>
+		<defName>CA_MakeCheese</defName>
+		<label>make cheese</label>
+		<description>Make cheese.</description>
+		<jobString>Making cheese.</jobString>
+		<workAmount>800</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Milk</li>
+					</thingDefs>
+				</filter>
+				<count>1.0</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Vinegar</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Milk</li>
+				<li>CA_Vinegar</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<CA_Cheese>25</CA_Cheese>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+	</RecipeDef>
+
+	<RecipeDef>
 		<defName>CA_MakeJam</defName>
 		<label>make jam</label>
 		<description>Make jam.</description>
@@ -49,6 +94,19 @@
 		<soundWorking>Recipe_CookMeal</soundWorking>
 		<allowMixingIngredients>true</allowMixingIngredients>
 	</RecipeDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_Smoking</defName>
+		<thingDef>CA_SmokedMeat</thingDef>
+		<ingredientFilter>
+			<categories>
+				<li>MeatRaw</li>
+			</categories>
+		</ingredientFilter>
+		<processDays>3</processDays>
+		<unfueledFactor>0.0</unfueledFactor>
+		<fuelUseFactor>500.0</fuelUseFactor>
+	</ProcessorFramework.ProcessDef>
 
 	<!-- Salt -->
 	<RecipeDef>
@@ -215,7 +273,7 @@
 				<li>CA_Sugarcane</li>
 			</thingDefs>
 		</ingredientFilter>
-		<efficiency>0.33333</efficiency>
+		<efficiency>0.333</efficiency>
 		<processDays>0.5</processDays>
 		<usesTemperature>false</usesTemperature>
 		<unpoweredFactor>0.0</unpoweredFactor>
