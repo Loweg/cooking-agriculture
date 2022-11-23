@@ -46,6 +46,89 @@
 	</RecipeDef>
 
 	<RecipeDef>
+		<defName>CA_CookDessert</defName>
+		<label>cook dessert</label>
+		<description>Cook a dessert.</description>
+		<jobString>Cooking dessert.</jobString>
+		<ingredients>
+			<li Name="Filling">
+				<filter>
+					<categories>
+						<li>AnimalProductRaw</li>
+						<li>CA_Fruit</li>
+					</categories>
+					<thingDefs>
+						<li>Chocolate</li>
+						<li>RawBerries</li>
+					</thingDefs>
+				</filter>
+				<count>0.25</count>
+			</li>
+			<li Name="Base">
+				<filter>
+					<thingDefs>
+						<li>CA_Flour</li>
+						<li>CA_Sugar</li>
+						<li>RawFungus</li>
+					</thingDefs>
+				</filter>
+				<count>0.5</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>AnimalProductRaw</li>
+				<li>CA_Fruit</li>
+			</categories>
+			<thingDefs>
+				<li>CA_Flour</li>
+				<li>CA_Sugar</li>
+				<li>Chocolate</li>
+				<li>RawBerries</li>
+				<li>RawFungus</li>
+			</thingDefs>
+			<specialFiltersToDisallow>
+				<li>AllowPlantFood</li>
+			</specialFiltersToDisallow>
+		</fixedIngredientFilter>
+		<defaultIngredientFilter>
+			<categories>
+				<li>AnimalProductRaw</li>
+				<li>CA_Fruit</li>
+			</categories>
+			<thingDefs>
+				<li>CA_Flour</li>
+				<li>CA_Sugar</li>
+				<li>Chocolate</li>
+				<li>RawBerries</li>
+			</thingDefs>
+			<disallowedCategories>
+				<li>EggsFertilized</li>
+			</disallowedCategories>
+			<disallowedThingDefs>
+				<li>InsectJelly</li>
+				<li>RawFungus</li>
+			</disallowedThingDefs>
+		</defaultIngredientFilter>
+		<products>
+			<CA_Dessert>2</CA_Dessert>
+		</products>
+		<skillRequirements>
+			<Cooking>6</Cooking>
+		</skillRequirements>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
+		<recipeUsers>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+	</RecipeDef>
+
+	<RecipeDef>
 		<defName>CA_MakeFlatbread</defName>
 		<label>make flatbread</label>
 		<description>Make flatbread.</description>

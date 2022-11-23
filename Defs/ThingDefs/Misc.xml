@@ -38,6 +38,60 @@
 		</building>
 	</ThingDef>
 
+	<ThingDef ParentName="MealBase">
+		<defName>CA_Dessert</defName>
+		<label>dessert</label>
+		<description>Dessert.</description>
+		<graphicData>
+			<texPath>Things/Item/Meal/SurvivalPack</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>4</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<ingestible>
+			<preferability>DesperateOnly</preferability>
+			<foodType>Processed</foodType>
+			<joy>0.60</joy>
+			<joyKind>Gluttonous</joyKind>
+			<ingestSound>Meal_Eat</ingestSound>
+		</ingestible>
+		<statBases>
+			<MarketValue>24</MarketValue>
+			<Nutrition>0.3</Nutrition>
+		</statBases>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="MealBase">
+		<defName>CA_Soup</defName>
+		<label>soup</label>
+		<description>Thin, efficient soup.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Wort</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>2</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<ingestible>
+			<preferability>MealSimple</preferability>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Meal_Eat</ingestSound>
+		</ingestible>
+		<statBases>
+			<MarketValue>15</MarketValue>
+			<Nutrition>0.9</Nutrition>
+		</statBases>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
 	<ThingCategoryDef>
 		<defName>CA_Fruit</defName>
 		<label>raw fruits</label>

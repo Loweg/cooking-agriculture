@@ -10,44 +10,24 @@ using Verse.AI;
 namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
 	public class Building_SaltPan : Building {
-		private float progress = 0f;
-		private Material barFilledCachedMat;
-		private const int ticksToComplete = 3600;
-		private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);
-		private static readonly Color BarEmptyColor = new Color(0.4f, 0.27f, 0.22f);
-		private static readonly Color BarCompleteColor = new Color(0.9f, 0.85f, 0.2f);
-		private static readonly Material BarUnfilledMat = SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.3f, 0.3f, 0.3f));
-		public float Progress {
-			get => progress;
-			set {
-				if (value == progress)
-					return;
-				progress = value;
-				barFilledCachedMat = null;
-			}
-		}
-		private Material BarFilledMat {
-			get {
-				if (barFilledCachedMat == null)
-					barFilledCachedMat = SolidColorMaterials.SimpleSolidColorMaterial(Color.Lerp(BarEmptyColor, BarCompleteColor, Progress));
-				return barFilledCachedMat;
-			}
-		}
+		private ProgressBar progressBar = new ProgressBar(3600);
+		public bool IsComplete => progressBar.Progress >= 1f;
+
 		private float CurrentTempSpeedFactor {
 			get {
 				return GenMath.LerpDouble(0f, 50f, 0f, 2f, this.AmbientTemperature);
 			}
 		}
-		private float ProgressPerTickAtCurrentTemp => Mathf.Max((1f / ticksToComplete) * CurrentTempSpeedFactor, 0f);
-		private int EstimatedTicksLeft => Mathf.RoundToInt((1f - Progress) / ProgressPerTickAtCurrentTemp);
+		private float ProgressPerTickAtCurrentTemp => Mathf.Max((1f / progressBar.ticksToComplete) * CurrentTempSpeedFactor, 0f);
+		private int EstimatedTicksLeft => Mathf.RoundToInt((1f - progressBar.Progress) / ProgressPerTickAtCurrentTemp);
 
 		private void Reset() {
-			Progress = 0.0f;
+			progressBar.Progress = 0.0f;
 		}
 
 		public override void TickRare() {
 			base.TickRare();
-			Progress = Mathf.Min(Progress + 250f * ProgressPerTickAtCurrentTemp, 1f);
+			progressBar.Progress = Mathf.Min(progressBar.Progress + 250f * ProgressPerTickAtCurrentTemp, 1f);
 		}
 
 		public override string GetInspectString() {
@@ -55,10 +35,10 @@ namespace CookingAgriculture {
 			stringBuilder.Append(base.GetInspectString());
 			if (stringBuilder.Length != 0)
 				stringBuilder.AppendLine();
-			if (Progress >= 1.0) {
+			if (IsComplete) {
 				stringBuilder.AppendLine("SaltPanReady".Translate());
 			} else {
-				stringBuilder.AppendLine("SaltPanProgress".Translate(Progress.ToStringPercent(), EstimatedTicksLeft.ToStringTicksToPeriod()));
+				stringBuilder.AppendLine("SaltPanProgress".Translate(progressBar.Progress.ToStringPercent(), EstimatedTicksLeft.ToStringTicksToPeriod()));
 				if (this.AmbientTemperature <= 0) {
 					stringBuilder.AppendLine("SaltPanTooCold".Translate());
 				} else {
@@ -70,7 +50,7 @@ namespace CookingAgriculture {
 		}
 
 		public Thing TakeOutSalt() {
-			if (Progress < 1.0) {
+			if (!IsComplete) {
 				Log.Warning("Tried to get salt but it's not yet ready.");
 				return null;
 			}
@@ -85,20 +65,12 @@ namespace CookingAgriculture {
 			Vector3 drawPos = this.DrawPos;
 			drawPos.y += 0.04054054f;
 			drawPos.z += 0.25f;
-			GenDraw.DrawFillableBar(new GenDraw.FillableBarRequest() {
-				center = drawPos,
-				size = BarSize,
-				fillPercent = Progress,
-				filledMat = BarFilledMat,
-				unfilledMat = BarUnfilledMat,
-				margin = 0.1f,
-				rotation = Rot4.North
-			});
+			progressBar.Draw(drawPos);
 		}
 
 		public override void ExposeData() {
 			base.ExposeData();
-			Scribe_Values.Look(ref progress, "progress");
+			progressBar.ExposeData();
 		}
 	}
 
@@ -224,14 +196,14 @@ namespace CookingAgriculture {
 		public override bool ShouldSkip(Pawn pawn, bool forced = false) {
 			List<Thing> pans = pawn.Map.listerThings.ThingsOfDef(ThingDef.Named("CA_SaltPan"));
 			for (int i = 0; i < pans.Count; i++) {
-				if (((Building_SaltPan)pans[i]).Progress >= 1f)
+				if (((Building_SaltPan)pans[i]).IsComplete)
 					return false;
 			}
 			return true;
 		}
 
 		public override PathEndMode PathEndMode => PathEndMode.Touch;
-		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) => t is Building_SaltPan saltPan && saltPan.Progress >= 1f && !t.IsBurning() && !t.IsForbidden(pawn) && pawn.CanReserve(t, ignoreOtherReservations: forced);
+		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) => t is Building_SaltPan saltPan && saltPan.IsComplete && !t.IsBurning() && !t.IsForbidden(pawn) && pawn.CanReserve(t, ignoreOtherReservations: forced);
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) => JobMaker.MakeJob(CA_DefOf.CA_TakeFromSaltPan, t);
 	}
 }
