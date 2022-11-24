@@ -7,6 +7,13 @@
 		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
 	</JobDef>
 
+	<JobDef>
+		<defName>CA_FeedYeastCulture</defName>
+		<driverClass>CookingAgriculture.JobDriver_FeedYeastCulture</driverClass>
+		<reportString>feeding TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
+
 	<WorkGiverDef>
 		<defName>CA_DoBillsMill</defName>
 		<label>mill</label>
@@ -22,5 +29,31 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 		<prioritizeSustains>true</prioritizeSustains>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>CA_TakeFromSaltPan</defName>
+		<label>rake salt in salt pans</label>
+		<giverClass>CookingAgriculture.WorkGiver_TakeFromSaltPan</giverClass>
+		<workType>Hauling</workType>
+		<verb>rake salt</verb>
+		<gerund>raking salt in</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<canBeDoneByMechs>false</canBeDoneByMechs>
+	</WorkGiverDef>
+
+	<WorkGiverDef>
+		<defName>CA_FeedYeastCulture</defName>
+		<label>feed yeast cultures</label>
+		<giverClass>CookingAgriculture.WorkGiver_FeedYeastCulture</giverClass>
+		<workType>Hauling</workType>
+		<verb>feed yeast culture</verb>
+		<gerund>feeding</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+		<canBeDoneByMechs>false</canBeDoneByMechs>
 	</WorkGiverDef>
 </Defs>

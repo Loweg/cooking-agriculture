@@ -185,6 +185,7 @@ namespace CookingAgriculture {
     [DefOf]
 	public static class CA_DefOf {
 		public static JobDef CA_TakeFromSaltPan;
+		public static JobDef CA_FeedYeastCulture;
 		public static StuffCategoryDef CA_ChunkStone;
 		public static ThingDef CA_Soup;
 	}

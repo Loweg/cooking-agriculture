@@ -6,4 +6,13 @@
 	<SaltPanTooCold>Too cold. Not evaporating.</SaltPanTooCold>
 	<MustHaveOceanWater>Must have salt water.</MustHaveOceanWater>
 	<MustNotBlockOtherSaltPan>Must not block other salt pan.</MustNotBlockOtherSaltPan>
+
+
+	<YeastCultureGrowth>Yeast: {0}/100</YeastCultureGrowth>
+	<YeastCultureNutrition>Nutrition: {0} full</YeastCultureNutrition>
+	<YeastCultureStarving>Dying off due to starvation</YeastCultureStarving>
+	<YeastCultureBadTemperature>Dying off due to bad temperature ({0} severity)</YeastCultureBadTemperature>
+	<YeastCultureGoodTemperature>Culture growing (speed: {0})</YeastCultureGoodTemperature>
+	<YeastCultureEmpty>Empty</YeastCultureEmpty>
+	<YeastCultureFull>Culture fully grown</YeastCultureFull>
 </LanguageData>

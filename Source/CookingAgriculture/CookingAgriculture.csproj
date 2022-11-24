@@ -59,6 +59,7 @@
     <Compile Include="Stew.cs" />
     <Compile Include="SaltPan.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="Yeast.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

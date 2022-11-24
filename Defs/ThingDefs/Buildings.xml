@@ -138,6 +138,22 @@
 		<rotatable>false</rotatable>
 	</ThingDef>
 
+	<ThingDef ParentName="CA_ProcessorBase">
+		<defName>CA_YeastCulture</defName>
+		<label>yeast culture</label>
+		<description>Yeast culture.</description>
+		<graphicData>
+			<texPath>Things/Building/Production/FermentingBarrel</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+		</graphicData>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
+	</ThingDef>
+
 	<!-- Mills -->
 	<ThingDef ParentName="BenchBase">
 		<defName>CA_MillManual</defName>
