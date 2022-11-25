@@ -101,7 +101,6 @@ namespace CookingAgriculture {
 		}
 
 		protected override IEnumerable<Toil> MakeNewToils() {
-			Log.Message("Found job...");
 			this.FailOnDespawnedNullOrForbidden(CultureInd);
 			this.FailOnBurningImmobile(CultureInd);
 			this.FailOnBurningImmobile(FoodInd);
@@ -128,11 +127,9 @@ namespace CookingAgriculture {
 		public override PathEndMode PathEndMode => PathEndMode.Touch;
 
 		public override bool ShouldSkip(Pawn pawn, bool forced = false) {
-			Log.Message("Checking culturing jobs");
 			List<Thing> cultures = pawn.Map.listerThings.ThingsOfDef(ThingDef.Named("CA_YeastCulture"));
 			for (int i = 0; i < cultures.Count; i++) {
 				if (((Building_YeastCulture)cultures[i]).ShouldFeed) {
-					Log.Message("Found job...");
 					return false;
 				}
 			}
@@ -148,7 +145,6 @@ namespace CookingAgriculture {
 		}
 
 		private Thing FindFeed(Pawn pawn) {
-			Log.Message("Finding feed...");
 			bool validator(Thing x) => !x.IsForbidden(pawn) && (x.def.defName == "CA_Flour" || x.def.defName == "CA_Wheat") && pawn.CanReserve(x);
 			return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.HaulableAlways), PathEndMode.ClosestTouch, TraverseParms.For(pawn), validator: validator);
 		}

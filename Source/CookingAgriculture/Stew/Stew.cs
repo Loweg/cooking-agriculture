@@ -49,4 +49,21 @@ namespace CookingAgriculture {
 		}
 
 	}
+
+	class StewUtility {
+		public static bool StewPredicate(Building_StewPot t) {
+			var getter = Utility.getter;
+			return (
+				getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) &&
+				(Utility.allowForbidden || !t.IsForbidden(getter)) &&
+				!t.IsEmpty && t.InteractionCell.Standable(t.Map) && !getter.IsWildMan() &&
+				(t.Faction == getter.Faction || t.Faction == getter.HostFaction) &&
+				IsFoodSourceOnMapSociallyProper(t, getter, Utility.eater, Utility.allowSociallyImproper) &&
+				getter.Map.reachability.CanReachNonLocal(getter.Position, new TargetInfo(t.InteractionCell, t.Map), PathEndMode.OnCell, TraverseParms.For(getter, Danger.Some))
+			);
+		}
+		private static bool IsFoodSourceOnMapSociallyProper(Thing t, Pawn getter, Pawn eater, bool allowSociallyImproper) {
+			return allowSociallyImproper || t.IsSociallyProper(getter) || t.IsSociallyProper(eater, eater.IsPrisonerOfColony, !getter.RaceProps.Animal);
+		}
+	}
 }

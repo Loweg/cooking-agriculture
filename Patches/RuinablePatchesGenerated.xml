@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is an automatically generated file. If you are the end user, this is safe to edit. If you are a contributor, please edit the source files instead. -->
+<Patch>
+<Operation Class="PatchOperationConditional">
+	<xpath>Defs/ThingDef[defName="RawBerries"]/comps</xpath>
+	<nomatch Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RawBerries"]</xpath>
+		<value>
+			<comps>
+				<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+			</comps>
+		</value>
+	</nomatch>
+	<match Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="RawBerries"]/comps</xpath>
+		<value>
+			<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+		</value>
+	</match>
+</Operation>
+</Patch>

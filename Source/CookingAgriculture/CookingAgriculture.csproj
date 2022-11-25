@@ -53,13 +53,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompUnfreezable.cs" />
     <Compile Include="CookingAgriculture.cs" />
     <Compile Include="HarmonyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stew.cs" />
     <Compile Include="SaltPan.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Yeast.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Stew\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

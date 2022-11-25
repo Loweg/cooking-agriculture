@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+	<FrozenImperfect>Frozen (spoils in {0})</FrozenImperfect>
+
 	<SaltPanReady>Ready for pickup.</SaltPanReady>
 	<SaltPanProgress>Progress: {0} ({1} left)</SaltPanProgress>
 	<SaltPanSpeed>Evaporation speed: {0}</SaltPanSpeed>
 	<SaltPanTooCold>Too cold. Not evaporating.</SaltPanTooCold>
 	<MustHaveOceanWater>Must have salt water.</MustHaveOceanWater>
 	<MustNotBlockOtherSaltPan>Must not block other salt pan.</MustNotBlockOtherSaltPan>
-
 
 	<YeastCultureGrowth>Yeast: {0}/100</YeastCultureGrowth>
 	<YeastCultureNutrition>Nutrition: {0} full</YeastCultureNutrition>
