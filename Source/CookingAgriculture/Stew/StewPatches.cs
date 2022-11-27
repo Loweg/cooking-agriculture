@@ -34,7 +34,7 @@ namespace CookingAgriculture.Stew {
 			[HarmonyPrefix]
 			static bool Prefix(ref Predicate<Thing> validator) {
 				var originalValidator = validator;
-				bool newValidator(Thing x) => x is Building_StewPot t ? Utility.StewPredicate(t) : originalValidator(x);
+				bool newValidator(Thing x) => x is Building_StewPot t ? StewUtility.StewPredicate(t) : originalValidator(x);
 				validator = newValidator;
 				return true;
 			}
@@ -44,7 +44,7 @@ namespace CookingAgriculture.Stew {
 			[HarmonyPrefix]
 			static bool Prefix(ref Predicate<Thing> validator) {
 				var originalValidator = validator;
-				bool newValidator(Thing x) => x is Building_StewPot t ? Utility.StewPredicate(t) : originalValidator(x);
+				bool newValidator(Thing x) => x is Building_StewPot t ? StewUtility.StewPredicate(t) : originalValidator(x);
 				validator = newValidator;
 				return true;
 			}
@@ -55,8 +55,15 @@ namespace CookingAgriculture.Stew {
 			static bool Prefix(ref JobDriver_Feed __instance, ref IEnumerable<Toil> __result) {
 				var targetThing = typeof(JobDriver_Feed).GetField("TargetThingA", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
 				if (targetThing is Building_StewPot) {
+					Log.Message("JobDriver_Feed: StewPot");
+					__instance.FailOnDespawnedNullOrForbidden(TargetIndex.B);
 					__result.AddItem(Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell).FailOnForbidden(TargetIndex.A));
 					__result.AddItem(Toils_Ingest.TakeMealFromDispenser(TargetIndex.A, __instance.pawn));
+					__result.AddItem(Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.Touch));
+					var deliveree = typeof(JobDriver_Feed).GetField("Deliveree", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
+					__result.AddItem(Toils_Ingest.ChewIngestible((Pawn)deliveree, 1.5f, TargetIndex.A).FailOnCannotTouch(TargetIndex.B, PathEndMode.Touch));
+					__result.AddItem(Toils_Ingest.FinalizeIngest((Pawn)deliveree, TargetIndex.A));
+					return false;
 				}
 				return true;
 			}
@@ -73,6 +80,23 @@ namespace CookingAgriculture.Stew {
 			}
 			static void Postfix() {
 				Utility.BestFoodSourceOnMap = false;
+			}
+		}
+		[HarmonyPatch(typeof(ThingListGroupHelper), nameof(ThingListGroupHelper.Includes))]
+		class FoodSourcePatch {
+			[HarmonyPostfix]
+			public static void Postfix(ref bool __result, ThingRequestGroup group, ThingDef def) {
+				if (group == ThingRequestGroup.FoodSource) {
+					if (def.thingClass == typeof(Building_StewPot)) {
+						Log.Message("Looking for food: stew pot");
+					}
+					__result = def.IsNutritionGivingIngestible || def.thingClass == typeof(Building_NutrientPasteDispenser) || def.thingClass == typeof(Building_StewPot);
+				} else if (group == ThingRequestGroup.FoodSourceNotPlantOrTree) {
+					if (def.thingClass == typeof(Building_StewPot)) {
+						Log.Message("Looking for food (non plant): stew pot");
+					}
+					__result = def.IsNutritionGivingIngestible && (def.ingestible.foodType & ~FoodTypeFlags.Plant & ~FoodTypeFlags.Tree) != FoodTypeFlags.None || def.thingClass == typeof(Building_NutrientPasteDispenser) || def.thingClass == typeof(Building_StewPot);
+				}
 			}
 		}
 		/*[HarmonyPatch(typeof(JobDriver_FoodDeliver), nameof(JobDriver_FoodDeliver.GetReport))]

@@ -110,6 +110,24 @@
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
+		<defName>CA_StewPot</defName>
+		<label>stew pot</label>
+		<description>Stew pot.</description>
+		<thingClass>CookingAgriculture.Building_StewPot</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Production/NutrientDispenser</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1,1)</drawSize>
+		</graphicData>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<costStuffCount>20</costStuffCount>
+		<rotatable>false</rotatable>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_SugarEvaporator</defName>
 		<label>sugar evaporator</label>
 		<description>Sugar evaporator.</description>

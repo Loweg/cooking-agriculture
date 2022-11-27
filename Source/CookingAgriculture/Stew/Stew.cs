@@ -4,6 +4,7 @@ using System.Text;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 
 namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
@@ -34,6 +35,7 @@ namespace CookingAgriculture {
 		public override string GetInspectString() {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.AppendLine(base.GetInspectString());
+			stringBuilder.AppendLine(progressBar.Progress.ToStringPercent());
 			if (!this.IsSociallyProper(null, false))
 				stringBuilder.AppendLine("InPrisonCell".Translate());
 			return stringBuilder.ToString().Trim();
@@ -47,7 +49,6 @@ namespace CookingAgriculture {
 				storedMeals = 10;
 			}
 		}
-
 	}
 
 	class StewUtility {

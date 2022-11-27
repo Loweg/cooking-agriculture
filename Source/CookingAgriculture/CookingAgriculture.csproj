@@ -58,6 +58,8 @@
     <Compile Include="HarmonyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaltPan.cs" />
+    <Compile Include="Stew\Stew.cs" />
+    <Compile Include="Stew\StewPatches.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Yeast.cs" />
   </ItemGroup>
