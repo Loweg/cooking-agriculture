@@ -8,18 +8,37 @@ using Verse;
 using Verse.AI;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace CookingAgriculture.Stew {
 	class StewPatches {
-		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.GetFinalIngestibleDef))]
-		class GetIngestiblePatch {
-			[HarmonyPostfix]
-			public static void Postfix(ref ThingDef __result, Thing foodSource) {
-				if (foodSource is Building_StewPot) {
-					__result = CA_DefOf.CA_Soup;
-				}
+		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.BestFoodSourceOnMap_NewTemp))]
+		public static class BestFoodSourcePatch {
+			static void Prefix(ref Pawn getter, ref Pawn eater, ref bool allowDispenserFull, ref bool allowForbidden, ref bool allowSociallyImproper) {
+				StewUtility.BestFoodSourceOnMap = true;
+				StewUtility.getter = getter;
+				StewUtility.eater = eater;
+				StewUtility.allowDispenserFull = allowDispenserFull;
+				StewUtility.allowForbidden = allowForbidden;
+				StewUtility.allowSociallyImproper = allowSociallyImproper;
+			}
+			static void Postfix() {
+				StewUtility.BestFoodSourceOnMap = false;
 			}
 		}
+
+		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.GetFinalIngestibleDef))]
+		class GetIngestiblePatch {
+			[HarmonyPrefix]
+			public static bool Prefix(ref ThingDef __result, Thing foodSource) {
+				if (foodSource is Building_StewPot && StewUtility.BestFoodSourceOnMap) {
+					__result = CA_DefOf.CA_Soup;
+					return false;
+				}
+				return true;
+			}
+		}
+
 		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.GetMaxAmountToPickup))]
 		class GetPickupPatch {
 			[HarmonyPostfix]
@@ -29,6 +48,7 @@ namespace CookingAgriculture.Stew {
 				}
 			}
 		}
+
 		[HarmonyPatch(typeof(FoodUtility), "SpawnedFoodSearchInnerScan")]
 		class SearchInnerPatch {
 			[HarmonyPrefix]
@@ -39,7 +59,8 @@ namespace CookingAgriculture.Stew {
 				return true;
 			}
 		}
-		[HarmonyPatch(typeof(GenClosest), "ClosestThingReachable")]
+
+		[HarmonyPatch(typeof(GenClosest), nameof(GenClosest.ClosestThingReachable))]
 		class ClosestThingPatch {
 			[HarmonyPrefix]
 			static bool Prefix(ref Predicate<Thing> validator) {
@@ -49,6 +70,7 @@ namespace CookingAgriculture.Stew {
 				return true;
 			}
 		}
+
 		[HarmonyPatch(typeof(JobDriver_Feed), "MakeNewToils")]
 		class JobFeedPatch {
 			[HarmonyPrefix]
@@ -68,53 +90,68 @@ namespace CookingAgriculture.Stew {
 				return true;
 			}
 		}
-		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.BestFoodSourceOnMap_NewTemp))]
-		public static class BestFoodSourcePatch {
-			static void Prefix(ref Pawn getter, ref Pawn eater, ref bool allowDispenserFull, ref bool allowForbidden, ref bool allowSociallyImproper) {
-				Utility.BestFoodSourceOnMap = true;
-				Utility.getter = getter;
-				Utility.eater = eater;
-				Utility.allowDispenserFull = allowDispenserFull;
-				Utility.allowForbidden = allowForbidden;
-				Utility.allowSociallyImproper = allowSociallyImproper;
-			}
-			static void Postfix() {
-				Utility.BestFoodSourceOnMap = false;
-			}
-		}
-		[HarmonyPatch(typeof(ThingListGroupHelper), nameof(ThingListGroupHelper.Includes))]
-		class FoodSourcePatch {
-			[HarmonyPostfix]
-			public static void Postfix(ref bool __result, ThingRequestGroup group, ThingDef def) {
-				if (group == ThingRequestGroup.FoodSource) {
-					if (def.thingClass == typeof(Building_StewPot)) {
-						Log.Message("Looking for food: stew pot");
-					}
-					__result = def.IsNutritionGivingIngestible || def.thingClass == typeof(Building_NutrientPasteDispenser) || def.thingClass == typeof(Building_StewPot);
-				} else if (group == ThingRequestGroup.FoodSourceNotPlantOrTree) {
-					if (def.thingClass == typeof(Building_StewPot)) {
-						Log.Message("Looking for food (non plant): stew pot");
-					}
-					__result = def.IsNutritionGivingIngestible && (def.ingestible.foodType & ~FoodTypeFlags.Plant & ~FoodTypeFlags.Tree) != FoodTypeFlags.None || def.thingClass == typeof(Building_NutrientPasteDispenser) || def.thingClass == typeof(Building_StewPot);
-				}
-			}
-		}
-		/*[HarmonyPatch(typeof(JobDriver_FoodDeliver), nameof(JobDriver_FoodDeliver.GetReport))]
-		public static class DeliverReportPatch {
-			static void Postfix(JobDriver_FoodDeliver __instance, ref string __result) {
-				if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
-					__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
-				}
-			}
-		}
-		[HarmonyPatch(typeof(JobDriver_FoodFeedPatient), nameof(JobDriver_FoodFeedPatient.GetReport))]
-		public static class FeedPatientReportPatch {
-			static void Postfix(JobDriver_FoodFeedPatient __instance, ref string __result) {
-				if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
-					__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
-				}
-			}
-		}*/
 
+		[HarmonyPatch(typeof(ThingDef), nameof(ThingDef.IsFoodDispenser), MethodType.Getter)]
+		public static class IsFoodDispenserPatch {
+			[HarmonyPrefix]
+			static bool Prefix(ThingDef __instance, ref bool __result) {
+				if (__instance.thingClass == typeof(Building_StewPot)) {
+					__result = false;
+					return false;
+				}
+				return true;
+			}
+		}
+
+		[HarmonyPatch(typeof(ThingListGroupHelper), nameof(ThingListGroupHelper.Includes))]
+		public static class FoodSourcePatch {
+			[HarmonyPrefix]
+			static bool Prefix(ref ThingRequestGroup group, ref ThingDef def, ref bool __result) {
+				if (group == ThingRequestGroup.FoodSource || group == ThingRequestGroup.FoodSourceNotPlantOrTree) {
+					if (def.thingClass == typeof(Building_StewPot)) {
+						__result = true;
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+
+		[HarmonyPatch(typeof(Toils_Ingest), nameof(Toils_Ingest.TakeMealFromDispenser))]
+		public static class TakeMealFromDispenserPatch {
+			[HarmonyPostfix]
+			static void Postfix(TargetIndex ind, Pawn eater, Toil __result) {
+				if (eater.jobs.curJob.GetTarget(ind).Thing is Building_StewPot) {
+					__result.initAction = delegate {
+						var actor = __result.actor;
+						var thing = ((Building_StewPot)actor.jobs.curJob.GetTarget(ind).Thing).TryDispenseFood();
+						if (thing == null) {
+							actor.jobs.curDriver.EndJobWith(JobCondition.Incompletable);
+							return;
+						}
+
+						actor.carryTracker.TryStartCarry(thing);
+						actor.CurJob.SetTarget(ind, actor.carryTracker.CarriedThing);
+					};
+					return;
+				}
+			}
+		}
 	}
+	/*[HarmonyPatch(typeof(JobDriver_FoodDeliver), nameof(JobDriver_FoodDeliver.GetReport))]
+	public static class DeliverReportPatch {
+		static void Postfix(JobDriver_FoodDeliver __instance, ref string __result) {
+			if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
+				__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
+			}
+		}
+	}
+	[HarmonyPatch(typeof(JobDriver_FoodFeedPatient), nameof(JobDriver_FoodFeedPatient.GetReport))]
+	public static class FeedPatientReportPatch {
+		static void Postfix(JobDriver_FoodFeedPatient __instance, ref string __result) {
+			if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
+				__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
+			}
+		}
+	}*/
 }

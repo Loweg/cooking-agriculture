@@ -43,8 +43,8 @@
 		<label>dessert</label>
 		<description>Dessert.</description>
 		<graphicData>
-			<texPath>Things/Item/Meal/SurvivalPack</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Item/Resource/Chocolate</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">

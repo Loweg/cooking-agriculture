@@ -6,15 +6,6 @@ using Verse;
 using Verse.AI;
 
 namespace CookingAgriculture {
-	static class Utility {
-		public static bool allowForbidden;
-		public static bool allowDispenserFull;
-		public static Pawn getter;
-		public static Pawn eater;
-		public static bool allowSociallyImproper;
-		public static bool BestFoodSourceOnMap;
-	}
-
 	class ProgressBar {
 		private Material barFilledCachedMat;
 		private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);

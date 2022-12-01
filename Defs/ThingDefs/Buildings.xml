@@ -125,6 +125,7 @@
 		</stuffCategories>
 		<costStuffCount>20</costStuffCount>
 		<rotatable>false</rotatable>
+		<tickerType>Normal</tickerType>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
