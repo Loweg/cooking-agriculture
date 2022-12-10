@@ -33,7 +33,7 @@
 		<label>apples</label>
 		<description>A red variety of apple.</description>
 		<graphicData>
-			<texPath>Resources/CA_Apples</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Apples</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -42,7 +42,7 @@
 		<label>bananas</label>
 		<description>A yellow fruit technically classified as a berry. Apparently monkeys love them.</description>
 		<graphicData>
-			<texPath>Resources/CA_Bananas</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Bananas</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -51,7 +51,7 @@
 		<label>cherries</label>
 		<description>A small red fruit with a pit.</description>
 		<graphicData>
-			<texPath>Resources/CA_Cherries</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Cherries</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -60,7 +60,7 @@
 		<label>dates</label>
 		<description>Dates.</description>
 		<graphicData>
-			<texPath>Resources/CA_Dates</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Dates</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -171,7 +171,7 @@
 		<label>smoked meat</label>
 		<description>Smoked meat.</description>
 		<graphicData>
-			<texPath>Resources/CA_Dates</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Dates</texPath>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
@@ -196,7 +196,7 @@
 		<label>wheat</label>
 		<description>Unprocessed wheat that can be milled into flour or brewed into beer.</description>
 		<graphicData>
-			<texPath>Resources/CA_Wheat</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Wheat</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -205,7 +205,7 @@
 		<label>sugarcane</label>
 		<description>Raw sugarcane, ready to be processed into sugar.</description>
 		<graphicData>
-			<texPath>Resources/CA_Sugarcane</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Sugarcane</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -231,7 +231,7 @@
 		<description>Salt.</description>
 		<graphicData>
 			<graphicClass>Graphic_Single</graphicClass>
-			<texPath>Resources/CA_Salt</texPath>
+			<texPath>Things/Item/Resource/CA_Salt</texPath>
 		</graphicData>
 	</ThingDef>
 
@@ -241,7 +241,7 @@
 		<description>Flour.</description>
 		<graphicData>
 			<graphicClass>Graphic_StackCount</graphicClass>
-			<texPath>Resources/CA_Flour</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Flour</texPath>
 		</graphicData>
 		<statBases>
 			<MarketValue>2</MarketValue>
@@ -284,7 +284,7 @@
 		<description>Sugar.</description>
 		<graphicData>
 			<graphicClass>Graphic_Single</graphicClass>
-			<texPath>Resources/CA_Sugar</texPath>
+			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Sugar</texPath>
 		</graphicData>
 	</ThingDef>
 

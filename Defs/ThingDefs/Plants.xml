@@ -50,7 +50,7 @@
 			<Nutrition>0.2</Nutrition>
 		</statBases>
 		<graphicData>
-			<texPath>Plants/Sugarcane</texPath>
+			<texPath>Things/Plant/CA_Sugarcane</texPath>
 		</graphicData>
 		<plant>
 			<fertilityMin>1</fertilityMin>
@@ -86,7 +86,7 @@
 			<Nutrition>0.18</Nutrition>
 		</statBases>
 		<graphicData>
-			<texPath>Plants/Wheat</texPath>
+			<texPath>Things/Plant/CA_Wheat</texPath>
 		</graphicData>
 		<plant>
 			<dieIfLeafless>false</dieIfLeafless>

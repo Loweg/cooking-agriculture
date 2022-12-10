@@ -97,6 +97,6 @@
 		<label>raw fruits</label>
 		<parent>PlantFoodRaw</parent>
 		<resourceReadoutRoot>true</resourceReadoutRoot>
-		<iconPath>Resources/CA_Apples</iconPath>
+		<iconPath>Things/Item/Resource/PlantFoodRaw/CA_Apples</iconPath>
 	</ThingCategoryDef>
 </Defs>

@@ -32,11 +32,11 @@
 		<label>apple tree</label>
 		<description>A tree that yields apples.</description>
 		<graphicData>
-			<texPath>Trees/Apple</texPath>
+			<texPath>Things/Plant/CA_TreeApple</texPath>
 		</graphicData>
 		<plant>
-			<immatureGraphicPath>Trees/Apple/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Trees/Apple/Leafless</leaflessGraphicPath>
+			<immatureGraphicPath>Things/Plant/CA_TreeApple/Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/CA_TreeApple/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>CA_Apples</harvestedThingDef>
 		</plant>
 	</ThingDef>
@@ -46,11 +46,11 @@
 		<label>banana tree</label>
 		<description>A tropical tree with a tall, naked trunk topped by a cluster of very broad leaves. This variety produces bananas.</description>
 		<graphicData>
-			<texPath>Trees/Banana</texPath>
+			<texPath>Things/Plant/CA_TreeBanana</texPath>
 		</graphicData>
 		<plant>
-			<immatureGraphicPath>Trees/Banana/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Trees/Banana/Leafless</leaflessGraphicPath>
+			<immatureGraphicPath>Things/Plant/CA_TreeBanana/Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/CA_TreeBanana/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>CA_Bananas</harvestedThingDef>
 			<topWindExposure>0.05</topWindExposure>
 			<harvestWork>150</harvestWork>
@@ -63,15 +63,15 @@
 		<description>A cold-tolerant tree that yields cherries. This variety is quite beautiful when it blossoms in the winter.</description>
 		<thingClass>CookingAgriculture.Plant_WinterFlowering</thingClass>
 		<graphicData>
-			<texPath>Trees/Cherry</texPath>
+			<texPath>Things/Plant/CA_TreeCherry</texPath>
 		</graphicData>
 		<statBases>
 			<Beauty>5</Beauty>
 			<BeautyOutdoors>5</BeautyOutdoors>
 		</statBases>
 		<plant>
-			<immatureGraphicPath>Trees/Cherry/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Trees/Cherry/Leafless</leaflessGraphicPath>
+			<immatureGraphicPath>Things/Plant/CA_TreeCherry/Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/CA_TreeCherry/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>CA_Cherries</harvestedThingDef>
 		</plant>
 	</ThingDef>
@@ -81,11 +81,11 @@
 		<label>date tree</label>
 		<description>A tropical tree with a tall, naked trunk topped by a cluster of very broad leaves. This variety produces dates.</description>
 		<graphicData>
-			<texPath>Trees/Date</texPath>
+			<texPath>Things/Plant/CA_TreeDate</texPath>
 		</graphicData>
 		<plant>
-			<immatureGraphicPath>Trees/Date/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Trees/Date/Leafless</leaflessGraphicPath>
+			<immatureGraphicPath>Things/Plant/CA_TreeDate/Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/CA_TreeDate/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>CA_Dates</harvestedThingDef>
 			<topWindExposure>0.05</topWindExposure>
 			<harvestWork>150</harvestWork>
@@ -97,11 +97,11 @@
 		<label>mulberry tree</label>
 		<description>A tree that yields delicious berries that can be eaten raw.</description>
 		<graphicData>
-			<texPath>Trees/Mulberry</texPath>
+			<texPath>Things/Plant/CA_TreeMulberry</texPath>
 		</graphicData>
 		<plant>
-			<immatureGraphicPath>Trees/Mulberry/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Trees/Mulberry/Leafless</leaflessGraphicPath>
+			<immatureGraphicPath>Things/Plant/CA_TreeMulberry/Immature</immatureGraphicPath>
+			<leaflessGraphicPath>Things/Plant/CA_TreeMulberry/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>RawBerries</harvestedThingDef>
 		</plant>
 	</ThingDef>
