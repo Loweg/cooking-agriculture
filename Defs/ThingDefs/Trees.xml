@@ -50,7 +50,6 @@
 		</graphicData>
 		<plant>
 			<immatureGraphicPath>Things/Plant/CA_TreeBanana/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Things/Plant/CA_TreeBanana/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>CA_Bananas</harvestedThingDef>
 			<topWindExposure>0.05</topWindExposure>
 			<harvestWork>150</harvestWork>
@@ -85,7 +84,6 @@
 		</graphicData>
 		<plant>
 			<immatureGraphicPath>Things/Plant/CA_TreeDate/Immature</immatureGraphicPath>
-			<leaflessGraphicPath>Things/Plant/CA_TreeDate/Leafless</leaflessGraphicPath>
 			<harvestedThingDef>CA_Dates</harvestedThingDef>
 			<topWindExposure>0.05</topWindExposure>
 			<harvestWork>150</harvestWork>
