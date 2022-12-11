@@ -61,6 +61,14 @@ namespace CookingAgriculture {
 				storedMeals = 10;
 			}
 		}
+		public override IEnumerable<Gizmo> GetGizmos() {
+			foreach (Gizmo c in base.GetGizmos()) {
+				yield return c;
+			}
+			if (Prefs.DevMode) {
+				yield return progressBar.GetGizmo();
+			}
+		}
 
 		public override Thing TryDispenseFood() {
 			if (IsEmpty) { return null; }

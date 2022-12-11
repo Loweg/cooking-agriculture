@@ -72,6 +72,15 @@ namespace CookingAgriculture {
 			base.ExposeData();
 			progressBar.ExposeData();
 		}
+
+		public override IEnumerable<Gizmo> GetGizmos() {
+			foreach (Gizmo c in base.GetGizmos()) {
+				yield return c;
+			}
+			if (Prefs.DevMode) {
+				yield return progressBar.GetGizmo();
+			}
+		}
 	}
 
 	public class PlaceWorker_SaltPan : PlaceWorker {

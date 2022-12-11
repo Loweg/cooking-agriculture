@@ -49,6 +49,17 @@ namespace CookingAgriculture {
 			});
 		}
 
+		public Gizmo GetGizmo() {
+			Command_Action gizmo = new Command_Action {
+				defaultLabel = "Debug: Finish",
+				defaultDesc = "Sets progress to 100%.",
+			};
+			gizmo.action = () => {
+				Progress = 1f;
+			};
+			return gizmo;
+		}
+
 		public void ExposeData() {
 			Scribe_Values.Look(ref progress, "progress");
 		}
@@ -57,7 +68,7 @@ namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
 	public class Plant_WinterFlowering : Plant {
 		private static readonly Graphic GraphicSowing = GraphicDatabase.Get<Graphic_Single>("Things/Plant/Plant_Sowing", ShaderDatabase.Cutout, Vector2.one, Color.white);
-		private static readonly Graphic GraphicWinter = GraphicDatabase.Get<Graphic_Random>("Trees/Cherry/Blossom", ShaderDatabase.CutoutPlant, Vector2.one, Color.white);
+		private static readonly Graphic GraphicWinter = GraphicDatabase.Get<Graphic_Random>("Things/Plant/CA_TreeCherry/Blossom", ShaderDatabase.CutoutPlant, Vector2.one, Color.white);
 
 		public override Graphic Graphic {
 			get {

@@ -137,21 +137,21 @@ namespace CookingAgriculture.Stew {
 				}
 			}
 		}
-	}
-	/*[HarmonyPatch(typeof(JobDriver_FoodDeliver), nameof(JobDriver_FoodDeliver.GetReport))]
-	public static class DeliverReportPatch {
-		static void Postfix(JobDriver_FoodDeliver __instance, ref string __result) {
-			if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
-				__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
+		[HarmonyPatch(typeof(JobDriver_FoodDeliver), nameof(JobDriver_FoodDeliver.GetReport))]
+		public static class DeliverReportPatch {
+			static void Postfix(JobDriver_FoodDeliver __instance, ref string __result) {
+				if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
+					__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
+				}
+			}
+		}
+		[HarmonyPatch(typeof(JobDriver_FoodFeedPatient), nameof(JobDriver_FoodFeedPatient.GetReport))]
+		public static class FeedPatientReportPatch {
+			static void Postfix(JobDriver_FoodFeedPatient __instance, ref string __result) {
+				if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
+					__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
+				}
 			}
 		}
 	}
-	[HarmonyPatch(typeof(JobDriver_FoodFeedPatient), nameof(JobDriver_FoodFeedPatient.GetReport))]
-	public static class FeedPatientReportPatch {
-		static void Postfix(JobDriver_FoodFeedPatient __instance, ref string __result) {
-			if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot && (Pawn)__instance.job.targetB.Thing != null) {
-				__result = __instance.job.def.reportString.Replace("TargetA", "soup").Replace("TargetB", __instance.job.targetB.Thing.LabelShort);
-			}
-		}
-	}*/
 }

@@ -66,6 +66,22 @@ namespace CookingAgriculture {
 			return stringBuilder.ToString().TrimEndNewlines();
 		}
 
+		public override IEnumerable<Gizmo> GetGizmos() {
+			foreach (Gizmo c in base.GetGizmos()) {
+				yield return c;
+			}
+			if (Prefs.DevMode) {
+				Command_Action gizmo = new Command_Action {
+					defaultLabel = "Debug: Fill",
+					defaultDesc = "Increase yeast amount to 100%.",
+				};
+				gizmo.action = () => {
+					growth = 100f;
+				};
+				yield return gizmo;
+			}
+		}
+
 		public Thing TakeOutYeast() {
 			if (growth < 10f) {
 				Log.Warning("Tried to get yeast but growth < 10.");
