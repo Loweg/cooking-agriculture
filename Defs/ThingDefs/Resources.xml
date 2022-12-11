@@ -73,33 +73,34 @@
 		<graphicData>
 			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
 		</graphicData>
+		<ingestible>
+			<foodType>VegetableOrFruit</foodType>
+		</ingestible>
 		<comps>
 			<li Class="CompProperties_Rottable">
 				<daysToRotStart>60</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
-		<ingestible>
-			<foodType>VegetableOrFruit</foodType>
-		</ingestible>
 		<statBases>
 			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
 		</statBases>
-		<thingCategories>
-			<li>Foods</li>
-		</thingCategories>
 	</ThingDef>
 
-	<ThingDef Name="CA_ResourcePreservedFoodBase" ParentName="PlantFoodRawBase" Abstract="True">
+	<ThingDef Name="CA_ResourcePreservedFoodBase" ParentName="OrganicProductBase" Abstract="True">
 		<ingestible>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>RawVegetable_Eat</ingestSound>
 			<preferability>RawTasty</preferability>
-			<tasteThought />
 			<foodType>VegetableOrFruit</foodType>
 		</ingestible>
 		<statBases>
 			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
 			<MarketValue>1.2</MarketValue>
+			<Nutrition>0.05</Nutrition>
 		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<allowedArchonexusCount>200</allowedArchonexusCount>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -153,6 +154,9 @@
 			<Mass>0.015</Mass>
 			<Nutrition>0.7</Nutrition>
 		</statBases>
+		<thingCategories>
+			<li>PlantFoodRaw</li>
+		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -165,6 +169,9 @@
 		<statBases>
 			<Nutrition>0.06</Nutrition>
 		</statBases>
+		<thingCategories>
+			<li>PlantFoodRaw</li>
+		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -183,9 +190,6 @@
 		<ingestible>
 			<foodType>Meat</foodType>
 		</ingestible>
-		<statBases>
-			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
-		</statBases>
 		<thingCategories>
 			<li>MeatRaw</li>
 		</thingCategories>
