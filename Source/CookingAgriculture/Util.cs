@@ -176,5 +176,6 @@ namespace CookingAgriculture {
 		public static JobDef CA_FeedYeastCulture;
 		public static StuffCategoryDef CA_ChunkStone;
 		public static ThingDef CA_Soup;
+		public static ThingDef CA_RuinedFood;
 	}
 }

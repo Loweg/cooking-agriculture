@@ -316,4 +316,41 @@
 			<texPath>Things/Item/Resource/Wort</texPath>
 		</graphicData>
 	</ThingDef>
+
+	<ThingDef ParentName="OrganicProductBase">
+		<defName>CA_RuinedFood</defName>
+		<label>ruined food</label>
+		<description>Freezerburned mush. Yuck.</description>
+		<thingCategories>
+			<li>Foods</li>
+		</thingCategories>
+		<graphicData>
+			<texPath>Things/Item/Resource/Kibble</texPath>
+		</graphicData>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<statBases>
+			<FoodPoisonChanceFixedHuman>0.02</FoodPoisonChanceFixedHuman>
+			<Nutrition>0.05</Nutrition>
+		</statBases>
+		<ingestible>
+			<foodType>Kibble</foodType>
+			<preferability>RawBad</preferability>
+			<tasteThought>AteKibble</tasteThought>
+			<optimalityOffsetHumanlikes>-30</optimalityOffsetHumanlikes>
+			<optimalityOffsetFeedingAnimals>15</optimalityOffsetFeedingAnimals>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>RawVegetable_Eat</ingestSound>
+		</ingestible>
+		<comps>
+			<li Class="CompProperties_Ingredients">
+				<performMergeCompatibilityChecks>false</performMergeCompatibilityChecks>
+				<noIngredientsFoodKind>Meat</noIngredientsFoodKind>
+			</li>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>7</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<allowedArchonexusCount>200</allowedArchonexusCount>
+	</ThingDef>
 </Defs>

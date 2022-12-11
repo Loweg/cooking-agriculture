@@ -21,8 +21,8 @@ namespace CookingAgriculture {
                 var map = parent.Map;
                 Log.Message($"Getting nutrition as {totalNutrition}");
                 parent.Destroy(DestroyMode.WillReplace);
-                Thing ruinedFood = ThingMaker.MakeThing(ThingDefOf.Kibble);
-                ruinedFood.stackCount = (int)((totalNutrition + 0.00001) / ThingDefOf.Kibble.ingestible.CachedNutrition);
+                Thing ruinedFood = ThingMaker.MakeThing(CA_DefOf.CA_RuinedFood);
+                ruinedFood.stackCount = (int)((totalNutrition + 0.00001) / ruinedFood.def.ingestible.CachedNutrition);
                 GenPlace.TryPlaceThing(ruinedFood, position, map, ThingPlaceMode.Near);
             } else if (parent.AmbientTemperature < 0f) {
                 ruinedPercent -= parent.AmbientTemperature * Props.progressPerDegreePerTick * ticks;
