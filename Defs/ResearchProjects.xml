@@ -1,34 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+	<ResearchTabDef>
+		<defName>CookingAgriculture</defName>
+		<label>Cooking and Agriculture</label>
+	</ResearchTabDef>
+
+	<!-- Milling -->
 	<ResearchProjectDef>
 		<defName>CA_MillingBasic</defName>
 		<label>basic milling</label>
-		<description>Milling with a hand mill.</description>
+		<description>Build a hand mill for grinding grains.</description>
 		<baseCost>300</baseCost>
+		<tab>CookingAgriculture</tab>
 		<techLevel>Neolithic</techLevel>
 		<tags>
 			<li>ClassicStart</li>
 			<li>TribalStart</li>
 		</tags>
+		<researchViewX>0.00</researchViewX>
+		<researchViewY>0.00</researchViewY>
 	</ResearchProjectDef>
 	<ResearchProjectDef>
 		<defName>CA_MillingAutomatic</defName>
 		<label>automatic milling</label>
-		<description>Wind and water mills.</description>
+		<description>Build wind and water mills for automatic processing of grains.</description>
 		<baseCost>600</baseCost>
+		<tab>CookingAgriculture</tab>
 		<techLevel>Medieval</techLevel>
 		<prerequisites>
 			<li>CA_MillingBasic</li>
 		</prerequisites>
+		<tags>
+			<li>ClassicStart</li>
+		</tags>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>0.00</researchViewY>
 	</ResearchProjectDef>
 	<ResearchProjectDef>
 		<defName>CA_MillingElectric</defName>
-		<label>electric milling</label>
-		<description>Grinding machine.</description>
+		<label>industrial processing</label>
+		<description>Build the grinding machine for milling plant matter, and the centrifuge for evaporating sugar syrup.</description>
 		<baseCost>1000</baseCost>
+		<tab>CookingAgriculture</tab>
 		<techLevel>Industrial</techLevel>
 		<prerequisites>
 			<li>Electricity</li>
 		</prerequisites>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>0.70</researchViewY>
+	</ResearchProjectDef>
+
+	<!-- Other -->
+	<ResearchProjectDef>
+		<defName>CA_Stew</defName>
+		<label>stew</label>
+		<description>Build a stew pot to simmer ingredients into efficient soups.</description>
+		<baseCost>400</baseCost>
+		<tab>CookingAgriculture</tab>
+		<techLevel>Neolithic</techLevel>
+		<tags>
+			<li>TribalStart</li>
+		</tags>
+		<researchViewX>0.00</researchViewX>
+		<researchViewY>0.70</researchViewY>
+	</ResearchProjectDef>
+	<ResearchProjectDef>
+		<defName>CA_SaltEvaporation</defName>
+		<label>salt pans</label>
+		<description>Build salt pans to evaporate valuable salt from sea water.</description>
+		<baseCost>600</baseCost>
+		<tab>CookingAgriculture</tab>
+		<techLevel>Neolithic</techLevel>
+		<researchViewX>0.00</researchViewX>
+		<researchViewY>1.40</researchViewY>
 	</ResearchProjectDef>
 </Defs>

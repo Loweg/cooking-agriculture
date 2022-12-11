@@ -18,6 +18,9 @@
 		<placeWorkers>
 			<li>CookingAgriculture.PlaceWorker_SaltPan</li>
 		</placeWorkers>
+		<researchPrerequisites>
+			<li>CA_SaltEvaporation</li>
+		</researchPrerequisites>
 		<statBases>
 			<Flammability>0</Flammability>
 			<WorkToBuild>1600</WorkToBuild>
@@ -106,6 +109,9 @@
 				</processes>
 			</li>
 		</comps>
+		<researchPrerequisites>
+			<li>Pemmican</li>
+		</researchPrerequisites>
 		<tickerType>Normal</tickerType>
 	</ThingDef>
 
@@ -119,6 +125,9 @@
 			<graphicClass>Graphic_Multi</graphicClass>
 			<drawSize>(1,1)</drawSize>
 		</graphicData>
+		<researchPrerequisites>
+			<li>CA_Stew</li>
+		</researchPrerequisites>
 		<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
@@ -165,6 +174,9 @@
 			<texPath>Things/Building/Production/FermentingBarrel</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 		</graphicData>
+		<researchPrerequisites>
+			<li>Brewing</li>
+		</researchPrerequisites>
 		<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
@@ -362,6 +374,9 @@
 			<Steel>200</Steel>
 			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
+		<researchPrerequisites>
+			<li>CA_MillingElectric</li>
+		</researchPrerequisites>
 		<statBases>
 			<Flammability>0.2</Flammability>
 			<MaxHitPoints>200</MaxHitPoints>

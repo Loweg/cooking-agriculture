@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Brewing -> fermentation -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ResearchProjectDef[defName="Brewing"]/label</xpath>
+		<value>
+			<label>fermentation</label>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ResearchProjectDef[defName="Brewing"]/description</xpath>
+		<value>
+			<description>Learn the basics of fermentation, allowing you to harness the power of yeast to rise bread and transform hops into tasty, tasty beer.</description>
+		</value>
+	</Operation>
+
+	<!-- Pemmican -> preservation -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ResearchProjectDef[defName="Pemmican"]/label</xpath>
+		<value>
+			<label>food preservation</label>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ResearchProjectDef[defName="Pemmican"]/description</xpath>
+		<value>
+			<description>Learn how different environmental factors affect spoilage in order to preserve a variety of foods.</description>
+		</value>
+	</Operation>
+</Patch>
