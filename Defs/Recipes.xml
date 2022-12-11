@@ -51,8 +51,9 @@
 		<description>Cook a dessert.</description>
 		<jobString>Cooking dessert.</jobString>
 		<ingredients>
-			<li Name="Filling">
+			<li>
 				<filter>
+					<customSummary>filling</customSummary>
 					<categories>
 						<li>AnimalProductRaw</li>
 						<li>CA_Fruit</li>
@@ -64,8 +65,9 @@
 				</filter>
 				<count>0.25</count>
 			</li>
-			<li Name="Base">
+			<li>
 				<filter>
+					<customSummary>base</customSummary>
 					<thingDefs>
 						<li>CA_Flour</li>
 						<li>CA_Sugar</li>

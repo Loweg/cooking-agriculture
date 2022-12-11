@@ -251,8 +251,14 @@
 		<statBases>
 			<MarketValue>2</MarketValue>
 			<Mass>0.08</Mass>
+			<Nutrition>0.05</Nutrition>
 			<Flammability>1.0</Flammability>
 		</statBases>
+		<ingestible>
+			<foodType>Plant</foodType>
+			<preferability>DesperateOnly</preferability>
+			<canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+		</ingestible>
 		<comps>
 			<li Class="CompProperties_Rottable">
 				<daysToRotStart>60</daysToRotStart>
@@ -291,6 +297,14 @@
 			<graphicClass>Graphic_Single</graphicClass>
 			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Sugar</texPath>
 		</graphicData>
+		<statBases>
+			<Nutrition>0.05</Nutrition>
+		</statBases>
+		<ingestible>
+			<foodType>Plant</foodType>
+			<preferability>DesperateOnly</preferability>
+			<canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
+		</ingestible>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourceProcessedBase">
