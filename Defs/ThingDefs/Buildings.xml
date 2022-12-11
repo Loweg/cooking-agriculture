@@ -297,7 +297,6 @@
 				<processes>
 					<li>CA_MillingElectric</li>
 					<li>CA_SugarGrinding</li>
-					<li>CA_SugarEvaporationCentrifuge</li>
 				</processes>
 			</li>
 			<li Class="CompProperties_Power">
@@ -324,7 +323,55 @@
 		<blockWind>true</blockWind>
 		<constructEffect>ConstructMetal</constructEffect>
 		<fillPercent>0.5</fillPercent>
-		<minifiedDef>MinifiedThing</minifiedDef>
+		<passability>Impassable</passability>
+		<size>(2,2)</size>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<tickerType>Normal</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ProcessorBase">
+		<defName>CA_Centrifuge</defName>
+		<label>centrifuge</label>
+		<description>Centrifuge.</description>
+		<graphicData>
+			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+		</building>
+		<comps>
+			<li Class="ProcessorFramework.CompProperties_Processor">
+				<showProductIcon>false</showProductIcon>
+				<capacity>75</capacity>
+				<independentProcesses>false</independentProcesses>
+				<parallelProcesses>false</parallelProcesses>
+				<processes>
+					<li>CA_SugarEvaporationCentrifuge</li>
+				</processes>
+			</li>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>50</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+			<li Class="CompProperties_Flickable" />
+		</comps>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<statBases>
+			<Flammability>0.2</Flammability>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Beauty>-5</Beauty>
+			<Mass>35</Mass>
+		</statBases>
+		<blockWind>true</blockWind>
+		<constructEffect>ConstructMetal</constructEffect>
+		<fillPercent>0.5</fillPercent>
 		<passability>Impassable</passability>
 		<size>(2,2)</size>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
