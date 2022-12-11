@@ -37,16 +37,15 @@
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[Name="EggBase"]/comps</xpath>
+		<xpath>Defs/ThingDef[@Name="EggBase"]/comps</xpath>
 		<value>
-			<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+			<li Class="CookingAgriculture.CompProperties_Unfreezable">
+				<progressPerDegreePerTick>0.00003</progressPerDegreePerTick>
+			</li>
 		</value>
 	</Operation>
 
 	<Operation Class="PatchOperationRemove">
-		<xpath>Defs/ThingDef[Name="EggFertBase"]/comps/li[@Class="CompProperties_TemperatureRuinable"]</xpath>
-		<value>
-			<li Class="CompProperties_TemperatureRuinable" />
-		</value>
+		<xpath>Defs/ThingDef[@Name="EggFertBase"]/comps/li[@Class="CompProperties_TemperatureRuinable"]</xpath>
 	</Operation>
 </Patch>

@@ -22,10 +22,10 @@ namespace CookingAgriculture {
                 Log.Message($"Getting nutrition as {totalNutrition}");
                 parent.Destroy(DestroyMode.WillReplace);
                 Thing ruinedFood = ThingMaker.MakeThing(ThingDefOf.Kibble);
-                ruinedFood.stackCount = (int)(totalNutrition / ThingDefOf.Kibble.ingestible.CachedNutrition);
+                ruinedFood.stackCount = (int)((totalNutrition + 0.00001) / ThingDefOf.Kibble.ingestible.CachedNutrition);
                 GenPlace.TryPlaceThing(ruinedFood, position, map, ThingPlaceMode.Near);
             } else if (parent.AmbientTemperature < 0f) {
-                ruinedPercent -= parent.AmbientTemperature * 0.000003f * ticks;
+                ruinedPercent -= parent.AmbientTemperature * Props.progressPerDegreePerTick * ticks;
             }
             ruinedPercent = Mathf.Clamp(ruinedPercent, 0f, 1f);
         }
@@ -33,12 +33,13 @@ namespace CookingAgriculture {
         public override string CompInspectStringExtra() {
             string str = base.CompInspectStringExtra();
             if (parent.AmbientTemperature < 0f) {
-                str += $"\nFreezing: {ruinedPercent.ToStringPercent()}";
+                str += $"Freezing: {ruinedPercent.ToStringPercent()}";
             }
             return str;
         }
     }
     public class CompProperties_Unfreezable : CompProperties {
+        public float progressPerDegreePerTick = 0.000003f;
         public CompProperties_Unfreezable() {
             compClass = typeof(CompUnfreezable);
         }

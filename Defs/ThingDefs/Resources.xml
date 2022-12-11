@@ -19,6 +19,7 @@
 				<daysToRotStart>15</daysToRotStart>
 				<rotDestroys>true</rotDestroys>
 			</li>
+			<li Class="CookingAgriculture.CompProperties_Unfreezable" />
 		</comps>
 		<thingCategories>
 			<li>CA_Fruit</li>
