@@ -60,4 +60,27 @@ namespace CookingAgriculture {
 			}
 		}
 	}
+
+	[HarmonyPatch(typeof(CompTemperatureRuinable), "DoTicks", new Type[] { typeof(int) })]
+	static class CompTemperatureRuinable_DoTicks_Patch {
+		static void Postfix(ref CompTemperatureRuinable __instance) {
+			if (__instance.Ruined && __instance.parent.def.defName.Contains("Fertilized")) {
+				ThingWithComps thing = __instance.parent;
+				Map map = thing.Map;
+				var pos = thing.Position;
+				var hp = thing.HitPoints;
+				var num = thing.stackCount;
+				var defname = thing.def.defName.Replace("Fertilized", "Unfertilized");
+				thing.Destroy();
+				var new_def = DefDatabase<ThingDef>.GetNamed(defname, false);
+				if (new_def == default(ThingDef)) {
+					new_def = DefDatabase<ThingDef>.GetNamed("EggChickenUnfertilized");
+				}
+				Thing new_thing = ThingMaker.MakeThing(new_def);
+				new_thing.HitPoints = hp;
+				new_thing.stackCount = num;
+				GenPlace.TryPlaceThing(new_thing, pos, map, ThingPlaceMode.Near);
+			}
+		}
+	}
 }
