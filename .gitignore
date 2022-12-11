@@ -2,4 +2,3 @@ Assemblies/
 *.suo
 Source/CookingAgriculture/obj
 .vscode/
-target/
