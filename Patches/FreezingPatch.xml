@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="Milk"]/comps</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Milk"]</xpath>
+			<value>
+				<comps>
+					<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+				</comps>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="Milk"]/comps</xpath>
+			<value>
+				<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="RawBerries"]/comps</xpath>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RawBerries"]</xpath>
+			<value>
+				<comps>
+					<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+				</comps>
+			</value>
+		</nomatch>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="RawBerries"]/comps</xpath>
+			<value>
+				<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+			</value>
+		</match>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[Name="EggBase"]/comps</xpath>
+		<value>
+			<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[Name="EggFertBase"]/comps/li[@Class="CompProperties_TemperatureRuinable"]</xpath>
+		<value>
+			<li Class="CompProperties_TemperatureRuinable" />
+		</value>
+	</Operation>
+</Patch>
