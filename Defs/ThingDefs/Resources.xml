@@ -218,6 +218,9 @@
 	<ThingDef Abstract="True" Name="CA_ResourceProcessedBase" ParentName="ResourceBase">
 		<stackLimit>75</stackLimit>
 		<healthAffectsPrice>false</healthAffectsPrice>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
 		<statBases>
 			<MaxHitPoints>50</MaxHitPoints>
 			<MarketValue>6</MarketValue>
@@ -235,7 +238,6 @@
 		<label>salt</label>
 		<description>Salt.</description>
 		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
 			<texPath>Things/Item/Resource/CA_Salt</texPath>
 		</graphicData>
 	</ThingDef>
@@ -245,8 +247,7 @@
 		<label>flour</label>
 		<description>Flour.</description>
 		<graphicData>
-			<graphicClass>Graphic_StackCount</graphicClass>
-			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Flour</texPath>
+			<texPath>Things/Item/Resource/CA_Flour</texPath>
 		</graphicData>
 		<statBases>
 			<MarketValue>2</MarketValue>
@@ -276,7 +277,6 @@
 		<label>syrup</label>
 		<description>Syrup.</description>
 		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
 			<texPath>Things/Item/Resource/Wort</texPath>
 		</graphicData>
 		<comps>
@@ -294,8 +294,7 @@
 		<label>sugar</label>
 		<description>Sugar.</description>
 		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
-			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Sugar</texPath>
+			<texPath>Things/Item/Resource/CA_Sugar</texPath>
 		</graphicData>
 		<statBases>
 			<Nutrition>0.05</Nutrition>
@@ -312,7 +311,6 @@
 		<label>vinegar</label>
 		<description>Vinegar.</description>
 		<graphicData>
-			<graphicClass>Graphic_Single</graphicClass>
 			<texPath>Things/Item/Resource/Wort</texPath>
 		</graphicData>
 	</ThingDef>
@@ -325,7 +323,8 @@
 			<li>Foods</li>
 		</thingCategories>
 		<graphicData>
-			<texPath>Things/Item/Resource/Kibble</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<texPath>Things/Item/Resource/CA_RuinedFood</texPath>
 		</graphicData>
 		<socialPropernessMatters>true</socialPropernessMatters>
 		<statBases>
