@@ -142,7 +142,8 @@
 		<label>flatbread</label>
 		<description>Simple unrisen bread. Tastes bland, but not offensive. It lasts a very long time without refrigeration. Great for traveling.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<texPath>Things/Item/Resource/CA_Flatbread</texPath>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
@@ -164,7 +165,8 @@
 		<label>risen bread</label>
 		<description>Fluffy leavened bread. Delicious, but doesn't keep as well as flatbread.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<texPath>Things/Item/Resource/CA_RisenBread</texPath>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
