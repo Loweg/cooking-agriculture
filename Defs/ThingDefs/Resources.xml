@@ -108,7 +108,7 @@
 		<label>pickles</label>
 		<description>Assorted pickled vegetables. Nice to eat, even when raw. Pickled foods never spoil, but don't restore as much nutrition as their unfermented counterparts.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/Berries</texPath>
+			<texPath>Things/Item/Resource/CA_Pickles</texPath>
 		</graphicData>
 		<statBases>
 			<Nutrition>0.04</Nutrition>
@@ -120,7 +120,7 @@
 		<label>cheese</label>
 		<description>Cheese.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+			<texPath>Things/Item/Resource/CA_Cheese</texPath>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
@@ -188,7 +188,7 @@
 		<label>jam</label>
 		<description>Fruit jam that is both filling and delicious. Jam lasts for ages.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/Berries</texPath>
+			<texPath>Things/Item/Resource/CA_Jam</texPath>
 		</graphicData>
 		<statBases>
 			<Nutrition>0.06</Nutrition>
