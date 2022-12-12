@@ -160,6 +160,28 @@
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
+		<defName>CA_RisenBread</defName>
+		<label>risen bread</label>
+		<description>Fluffy leavened bread. Delicious, but doesn't keep as well as flatbread.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>15</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+			<li Class="CookingAgriculture.CompProperties_Unfreezable" />
+		</comps>
+		<statBases>
+			<Nutrition>0.7</Nutrition>
+		</statBases>
+		<thingCategories>
+			<li>PlantFoodRaw</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_Jam</defName>
 		<label>jam</label>
 		<description>Fruit jam that is both filling and delicious. Jam lasts for ages.</description>
