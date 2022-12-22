@@ -121,9 +121,10 @@
 		<description>Stew pot.</description>
 		<thingClass>CookingAgriculture.Building_StewPot</thingClass>
 		<graphicData>
-			<texPath>Things/Building/Production/NutrientDispenser</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
+			<texPath>Things/Building/Production/CA_StewPot</texPath>
 			<drawSize>(1,1)</drawSize>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
 		<researchPrerequisites>
 			<li>CA_Stew</li>
