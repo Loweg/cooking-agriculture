@@ -73,7 +73,7 @@
 		<label>smoker</label>
 		<description>Smoker.</description>
 		<graphicData>
-			<texPath>Things/Building/Misc/Campfire</texPath>
+			<texPath>Things/Building/Production/CA_Smoker</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<stuffCategories>
