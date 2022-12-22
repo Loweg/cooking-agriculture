@@ -7,8 +7,9 @@
 		<description>Salt Pan.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_SaltPan</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
 			<drawSize>(3,3)</drawSize>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
 		<building>
 			<ai_chillDestination>false</ai_chillDestination>
