@@ -71,8 +71,8 @@
 		<label>soup</label>
 		<description>Thin, efficient soup.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/Wort</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Item/Meal/CA_Soup</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
