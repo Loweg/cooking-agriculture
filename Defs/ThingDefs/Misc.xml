@@ -43,7 +43,7 @@
 		<label>dessert</label>
 		<description>Dessert.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/Chocolate</texPath>
+			<texPath>Things/Item/Meal/CA_Dessert</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>
 		</graphicData>
 		<comps>
