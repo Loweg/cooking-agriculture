@@ -71,7 +71,7 @@
 		<label>salted vegetables</label>
 		<description>Salted vegetables.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/Potatoes</texPath>
+			<texPath>Things/Item/Resource/CA_SaltedVegetable</texPath>
 		</graphicData>
 		<ingestible>
 			<foodType>VegetableOrFruit</foodType>
