@@ -194,7 +194,7 @@
 		<thingClass>Building_WorkTable</thingClass>
 		<description>Hand mill.</description>
 		<graphicData>
-			<texPath>Things/Building/Production/CA_MillManual</texPath>
+			<texPath>Things/Building/Production/CA_Mill/CA_MillManual</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(.9,.9)</drawSize>
@@ -239,7 +239,7 @@
 		<label>wind mill</label>
 		<description>Wind mill.</description>
 		<graphicData>
-			<texPath>Things/Building/Production/CA_MillManual</texPath>
+			<texPath>Things/Building/Production/Mill/CA_MillWater</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<drawSize>(1.8,1.8)</drawSize>
 		</graphicData>
