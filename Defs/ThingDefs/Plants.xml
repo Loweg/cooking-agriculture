@@ -59,6 +59,7 @@
 			<harvestedThingDef>CA_Sugarcane</harvestedThingDef>
 			<harvestYield>2</harvestYield>
 			<harvestWork>300</harvestWork>
+			<immatureGraphicPath>Things/Plant/CA_Sugarcane/Immature</immatureGraphicPath>
 			<topWindExposure>0.1</topWindExposure>
 			<growDays>12</growDays>
 			<visualSizeRange>0.4~1.1</visualSizeRange>
