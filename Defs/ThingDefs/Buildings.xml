@@ -196,6 +196,7 @@
 		<graphicData>
 			<texPath>Things/Building/Production/CA_MillManual</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(.9,.9)</drawSize>
 		</graphicData>
 		<building>
