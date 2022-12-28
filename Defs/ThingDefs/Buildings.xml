@@ -195,7 +195,7 @@
 		<description>Hand mill.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_Mill/CA_MillManual</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
+			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(.9,.9)</drawSize>
 		</graphicData>
@@ -234,20 +234,32 @@
 		<surfaceType>Item</surfaceType>
 	</ThingDef>
 
-	<ThingDef ParentName="BuildingBase">
-		<defName>CA_MillWind</defName>
-		<label>wind mill</label>
-		<description>Wind mill.</description>
-		<graphicData>
-			<texPath>Things/Building/Production/Mill/CA_MillWater</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>(1.8,1.8)</drawSize>
-		</graphicData>
+	<ThingDef Name="CA_BigMillBase" ParentName="BuildingBase" Abstract="True">
 		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<destroySound>BuildingDestroyed_Wood_Big</destroySound>
 			<buildingTags>
 				<li>Production</li>
 			</buildingTags>
 		</building>
+		<altitudeLayer>Building</altitudeLayer>
+		<blockWind>true</blockWind>
+		<canOverlapZones>false</canOverlapZones>
+		<designationCategory>Production</designationCategory>
+		<fillPercent>0.5</fillPercent>
+		<passability>Impassable</passability>
+		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_BigMillBase">
+		<defName>CA_MillWind</defName>
+		<label>wind mill</label>
+		<description>Wind mill.</description>
+		<graphicData>
+			<texPath>Things/Building/Production/CA_Mill/CA_WaterMill/CA_WaterMillBody</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1.8,1.8)</drawSize>
+		</graphicData>
 		<comps>
 			<li Class="ProcessorFramework.CompProperties_Processor">
 				<showProductIcon>false</showProductIcon>
@@ -277,18 +289,73 @@
 			<MaxHitPoints>120</MaxHitPoints>
 			<WorkToBuild>1000</WorkToBuild>
 		</statBases>
-		<altitudeLayer>Building</altitudeLayer>
-		<blockWind>true</blockWind>
-		<canOverlapZones>false</canOverlapZones>
 		<constructEffect>ConstructMetal</constructEffect>
 		<drawerType>MapMeshAndRealTime</drawerType>
-		<designationCategory>Production</designationCategory>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-		<fillPercent>0.5</fillPercent>
-		<passability>Impassable</passability>
 		<size>(2,2)</size>
-		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
 		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_BigMillBase">
+		<defName>CA_WaterMill</defName>
+		<label>watermill</label>
+		<description>Water mill.</description>
+		<thingClass>Building</thingClass>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Building/Production/CA_Mill/CA_WaterMill/CA_WaterMillBody</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(5,6)</drawSize>
+			<shadowData>
+				<volume>(2.6,1,2.16)</volume>
+				<offset>(-0.20,0,0)</offset>
+			</shadowData>
+			<damageData>
+				<rectN>(0.1,1.2,4.75,3.25)</rectN>
+				<rectE>(1.25,0.2,3.5,4.7)</rectE>
+				<rectS>(0.2,1.2,4.7,3.25)</rectS>
+				<rectW>(1.25,0.2,3.5,4.7)</rectW>
+			</damageData>
+		</graphicData>
+		<castEdgeShadows>false</castEdgeShadows>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<fillPercent>1</fillPercent>
+		<blockLight>true</blockLight>
+		<canOverlapZones>false</canOverlapZones>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<WorkToBuild>4000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-20</Beauty>
+		</statBases>
+		<tickerType>Rare</tickerType>
+		<size>(5,6)</size>
+		<costList>
+			<WoodLog>280</WoodLog>
+			<Steel>80</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<comps>
+			<li Class="ProcessorFramework.CompProperties_Processor">
+				<showProductIcon>false</showProductIcon>
+				<capacity>75</capacity>
+				<independentProcesses>false</independentProcesses>
+				<parallelProcesses>false</parallelProcesses>
+				<processes>
+					<li>CA_MillingWind</li>
+				</processes>
+			</li>
+		</comps>
+		<rotatable>true</rotatable>
+		<terrainAffordanceNeeded></terrainAffordanceNeeded> <!-- handled by the placeworker -->
+		<placeWorkers>
+			<li>PlaceWorker_WatermillGenerator</li>
+		</placeWorkers>
+		<constructEffect>ConstructWood</constructEffect>
+		<researchPrerequisites>
+			<li>CA_MillingAutomatic</li>
+		</researchPrerequisites>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
