@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef/Item/Resource/PlantFoodRaw[defName="Berries"]/thingCategories</xpath>
+		<value>
+			<thingCategories>
+				<li>CA_Fruit</li>
+			</thingCategories>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef/Item/Resource/Manufactured[defName="Wort"]/thingCategories</xpath>
+		<value>
+			<thingCategories>
+				<li>CA_Cooking</li>
+			</thingCategories>
+		</value>
+	</Operation>
 	<Operation Class="PatchOperationAdd">
 		<xpath>/Defs/RecipeDef[defName="Make_Kibble"]/ingredients/li/filter[customSummary=protein]/categories</xpath>
 		<value>

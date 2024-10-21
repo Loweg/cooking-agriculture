@@ -4,8 +4,6 @@
 * Salt pan
 * Stew
 * Traders should carry flour and sugar
-* Vanilla berries should be fruit
-* Wort should be cooking ingredient
 * Some buildings should not be reinstallable
 
 # Need Textures
@@ -28,9 +26,7 @@
 # Issues
 * Masks don't work in the architect menu because of a vanilla rimworld bug.
 * Processors don't display progress properly due to processor framework bug.
-* Manual mill needs simple mask.
-* Smoked meat can be used to make smoked meat.
-* Stew pot mask may be misaligned.
+* Stew pot mask not working.
 * Stew pot eaters want to sit on the stewpot. Maybe causing traders to throw exceptions too. If occupied:
 JobDriver threw exception in toil CarryIngestibleToChewSpot's initAction for pawn Lawrence driver=JobDriver_Ingest (toilIndex=2) driver.job=(Ingest (Job_2553) A = Thing_CA_Soup6661 Giver = JobGiver_GetFood [workGiverDef: null])
 System.IndexOutOfRangeException: Index was outside the bounds of the array.

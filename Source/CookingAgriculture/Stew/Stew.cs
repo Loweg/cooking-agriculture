@@ -7,33 +7,31 @@ using Verse;
 using Verse.AI;
 
 namespace CookingAgriculture {
+	// Somewhat based on the Replimat
 	[StaticConstructorOnStartup]
 	class Building_StewPot : Building_NutrientPasteDispenser {
+		public static int CollectDuration = GenTicks.SecondsToTicks(1f);
+
 		private int storedMeals = 0;
 		private List<ThingDef> ingredients;
 		private ProgressBar progressBar = new ProgressBar(2000);
 
-		private float ProgressPerTickAtCurrentTemp => Mathf.Max((1f / progressBar.ticksToComplete) * CurrentTempSpeedFactor, 0f);
+		private float ProgressPerTickAtCurrentTemp => 1f / progressBar.ticksToComplete, 0f;
 
 		public bool IsComplete => progressBar.Progress >= 1f;
-		public bool IsEmpty => storedMeals <= 0;
-		private float CurrentTempSpeedFactor {
-			get {
-				return GenMath.LerpDouble(-35f, 0f, 0f, 1f, this.AmbientTemperature);
-			}
-		}
-		public override ThingDef DispensableDef => ThingDefOf.MealNutrientPaste;
+		public bool IsEmpty => storedMeals <= 0 && ingredients.IsEmpty();
+		public bool ShouldFill => IsEmpty;
+		public bool IsCooking => !IsComplete && storedMeals == 0;
+		public override ThingDef DispensableDef => ThingDef.Named("CA_Soup");
 
 		public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
-		/*public override void Draw() {
-			base.Draw();
-
-			Vector3 drawPos = this.DrawPos;
-			drawPos.y += 0.04054054f;
-			drawPos.z += 0.25f;
+		public override void DrawAt(Vector3 drawLoc, bool flip = false) {
+			base.DrawAt(drawLoc, flip;);
+			drawLoc.y += 0.04054054f;
+			drawLoc.z += 0.25f;
 			progressBar.Draw(drawPos);
-		}*/
+		}
 
 		public override void ExposeData() {
 			base.ExposeData();
@@ -55,8 +53,9 @@ namespace CookingAgriculture {
 
 		public override void Tick() {
 			base.Tick();
-			progressBar.Progress = Mathf.Min(progressBar.Progress + ProgressPerTickAtCurrentTemp, 1f);
-
+			if (IsCooking) {
+				progressBar.Progress = Mathf.Min(progressBar.Progress + ProgressPerTickAtCurrentTemp, 1f);
+			}
 			if (IsComplete) {
 				storedMeals = 10;
 			}
