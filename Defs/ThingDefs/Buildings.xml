@@ -143,7 +143,7 @@
 	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_SugarEvaporator</defName>
 		<label>sugar evaporator</label>
-		<description>Sugar evaporator.</description>
+		<description>A primitive open vessel where exposure to sun and wind evaporates sugary syrup into sugar.</description>
 		<graphicData>
 			<texPath>Things/Building/Furniture/Stool</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
@@ -172,7 +172,7 @@
 	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_YeastCulture</defName>
 		<label>yeast culture</label>
-		<description>Yeast culture.</description>
+		<description>A vessel where a yeast culture is kept and fed. Yeast cultures must be started with the dregs from beer brewing, or simply food and time. They must be fed wheat or flour to stay alive and grow, and can't get too hot or cold. Yeast can be periodically harvested for brewing or baking.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/FermentingBarrel</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
@@ -194,7 +194,7 @@
 		<defName>CA_MillManual</defName>
 		<label>hand mill</label>
 		<thingClass>Building_WorkTable</thingClass>
-		<description>Hand mill.</description>
+		<description>A hand-powered mill for grinding grains, sometimes called a quern, made of two large stones and a handle. The top stone has a hole to allow material to be added, and the ground product is caught as it comes out the bottom.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_Mill/CA_MillManual</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -256,8 +256,8 @@
 
 	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_MillWind</defName>
-		<label>wind mill</label>
-		<description>Wind mill.</description>
+		<label>windmill</label>
+		<description>A wind-powered mill for grinding grains. Windmills have been in use since at least the 9th century, and have been used not only as gristmills (a mill that grinds grains), but also as water pumps.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_Mill/CA_WaterMill/CA_WaterMillBody</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
@@ -301,7 +301,7 @@
 	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_WaterMill</defName>
 		<label>watermill</label>
-		<description>Water mill.</description>
+		<description>Beyond fresh water, rivers in antiquity provided another vital resource: hydropower. The watermill is what allowed humanity to harness this abundant source of energy to automate tasks such as grinding grains, sawing logs, drawing wire, and much more. This particular mill is designed for grinding grains.</description>
 		<thingClass>Building</thingClass>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
@@ -361,7 +361,7 @@
 	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_MillElectric</defName>
 		<label>grinding machine</label>
-		<description>Grinding machine.</description>
+		<description>The electric grinding machine allows the grinding of plant matter using electricity.</description>
 		<graphicData>
 			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -411,7 +411,7 @@
 	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_Centrifuge</defName>
 		<label>centrifuge</label>
-		<description>Centrifuge.</description>
+		<description>This food-grade centrifuge can be used as a rotary evaporator, quickly turning syrup into solid sugar.</description>
 		<graphicData>
 			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

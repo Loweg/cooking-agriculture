@@ -22,7 +22,7 @@
 	<ThingDef ParentName="RockBase">
 		<defName>CA_SaltRock</defName>
 		<label>rock salt</label>
-		<description>Rock salt.</description>
+		<description>Solid rock salt, or halite, formed from the evaporation of ancient oceans or salty lakes.</description>
 		<graphicData>
 			<color>(161,120,122)</color>
 		</graphicData>
@@ -41,7 +41,7 @@
 	<ThingDef ParentName="MealBase">
 		<defName>CA_Dessert</defName>
 		<label>dessert</label>
-		<description>Dessert.</description>
+		<description>Sometimes called pudding, desserts are usually sweet, and are generally eaten for fun rather than for their nutritive value.</description>
 		<graphicData>
 			<texPath>Things/Item/Meal/CA_Dessert</texPath>
 			<graphicClass>Graphic_StackCount</graphicClass>

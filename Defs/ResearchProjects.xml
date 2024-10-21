@@ -9,7 +9,7 @@
 	<ResearchProjectDef>
 		<defName>CA_MillingBasic</defName>
 		<label>basic milling</label>
-		<description>Build a hand mill for grinding grains.</description>
+		<description>Build a hand mill from stone chunks for grinding grains.</description>
 		<baseCost>300</baseCost>
 		<tab>CookingAgriculture</tab>
 		<techLevel>Neolithic</techLevel>

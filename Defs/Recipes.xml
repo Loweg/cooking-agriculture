@@ -3,7 +3,7 @@
 	<RecipeDef>
 		<defName>CA_MakeCheese</defName>
 		<label>make cheese</label>
-		<description>Make cheese.</description>
+		<description>Curdle milk into cheese using vinegar.</description>
 		<jobString>Making cheese.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
@@ -49,7 +49,7 @@
 	<RecipeDef>
 		<defName>CA_CookDessert</defName>
 		<label>cook dessert</label>
-		<description>Cook a dessert.</description>
+		<description>Cook a dessert from a filling and a base. The filling must be chocolate, fruit, or an animal product. The base must be flour, sugar, or fungus.</description>
 		<jobString>Cooking dessert.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
@@ -134,9 +134,9 @@
 
 	<RecipeDef>
 		<defName>CA_MakeFlatbread</defName>
-		<label>make flatbread</label>
-		<description>Make flatbread.</description>
-		<jobString>Making flatbread.</jobString>
+		<label>bake flatbread</label>
+		<description>Bake simple flatbread from flour.</description>
+		<jobString>Baking flatbread.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
 			<li>
@@ -171,7 +171,7 @@
 	<RecipeDef>
 		<defName>CA_MakeJam</defName>
 		<label>make jam</label>
-		<description>Make jam.</description>
+		<description>Cook fruit into jam by adding heat and plenty of sugar.</description>
 		<jobString>Making jam.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
@@ -236,7 +236,7 @@
 	<RecipeDef>
 		<defName>CA_MakeSaltFromChunk</defName>
 		<label>make salt from rock salt</label>
-		<description>Salt.</description>
+		<description>Smash a chunk of rock salt into table salt for cooking.</description>
 		<jobString>Making salt from rock salt.</jobString>
 		<workAmount>800</workAmount>
 		<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -263,7 +263,7 @@
 	<RecipeDef>
 		<defName>CA_SaltVegetable</defName>
 		<label>salt vegetables</label>
-		<description>Salt vegetables.</description>
+		<description>Chop and salt vegetables to prepare them for pickling.</description>
 		<jobString>Salting vegetables.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
@@ -332,7 +332,7 @@
 	<RecipeDef>
 		<defName>CA_MakeSyrup</defName>
 		<label>make syrup</label>
-		<description>Make syrup.</description>
+		<description>Cook and smash raw sugarcane into a sugary syrup that can be evaporated into sugar.</description>
 		<jobString>Making syrup.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>

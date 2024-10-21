@@ -145,7 +145,7 @@
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_Flatbread</defName>
 		<label>flatbread</label>
-		<description>Simple unrisen bread. Tastes bland, but not offensive. It lasts a very long time without refrigeration. Great for traveling.</description>
+		<description>Simple unleavened bread. Tastes bland, but not offensive. It lasts a very long time without refrigeration. Great for traveling.</description>
 		<graphicData>
 			<graphicClass>Graphic_StackCount</graphicClass>
 			<texPath>Things/Item/Resource/CA_Flatbread</texPath>
@@ -274,7 +274,7 @@
 	<ThingDef ParentName="CA_ResourceProcessedBase">
 		<defName>CA_Flour</defName>
 		<label>flour</label>
-		<description>Ground wheat.</description>
+		<description>Ground wheat. Flour is not tasty by itself, but is a very versatile cooking ingredient that can be turned into wondrously fluffy risen bread with yeast.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/CA_Flour</texPath>
 		</graphicData>

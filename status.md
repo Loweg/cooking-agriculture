@@ -11,13 +11,9 @@
 * Dessert: Works.
 
 # Need Textures
-* Smoker
-* Sugar evaporator
-* Yeast culture
 * Grinding machine
 * Centrifuge
 * Jam
-* Salt
 * Flour
 * Syrup
 * Sugar
@@ -29,6 +25,7 @@
 * Date tree
 * Mulberry tree
 * Wheat plant
+* Really all of the textures could use improvements. Only the meals, salt pan, and stew pot are anywhere near where I want them. Replacing open-source RimCuisine textures is a low priority.
 
 # Issues
 * Stew pot eaters want to sit on the stewpot. Maybe causing traders to throw exceptions too. If occupied:
