@@ -4,6 +4,7 @@
 	<ThingDef Abstract="True" Name="CA_ResourceFruitBase" ParentName="OrganicProductBase">
 		<ingestible>
 			<preferability>RawTasty</preferability>
+			<tasteThought />
 			<foodType>VegetableOrFruit</foodType>
 			<ingestEffect>EatVegetarian</ingestEffect>
 			<ingestSound>RawVegetable_Eat</ingestSound>
@@ -22,7 +23,6 @@
 		</comps>
 		<thingCategories>
 			<li>CA_Fruit</li>
-			<li>PlantFoodRaw</li>
 		</thingCategories>
 		<soundInteract>Grain_Drop</soundInteract>
 		<soundDrop>Grain_Drop</soundDrop>
@@ -66,30 +66,6 @@
 	</ThingDef>
 
 	<!-- Preserved -->
-	<ThingDef ParentName="PlantFoodRawBase">
-		<defName>CA_SaltedVegetable</defName>
-		<label>salted vegetables</label>
-		<description>Vegetables ready for pickling.</description>
-		<graphicData>
-			<texPath>Things/Item/Resource/CA_SaltedVegetable</texPath>
-		</graphicData>
-		<ingestible>
-			<foodType>VegetableOrFruit</foodType>
-		</ingestible>
-		<comps>
-			<li Class="CompProperties_Rottable">
-				<daysToRotStart>60</daysToRotStart>
-				<rotDestroys>true</rotDestroys>
-			</li>
-		</comps>
-		<thingCategories>
-			<li>CA_PreservedFood</li>
-		</thingCategories>
-		<statBases>
-			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
-		</statBases>
-	</ThingDef>
-
 	<ThingDef Name="CA_ResourcePreservedFoodBase" ParentName="OrganicProductBase" Abstract="True">
 		<ingestible>
 			<ingestEffect>EatVegetarian</ingestEffect>
@@ -104,6 +80,31 @@
 		</statBases>
 		<socialPropernessMatters>true</socialPropernessMatters>
 		<allowedArchonexusCount>200</allowedArchonexusCount>
+		<thingCategories>
+			<li>CA_PreservedFood</li>
+		</thingCategories>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
+		<defName>CA_SaltedVegetable</defName>
+		<label>salted vegetables</label>
+		<description>Vegetables ready for pickling.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/CA_SaltedVegetable</texPath>
+		</graphicData>
+		<ingestible>
+			<preferability>RawBad</preferability>
+			<tasteThought>AteRawFood</tasteThought>
+		</ingestible>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>60</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<statBases>
+			<MarketValue>1.0</MarketValue>
+		</statBases>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -137,7 +138,7 @@
 			<foodType>AnimalProduct, Fluid</foodType>
 			<babiesCanIngest>true</babiesCanIngest>
 		</ingestible>
-		<thingCategories>
+		<thingCategories Inherit="false">
 			<li>AnimalProductRaw</li>
 		</thingCategories>
 	</ThingDef>
@@ -160,9 +161,6 @@
 			<Mass>0.015</Mass>
 			<Nutrition>0.7</Nutrition>
 		</statBases>
-		<thingCategories>
-			<li>PlantFoodRaw</li>
-		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -183,9 +181,6 @@
 		<statBases>
 			<Nutrition>0.7</Nutrition>
 		</statBases>
-		<thingCategories>
-			<li>PlantFoodRaw</li>
-		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -198,9 +193,6 @@
 		<statBases>
 			<Nutrition>0.06</Nutrition>
 		</statBases>
-		<thingCategories>
-			<li>PlantFoodRaw</li>
-		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -208,7 +200,8 @@
 		<label>smoked meat</label>
 		<description>Meat that has been exposed to smoke in order to cook and preserve it.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Dates</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<texPath>Things/Item/Resource/CA_SmokedMeat</texPath>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
@@ -218,10 +211,9 @@
 		</comps>
 		<ingestible>
 			<foodType>Meat</foodType>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Meal_Eat</ingestSound>
 		</ingestible>
-		<thingCategories>
-			<li>MeatRaw</li>
-		</thingCategories>
 	</ThingDef>
 
 	<!-- Unprocessed -->
@@ -245,7 +237,6 @@
 
 	<!-- Processed -->
 	<ThingDef Abstract="True" Name="CA_ResourceProcessedBase" ParentName="ResourceBase">
-		<stackLimit>75</stackLimit>
 		<healthAffectsPrice>false</healthAffectsPrice>
 		<graphicData>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -258,7 +249,7 @@
 			<DeteriorationRate>2.0</DeteriorationRate>
 		</statBases>
 		<thingCategories>
-			<li>Manufactured</li>
+			<li>CA_Cooking</li>
 		</thingCategories>
 	</ThingDef>
 
@@ -295,10 +286,6 @@
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
-		<thingCategories>
-			<li>PlantMatter</li>
-			<li>PlantFoodRaw</li>
-		</thingCategories>
 		<tickerType>Rare</tickerType>
 	</ThingDef>
 
@@ -334,10 +321,6 @@
 			<preferability>DesperateOnly</preferability>
 			<canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
 		</ingestible>
-		<thingCategories>
-			<li>PlantMatter</li>
-			<li>PlantFoodRaw</li>
-		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourceProcessedBase">
@@ -347,6 +330,27 @@
 		<graphicData>
 			<texPath>Things/Item/Resource/Wort</texPath>
 		</graphicData>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ResourceProcessedBase">
+		<defName>CA_Yeast</defName>
+		<label>yeast</label>
+		<description>Helpful little fungi that somehow make food better by spoiling it. Does not keep outside of a culture vat.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/Wort</texPath>
+		</graphicData>
+		<stackLimit>25</stackLimit>
+		<statBases>
+			<MaxHitPoints>10</MaxHitPoints>
+			<DeteriorationRate>5.0</DeteriorationRate>
+		</statBases>
+		<comps>
+			<li Class="CompProperties_Rottable">
+				<daysToRotStart>1</daysToRotStart>
+				<rotDestroys>true</rotDestroys>
+			</li>
+		</comps>
+		<tickerType>Normal</tickerType>
 	</ThingDef>
 
 	<ThingDef ParentName="OrganicProductBase">

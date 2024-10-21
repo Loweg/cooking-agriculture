@@ -8,9 +8,15 @@
 		<graphicData>
 			<texPath>Things/Building/Production/CA_SaltPan</texPath>
 			<drawSize>(3,3)</drawSize>
-			<graphicClass>Graphic_Multi</graphicClass>
+			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>10</costStuffCount>
 		<building>
 			<ai_chillDestination>false</ai_chillDestination>
 			<expandHomeArea>false</expandHomeArea>
@@ -124,8 +130,7 @@
 		<thingClass>CookingAgriculture.Building_StewPot</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_StewPot</texPath>
-			<drawSize>(1,1)</drawSize>
-			<graphicClass>Graphic_Multi</graphicClass>
+			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
 		<researchPrerequisites>
@@ -145,9 +150,8 @@
 		<label>sugar evaporator</label>
 		<description>A primitive open vessel where exposure to sun and wind evaporates sugary syrup into sugar.</description>
 		<graphicData>
-			<texPath>Things/Building/Furniture/Stool</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>(2,2)</drawSize>
+			<texPath>Things/Building/Production/CA_Evaporator</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<stuffCategories>
 			<li>Metallic</li>
@@ -174,8 +178,8 @@
 		<label>yeast culture</label>
 		<description>A vessel where a yeast culture is kept and fed. Yeast cultures must be started with the dregs from beer brewing, or simply food and time. They must be fed wheat or flour to stay alive and grow, and can't get too hot or cold. Yeast can be periodically harvested for brewing or baking.</description>
 		<graphicData>
-			<texPath>Things/Building/Production/FermentingBarrel</texPath>
-			<graphicClass>Graphic_Multi</graphicClass>
+			<texPath>Things/Building/Production/CA_YeastCulture</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
 		<researchPrerequisites>
 			<li>Brewing</li>
@@ -302,7 +306,6 @@
 		<defName>CA_WaterMill</defName>
 		<label>watermill</label>
 		<description>Beyond fresh water, rivers in antiquity provided another vital resource: hydropower. The watermill is what allowed humanity to harness this abundant source of energy to automate tasks such as grinding grains, sawing logs, drawing wire, and much more. This particular mill is designed for grinding grains.</description>
-		<thingClass>Building</thingClass>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_Mill/CA_WaterMill/CA_WaterMillBody</texPath>

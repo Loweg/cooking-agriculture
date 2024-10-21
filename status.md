@@ -1,14 +1,12 @@
 # State of the Mod
-* Freezing overhaul: Works perfectly
-* Sowing grass: Works. Looks weird.
-* Sugarcane, sugar: Works perfectly.
-* Wheat: Wind and water mills don't display progress correctly. Hand mill masks are only applied in preview. Beer is untouched. Risen bread unimplemented.
-* Fruit trees: Works. Tested cherries.
-* Salt: Salt pan is throwing exceptions
-* Preservation: Smoked meat can be used to make smoked meat.
-* Yeast: Mostly unimplemented
-* Stew: Partially implemented
-* Dessert: Works.
+## TODO
+* Yeast, risen bread, beer
+* Salt pan
+* Stew
+* Traders should carry flour and sugar
+* Vanilla berries should be fruit
+* Wort should be cooking ingredient
+* Some buildings should not be reinstallable
 
 # Need Textures
 * Grinding machine
@@ -28,6 +26,11 @@
 * Really all of the textures could use improvements. Only the meals, salt pan, and stew pot are anywhere near where I want them. Replacing open-source RimCuisine textures is a low priority.
 
 # Issues
+* Masks don't work in the architect menu because of a vanilla rimworld bug.
+* Processors don't display progress properly due to processor framework bug.
+* Manual mill needs simple mask.
+* Smoked meat can be used to make smoked meat.
+* Stew pot mask may be misaligned.
 * Stew pot eaters want to sit on the stewpot. Maybe causing traders to throw exceptions too. If occupied:
 JobDriver threw exception in toil CarryIngestibleToChewSpot's initAction for pawn Lawrence driver=JobDriver_Ingest (toilIndex=2) driver.job=(Ingest (Job_2553) A = Thing_CA_Soup6661 Giver = JobGiver_GetFood [workGiverDef: null])
 System.IndexOutOfRangeException: Index was outside the bounds of the array.

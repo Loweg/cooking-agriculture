@@ -23,7 +23,8 @@ Salt is mined, made in a salt pan on the ocean, or purchased. This coveted ingre
 ### Sugar
 Sugarcane is first processed by hand or electric mill into syrup. The syrup is then evaporated into sugar in a sugar evaporator in a warm, dry environment. It can also be processed into sugar at a centrifuge.
 ## Cooking
-Preserved versions of foods are each made in a unique way, but they all last much longer than the raw version and can be eaten plain like berries (but without the risk of food poisoning), or cooked into meals.
+Preserved versions of foods are each made in a unique way, but they all last much longer than the raw version and can be eaten plain like berries (but without the risk of food poisoning), or cooked into meals.;
+Flour, sugar, preserved foods, and bread can't be used in simple meals, but can be an ingredient in more complex meals.
 ### Pickles
 Pickles are made by fermenting salted vegetables (crafted at a stove or campfire) in a barrel. Pickling has a byproduct of vinegar.
 ### Cheese
