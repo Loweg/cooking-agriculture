@@ -113,6 +113,7 @@
 		<researchPrerequisites>
 			<li>Pemmican</li>
 		</researchPrerequisites>
+		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
 	</ThingDef>
 
@@ -185,6 +186,7 @@
 		</stuffCategories>
 		<costStuffCount>30</costStuffCount>
 		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
+		<rotatable>false</rotatable>
 	</ThingDef>
 
 	<!-- Mills -->
@@ -246,9 +248,10 @@
 		<blockWind>true</blockWind>
 		<canOverlapZones>false</canOverlapZones>
 		<designationCategory>Production</designationCategory>
-		<fillPercent>0.5</fillPercent>
+		<fillPercent>1</fillPercent>
 		<passability>Impassable</passability>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<drawerType>MapMeshAndRealTime</drawerType>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_BigMillBase">
@@ -290,7 +293,6 @@
 			<WorkToBuild>1000</WorkToBuild>
 		</statBases>
 		<constructEffect>ConstructMetal</constructEffect>
-		<drawerType>MapMeshAndRealTime</drawerType>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<size>(2,2)</size>
 		<tickerType>Rare</tickerType>
@@ -319,9 +321,7 @@
 		</graphicData>
 		<castEdgeShadows>false</castEdgeShadows>
 		<staticSunShadowHeight>0</staticSunShadowHeight>
-		<fillPercent>1</fillPercent>
 		<blockLight>true</blockLight>
-		<canOverlapZones>false</canOverlapZones>
 		<statBases>
 			<MaxHitPoints>400</MaxHitPoints>
 			<WorkToBuild>4000</WorkToBuild>
@@ -358,7 +358,7 @@
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 	</ThingDef>
 
-	<ThingDef ParentName="CA_ProcessorBase">
+	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_MillElectric</defName>
 		<label>grinding machine</label>
 		<description>Grinding machine.</description>
@@ -402,16 +402,13 @@
 			<Beauty>-5</Beauty>
 			<Mass>35</Mass>
 		</statBases>
-		<blockWind>true</blockWind>
 		<constructEffect>ConstructMetal</constructEffect>
-		<fillPercent>0.5</fillPercent>
-		<passability>Impassable</passability>
 		<size>(2,2)</size>
-		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
 	</ThingDef>
 
-	<ThingDef ParentName="CA_ProcessorBase">
+	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_Centrifuge</defName>
 		<label>centrifuge</label>
 		<description>Centrifuge.</description>
@@ -454,12 +451,9 @@
 			<Beauty>-5</Beauty>
 			<Mass>35</Mass>
 		</statBases>
-		<blockWind>true</blockWind>
 		<constructEffect>ConstructMetal</constructEffect>
-		<fillPercent>0.5</fillPercent>
-		<passability>Impassable</passability>
 		<size>(2,2)</size>
-		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
 	</ThingDef>
 </Defs>

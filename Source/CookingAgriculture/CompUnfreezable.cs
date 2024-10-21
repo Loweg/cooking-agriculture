@@ -16,6 +16,7 @@ namespace CookingAgriculture {
 
 		private void DoTicks(int ticks) {
 			if (ruinedPercent >= 1.0) {
+				var oldDef = parent.def;
 				var totalNutrition = parent.def.ingestible.CachedNutrition * parent.stackCount;
 				var position = parent.Position;
 				var map = parent.Map;
@@ -23,6 +24,10 @@ namespace CookingAgriculture {
 				parent.Destroy(DestroyMode.WillReplace);
 				Thing ruinedFood = ThingMaker.MakeThing(CA_DefOf.CA_RuinedFood);
 				ruinedFood.stackCount = (int)((totalNutrition + 0.00001) / ruinedFood.def.ingestible.CachedNutrition);
+				var newIngredients = ruinedFood.TryGetComp<CompIngredients>();
+				if (newIngredients != null) {
+					newIngredients.ingredients.Add(oldDef);
+				}
 				GenPlace.TryPlaceThing(ruinedFood, position, map, ThingPlaceMode.Near);
 			} else if (parent.AmbientTemperature < 0f) {
 				ruinedPercent -= parent.AmbientTemperature * Props.progressPerDegreePerTick * ticks;

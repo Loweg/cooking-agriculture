@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraderKindDef[defName="Base_Neolithic_Standard"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>30~60</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Vinegar</thingDef>
+				<countRange>30~90</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Neolithic_BulkGoods"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>10~20</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Vinegar</thingDef>
+				<countRange>10~25</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Neolithic_ShamanMerchant"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>10~15</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraderKindDef[defName="Base_Outlander_Standard"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>60~120</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Vinegar</thingDef>
+				<countRange>75~150</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_BulkGoods"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>20~45</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Vinegar</thingDef>
+				<countRange>15~30</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/TraderKindDef[defName="Caravan_Outlander_Exotic"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>20~40</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+		<xpath>/Defs/TraderKindDef[defName="Orbital_BulkGoods"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>40~90</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+		<xpath>/Defs/TraderKindDef[defName="Orbital_Exotic"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>40~90</countRange>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+		<xpath>/Defs/TraderKindDef[defName="Base_Empire_Standard"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>80~160</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Vinegar</thingDef>
+				<countRange>100~150</countRange>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Royalty">
+		<xpath>/Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/stockGenerators</xpath>
+		<value>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Salt</thingDef>
+				<countRange>50~85</countRange>
+			</li>
+			<li Class="StockGenerator_SingleDef">
+				<thingDef>CA_Vinegar</thingDef>
+				<countRange>30~70</countRange>
+			</li>
+		</value>
+	</Operation>
+</Patch>

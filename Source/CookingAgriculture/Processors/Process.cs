@@ -73,15 +73,15 @@ namespace CookingAgriculture.Processors {
 			return true;
 		}
 
-        // * Ingredient Counting *
-        // Based on WorkGiver_DoBill TryFindBestIngredientsHelper
-        public Thing FindIngredient(Pawn pawn) {
-            var radiusSq = ingredientSearchRadius * ingredientSearchRadius;
+		// * Ingredient Counting *
+		// Based on WorkGiver_DoBill TryFindBestIngredientsHelper
+		public Thing FindIngredient(Pawn pawn) {
+			var radiusSq = ingredientSearchRadius * ingredientSearchRadius;
 			Predicate<Thing> validator = t => t.Spawned && ingredientFilter.Allows(t) && (t.Position - parent.Position).LengthHorizontalSquared < radiusSq && !t.IsForbidden(pawn) && pawn.CanReserve(t, 1, Mathf.Min(parent.SpaceLeft, t.stackCount, pawn.carryTracker.AvailableStackSpace(t.def)));
 			return GenClosest.ClosestThingReachable(parent.InteractionCell, parent.Map, ThingRequest.ForGroup(ThingRequestGroup.HaulableEver), PathEndMode.ClosestTouch, TraverseParms.For(pawn), 9999f, validator);
-            /*chosen.Clear();
+			/*chosen.Clear();
 
-            Region rootReg = parent.InteractionCell.GetRegion(pawn.Map);
+			Region rootReg = parent.InteractionCell.GetRegion(pawn.Map);
 			TraverseParms traverseParams = TraverseParms.For(pawn);
 			RegionEntryPredicate entryCondition = (_, r) => {
 				if (!r.Allows(traverseParams, false)) {
@@ -117,7 +117,7 @@ namespace CookingAgriculture.Processors {
                     Comparison<Thing> comparison = (t1, t2) => ((float)(t1.PositionHeld - parent.InteractionCell).LengthHorizontalSquared).CompareTo((t2.PositionHeld - parent.InteractionCell).LengthHorizontalSquared);
                     foundThings.Sort(comparison);
 					for (int i = 0;	i < foundThings.Count; i++) {
-                        
+
 
                     }
                     if (foundAllIngredientsAndChoose(foundThings)) {
@@ -131,8 +131,8 @@ namespace CookingAgriculture.Processors {
             return foundAll;*/
         }
 
-        // * Product Counting *
-        public bool CanCountProducts() => def.outputs != null && def.outputs.Count == 1;
+		// * Product Counting *
+		public bool CanCountProducts() => def.outputs != null && def.outputs.Count == 1;
 		public bool CanPossiblyStoreInStockpile(Zone_Stockpile stockpile) => !CanCountProducts() || stockpile.GetStoreSettings().AllowedToAccept(def.outputs[0].thingDef);
 		public bool CanUnpause(Map map) => paused && CountProducts(map) < targetCount;
 

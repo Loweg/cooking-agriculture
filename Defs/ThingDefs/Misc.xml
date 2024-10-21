@@ -96,7 +96,14 @@
 		<defName>CA_Fruit</defName>
 		<label>raw fruits</label>
 		<parent>PlantFoodRaw</parent>
-		<resourceReadoutRoot>true</resourceReadoutRoot>
+		<resourceReadoutRoot>false</resourceReadoutRoot>
 		<iconPath>Things/Item/Resource/PlantFoodRaw/CA_Apples</iconPath>
+	</ThingCategoryDef>
+	<ThingCategoryDef>
+		<defName>CA_PreservedFood</defName>
+		<label>preserved foods</label>
+		<parent>FoodRaw</parent>
+		<resourceReadoutRoot>false</resourceReadoutRoot>
+		<iconPath>Things/Item/Resource/CA_Pickles</iconPath>
 	</ThingCategoryDef>
 </Defs>

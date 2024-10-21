@@ -81,7 +81,7 @@ namespace CookingAgriculture.Processors {
 
 		public override bool TryMakePreToilReservations(bool errorOnFailed) {
 			return pawn.Reserve(Ingredient, job, stackCount: job.count) &&
-				   pawn.Reserve(Processor, job, errorOnFailed: errorOnFailed);
+				pawn.Reserve(Processor, job, errorOnFailed: errorOnFailed);
 		}
 
 		protected override IEnumerable<Toil> MakeNewToils() {
@@ -119,15 +119,15 @@ namespace CookingAgriculture.Processors {
 		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) => t is Building_Processor processor && processor.ShouldFill() && processor.CanStartAnyBill() && !t.IsBurning() && !t.IsForbidden(pawn) && pawn.CanReserve(t, ignoreOtherReservations: forced) && pawn.Map.designationManager.DesignationOn(t, DesignationDefOf.Deconstruct) == null; //&& FindFeed(pawn) != null;
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			Building_Processor processor = (Building_Processor)t;
-            for (int i = 0; i < processor.bills.Count; i++) {
+			for (int i = 0; i < processor.bills.Count; i++) {
 				if (processor.bills[i].CanStart(t.Map)) {
 					ProcessBill bill = processor.bills[i];
 					var ingredient = bill.FindIngredient(pawn);
 					if (ingredient != null) {
-                        return new Job(CA_DefOf.CA_FillProcessor, t, ingredient) {
-                            count = Mathf.Min((t as Building_Processor).WantedOf(ingredient.def), ingredient.stackCount, pawn.carryTracker.AvailableStackSpace(ingredient.def))
-                        };
-                    }
+						return new Job(CA_DefOf.CA_FillProcessor, t, ingredient) {
+							count = Mathf.Min((t as Building_Processor).WantedOf(ingredient.def), ingredient.stackCount, pawn.carryTracker.AvailableStackSpace(ingredient.def))
+						};
+					}
 				}
 			}
 			return null;

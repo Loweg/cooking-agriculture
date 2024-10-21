@@ -99,7 +99,7 @@ namespace CookingAgriculture.Processors {
 		public ThingOwner innerContainer = new ThingOwner<Thing>();
 		public int TotalVolume => innerContainer.Count;
 		public int SpaceLeft => Capacity - TotalVolume;
-		
+
 
 		public ThingOwner GetDirectlyHeldThings() {
 			return innerContainer;
@@ -125,18 +125,16 @@ namespace CookingAgriculture.Processors {
 			progressBar.Progress = Mathf.Min(progressBar.Progress + (ProgressPerTick * GenTicks.TickLongInterval), 1f);
 		}
 
-        // Other
-        public override IEnumerable<Gizmo> GetGizmos() {
-            foreach (Gizmo c in base.GetGizmos())
-            {
-                yield return c;
-            }
-            if (Prefs.DevMode)
-            {
-                yield return progressBar.GetGizmo();
-            }
-        }
-        public override void ExposeData() {
+		// Other
+		public override IEnumerable<Gizmo> GetGizmos() {
+			foreach (Gizmo c in base.GetGizmos()) {
+				yield return c;
+			}
+			if (Prefs.DevMode) {
+				yield return progressBar.GetGizmo();
+			}
+		}
+		public override void ExposeData() {
 			base.ExposeData();
 			progressBar.ExposeData();
 

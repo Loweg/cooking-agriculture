@@ -142,9 +142,9 @@ namespace CookingAgriculture {
 				color = referenceProps.color,
 				constructEffect = referenceProps.constructEffect,
 				appearance = referenceProps.appearance,
-                soundImpactBullet = referenceProps.soundImpactBullet,
-                soundImpactMelee = referenceProps.soundImpactMelee,
-                soundMeleeHitSharp = referenceProps.soundMeleeHitSharp,
+				soundImpactBullet = referenceProps.soundImpactBullet,
+				soundImpactMelee = referenceProps.soundImpactMelee,
+				soundMeleeHitSharp = referenceProps.soundMeleeHitSharp,
 				soundMeleeHitBlunt = referenceProps.soundMeleeHitBlunt
 			};
 			StuffProperties chunkProps = stoneChunk.stuffProps;

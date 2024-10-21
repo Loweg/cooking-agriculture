@@ -69,7 +69,7 @@
 	<ThingDef ParentName="PlantFoodRawBase">
 		<defName>CA_SaltedVegetable</defName>
 		<label>salted vegetables</label>
-		<description>Salted vegetables.</description>
+		<description>Vegetables ready for pickling.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/CA_SaltedVegetable</texPath>
 		</graphicData>
@@ -82,6 +82,9 @@
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
+		<thingCategories>
+			<li>CA_PreservedFood</li>
+		</thingCategories>
 		<statBases>
 			<FoodPoisonChanceFixedHuman>0</FoodPoisonChanceFixedHuman>
 		</statBases>
@@ -260,7 +263,7 @@
 	<ThingDef ParentName="CA_ResourceProcessedBase">
 		<defName>CA_Salt</defName>
 		<label>salt</label>
-		<description>Salt.</description>
+		<description>Table salt, mostly NaCl. The most commonly used mineral in cooking.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/CA_Salt</texPath>
 		</graphicData>
@@ -269,7 +272,7 @@
 	<ThingDef ParentName="CA_ResourceProcessedBase">
 		<defName>CA_Flour</defName>
 		<label>flour</label>
-		<description>Flour.</description>
+		<description>Ground wheat.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/CA_Flour</texPath>
 		</graphicData>
@@ -292,6 +295,7 @@
 		</comps>
 		<thingCategories>
 			<li>PlantMatter</li>
+			<li>PlantFoodRaw</li>
 		</thingCategories>
 		<tickerType>Rare</tickerType>
 	</ThingDef>
@@ -299,7 +303,7 @@
 	<ThingDef ParentName="CA_ResourceProcessedBase">
 		<defName>CA_Syrup</defName>
 		<label>syrup</label>
-		<description>Syrup.</description>
+		<description>Smashed and squeezed sugarcane, the precursor to sugar.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/Wort</texPath>
 		</graphicData>
@@ -316,7 +320,7 @@
 	<ThingDef ParentName="CA_ResourceProcessedBase">
 		<defName>CA_Sugar</defName>
 		<label>sugar</label>
-		<description>Sugar.</description>
+		<description>Looks like salt but tastes better. A bit better.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/CA_Sugar</texPath>
 		</graphicData>
@@ -328,12 +332,16 @@
 			<preferability>DesperateOnly</preferability>
 			<canAutoSelectAsFoodForCaravan>false</canAutoSelectAsFoodForCaravan>
 		</ingestible>
+		<thingCategories>
+			<li>PlantMatter</li>
+			<li>PlantFoodRaw</li>
+		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourceProcessedBase">
 		<defName>CA_Vinegar</defName>
 		<label>vinegar</label>
-		<description>Vinegar.</description>
+		<description>Acetic acid with a more appetizing name.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/Wort</texPath>
 		</graphicData>
@@ -342,7 +350,7 @@
 	<ThingDef ParentName="OrganicProductBase">
 		<defName>CA_RuinedFood</defName>
 		<label>ruined food</label>
-		<description>Freezerburned mush. Yuck.</description>
+		<description>Freezer burned mush. Yuck.</description>
 		<thingCategories>
 			<li>Foods</li>
 		</thingCategories>
@@ -358,7 +366,7 @@
 		<ingestible>
 			<foodType>Kibble</foodType>
 			<preferability>RawBad</preferability>
-			<tasteThought>AteKibble</tasteThought>
+			<tasteThought>CA_AteMush</tasteThought>
 			<optimalityOffsetHumanlikes>-30</optimalityOffsetHumanlikes>
 			<optimalityOffsetFeedingAnimals>15</optimalityOffsetFeedingAnimals>
 			<ingestEffect>EatVegetarian</ingestEffect>
@@ -374,6 +382,5 @@
 				<rotDestroys>true</rotDestroys>
 			</li>
 		</comps>
-		<allowedArchonexusCount>200</allowedArchonexusCount>
 	</ThingDef>
 </Defs>

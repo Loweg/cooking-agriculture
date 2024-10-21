@@ -51,6 +51,7 @@
 		<label>cook dessert</label>
 		<description>Cook a dessert.</description>
 		<jobString>Cooking dessert.</jobString>
+		<workAmount>800</workAmount>
 		<ingredients>
 			<li>
 				<filter>

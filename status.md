@@ -8,13 +8,10 @@
 * Preservation: Smoked meat can be used to make smoked meat.
 * Yeast: Mostly unimplemented
 * Stew: Partially implemented
-* Dessert: Has no work amount
+* Dessert: Works.
 
 
 # Issues
-* Traders should trade stuff
-* Ruined food always contains meat?
-* Smoker is rotatable
 * Stew pot eaters want to sit on the stewpot. Maybe causing traders to throw exceptions too. If occupied:
 JobDriver threw exception in toil CarryIngestibleToChewSpot's initAction for pawn Lawrence driver=JobDriver_Ingest (toilIndex=2) driver.job=(Ingest (Job_2553) A = Thing_CA_Soup6661 Giver = JobGiver_GetFood [workGiverDef: null])
 System.IndexOutOfRangeException: Index was outside the bounds of the array.
