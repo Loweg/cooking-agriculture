@@ -34,7 +34,7 @@
 			<leaflessGraphicPath>Things/Plant/Grass_Leafless</leaflessGraphicPath>
 			<harvestWork>60</harvestWork>
 			<maxMeshCount>9</maxMeshCount>
-			<visualSizeRange>0.85~1</visualSizeRange>
+			<visualSizeRange>0.5~0.8</visualSizeRange>
 			<topWindExposure>0.4</topWindExposure>
 			<wildOrder>1</wildOrder>
 			<neverBlightable>true</neverBlightable>
@@ -57,7 +57,7 @@
 			<dieIfLeafless>true</dieIfLeafless>
 			<harvestTag>Standard</harvestTag>
 			<harvestedThingDef>CA_Sugarcane</harvestedThingDef>
-			<harvestYield>2</harvestYield>
+			<harvestYield>6</harvestYield>
 			<harvestWork>300</harvestWork>
 			<immatureGraphicPath>Things/Plant/CA_Sugarcane/Immature</immatureGraphicPath>
 			<topWindExposure>0.1</topWindExposure>

@@ -4,7 +4,7 @@
 		<defName>CA_SaltPan</defName>
 		<label>salt pan</label>
 		<thingClass>CookingAgriculture.Building_SaltPan</thingClass>
-		<description>Salt Pan.</description>
+		<description>A large pond where seawater is evaporated in order to concentrate salt for collection.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_SaltPan</texPath>
 			<drawSize>(3,3)</drawSize>
@@ -71,7 +71,7 @@
 	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_Smoker</defName>
 		<label>smoker</label>
-		<description>Smoker.</description>
+		<description>A vessel for smoking meat.</description>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_Smoker</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -120,7 +120,7 @@
 	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_StewPot</defName>
 		<label>stew pot</label>
-		<description>Stew pot.</description>
+		<description>The Neolithic nutrient paste dispenser, a stew pot turns raw food into meals very efficiently. Pawns will help themselves to soup from a finished stew pot. Stir, simmer, serve!</description>
 		<thingClass>CookingAgriculture.Building_StewPot</thingClass>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_StewPot</texPath>

@@ -1,7 +1,7 @@
 # State of the Mod
 * Freezing overhaul: Works perfectly
 * Sowing grass: Works. Looks weird.
-* Sugarcane, sugar: Works perfectly. Very stingy.
+* Sugarcane, sugar: Works perfectly.
 * Wheat: Wind and water mills don't display progress correctly. Hand mill masks are only applied in preview. Beer is untouched. Risen bread unimplemented.
 * Fruit trees: Works. Tested cherries.
 * Salt: Salt pan is throwing exceptions
@@ -10,6 +10,25 @@
 * Stew: Partially implemented
 * Dessert: Works.
 
+# Need Textures
+* Smoker
+* Sugar evaporator
+* Yeast culture
+* Grinding machine
+* Centrifuge
+* Jam
+* Salt
+* Flour
+* Syrup
+* Sugar
+* Vinegar
+* Risen bread
+* Flatbread
+* Apple tree
+* Cherry tree
+* Date tree
+* Mulberry tree
+* Wheat plant
 
 # Issues
 * Stew pot eaters want to sit on the stewpot. Maybe causing traders to throw exceptions too. If occupied:

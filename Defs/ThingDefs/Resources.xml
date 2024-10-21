@@ -41,7 +41,7 @@
 	<ThingDef ParentName="CA_ResourceFruitBase">
 		<defName>CA_Bananas</defName>
 		<label>bananas</label>
-		<description>A yellow fruit technically classified as a berry. Apparently monkeys love them.</description>
+		<description>A yellow fruit that is technically classified as a berry. Apparently monkeys love them.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Bananas</texPath>
 		</graphicData>
@@ -59,7 +59,7 @@
 	<ThingDef ParentName="CA_ResourceFruitBase">
 		<defName>CA_Dates</defName>
 		<label>dates</label>
-		<description>Dates.</description>
+		<description>Dates. I've never had one.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Dates</texPath>
 		</graphicData>
@@ -111,6 +111,7 @@
 		<label>pickles</label>
 		<description>Assorted pickled vegetables. Nice to eat, even when raw. Pickled foods never spoil, but don't restore as much nutrition as their unfermented counterparts.</description>
 		<graphicData>
+			<graphicClass>Graphic_StackCount</graphicClass>
 			<texPath>Things/Item/Resource/CA_Pickles</texPath>
 		</graphicData>
 		<statBases>
@@ -123,6 +124,7 @@
 		<label>cheese</label>
 		<description>Delicious cheese. Made of milk, or possibly the moon.</description>
 		<graphicData>
+			<graphicClass>Graphic_StackCount</graphicClass>
 			<texPath>Things/Item/Resource/CA_Cheese</texPath>
 		</graphicData>
 		<comps>
@@ -204,7 +206,7 @@
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_SmokedMeat</defName>
 		<label>smoked meat</label>
-		<description>Smoked meat.</description>
+		<description>Meat that has been exposed to smoke in order to cook and preserve it.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/PlantFoodRaw/CA_Dates</texPath>
 		</graphicData>

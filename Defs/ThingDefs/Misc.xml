@@ -104,6 +104,6 @@
 		<label>preserved foods</label>
 		<parent>FoodRaw</parent>
 		<resourceReadoutRoot>false</resourceReadoutRoot>
-		<iconPath>Things/Item/Resource/CA_Pickles</iconPath>
+		<iconPath>Things/Item/Resource/CA_Pickles/CA_Pickles_a</iconPath>
 	</ThingCategoryDef>
 </Defs>

@@ -44,3 +44,6 @@ Yeast can first be obtained as a byproduct of beer-making, or with an initial in
 Desserts are sweet treats that are made with a filling and a base. The base should be flour, sugar, or (for you cave-dwellers) fungus. The filling can be chocolate, fruit, or animal products.
 ### Stew
 A stew pot can be used to very efficiently turn ingredients into meals, like a neolithic nutrient paste dispenser. Simply add your ingredients, let it simmer, and help yourself!
+
+## Fine print
+Some textures are used under the MIT license from RimCuisine2.
