@@ -26,14 +26,14 @@ namespace CookingAgriculture {
 
 		public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
-		public override void Draw() {
+		/*public override void Draw() {
 			base.Draw();
 
 			Vector3 drawPos = this.DrawPos;
 			drawPos.y += 0.04054054f;
 			drawPos.z += 0.25f;
 			progressBar.Draw(drawPos);
-		}
+		}*/
 
 		public override void ExposeData() {
 			base.ExposeData();
@@ -84,7 +84,6 @@ namespace CookingAgriculture {
 
 	class StewUtility {
 		public static bool allowForbidden;
-		public static bool allowDispenserFull;
 		public static Pawn getter;
 		public static Pawn eater;
 		public static bool allowSociallyImproper;

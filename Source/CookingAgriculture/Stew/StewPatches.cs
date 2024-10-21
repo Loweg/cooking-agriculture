@@ -12,13 +12,12 @@ using System.Reflection.Emit;
 
 namespace CookingAgriculture.Stew {
 	class StewPatches {
-		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.BestFoodSourceOnMap_NewTemp))]
+		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.TryFindBestFoodSourceFor))]
 		public static class BestFoodSourcePatch {
-			static void Prefix(ref Pawn getter, ref Pawn eater, ref bool allowDispenserFull, ref bool allowForbidden, ref bool allowSociallyImproper) {
+			static void Prefix(ref Pawn getter, ref Pawn eater, ref bool allowForbidden, ref bool allowSociallyImproper) {
 				StewUtility.BestFoodSourceOnMap = true;
 				StewUtility.getter = getter;
 				StewUtility.eater = eater;
-				StewUtility.allowDispenserFull = allowDispenserFull;
 				StewUtility.allowForbidden = allowForbidden;
 				StewUtility.allowSociallyImproper = allowSociallyImproper;
 			}

@@ -4,7 +4,6 @@
 	<ThingDef Abstract="True" Name="CA_ResourceFruitBase" ParentName="OrganicProductBase">
 		<ingestible>
 			<preferability>RawTasty</preferability>
-			<tasteThought />
 			<foodType>VegetableOrFruit</foodType>
 			<ingestEffect>EatVegetarian</ingestEffect>
 			<ingestSound>RawVegetable_Eat</ingestSound>
@@ -23,6 +22,7 @@
 		</comps>
 		<thingCategories>
 			<li>CA_Fruit</li>
+			<li>PlantFoodRaw</li>
 		</thingCategories>
 		<soundInteract>Grain_Drop</soundInteract>
 		<soundDrop>Grain_Drop</soundDrop>
@@ -118,7 +118,7 @@
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
 		<defName>CA_Cheese</defName>
 		<label>cheese</label>
-		<description>Cheese.</description>
+		<description>Delicious cheese. Made of milk, or possibly the moon.</description>
 		<graphicData>
 			<texPath>Things/Item/Resource/CA_Cheese</texPath>
 		</graphicData>

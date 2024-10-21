@@ -62,7 +62,7 @@
 			<immatureGraphicPath>Things/Plant/CA_Sugarcane/Immature</immatureGraphicPath>
 			<topWindExposure>0.1</topWindExposure>
 			<growDays>12</growDays>
-			<visualSizeRange>0.4~1.1</visualSizeRange>
+			<visualSizeRange>0.6~1.4</visualSizeRange>
 			<purpose>Food</purpose>
 		</plant>
 	</ThingDef>

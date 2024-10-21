@@ -49,6 +49,18 @@ namespace CookingAgriculture {
 			});
 		}
 
+		public void Draw(Vector3 drawPos, Vector2 drawScale) {
+			GenDraw.DrawFillableBar(new GenDraw.FillableBarRequest() {
+				center = drawPos,
+				size = BarSize * drawScale,
+				fillPercent = Progress,
+				filledMat = BarFilledMat,
+				unfilledMat = BarUnfilledMat,
+				margin = 0.1f,
+				rotation = Rot4.North
+			});
+		}
+
 		public Gizmo GetGizmo() {
 			Command_Action gizmo = new Command_Action {
 				defaultLabel = "Debug: Finish",
@@ -130,8 +142,9 @@ namespace CookingAgriculture {
 				color = referenceProps.color,
 				constructEffect = referenceProps.constructEffect,
 				appearance = referenceProps.appearance,
-				soundImpactStuff = referenceProps.soundImpactStuff,
-				soundMeleeHitSharp = referenceProps.soundMeleeHitSharp,
+                soundImpactBullet = referenceProps.soundImpactBullet,
+                soundImpactMelee = referenceProps.soundImpactMelee,
+                soundMeleeHitSharp = referenceProps.soundMeleeHitSharp,
 				soundMeleeHitBlunt = referenceProps.soundMeleeHitBlunt
 			};
 			StuffProperties chunkProps = stoneChunk.stuffProps;
@@ -172,8 +185,9 @@ namespace CookingAgriculture {
 
 	[DefOf]
 	public static class CA_DefOf {
+		public static JobDef CA_EmptyProcessor;
+		public static JobDef CA_FillProcessor;
 		public static JobDef CA_TakeFromSaltPan;
-		public static JobDef CA_FeedYeastCulture;
 		public static StuffCategoryDef CA_ChunkStone;
 		public static ThingDef CA_Soup;
 		public static ThingDef CA_RuinedFood;

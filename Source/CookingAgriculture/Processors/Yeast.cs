@@ -11,6 +11,7 @@ using Verse.AI;
 namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
 	public class Building_YeastCulture : Building {
+		private float feedThreshold = 0.1f;
 		private float growth = 0f;
 		private float food = 0f;
 
@@ -104,7 +105,7 @@ namespace CookingAgriculture {
 			Scribe_Values.Look(ref food, "food");
 		}
 	}
-
+	/*
 	public class JobDriver_FeedYeastCulture : JobDriver {
 		private const TargetIndex CultureInd = TargetIndex.A;
 		private const TargetIndex FoodInd = TargetIndex.B;
@@ -164,5 +165,5 @@ namespace CookingAgriculture {
 			bool validator(Thing x) => !x.IsForbidden(pawn) && (x.def.defName == "CA_Flour" || x.def.defName == "CA_Wheat") && pawn.CanReserve(x);
 			return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.HaulableAlways), PathEndMode.ClosestTouch, TraverseParms.For(pawn), validator: validator);
 		}
-	}
+	}*/
 }

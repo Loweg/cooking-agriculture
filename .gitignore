@@ -3,3 +3,5 @@ Assemblies/
 Source/CookingAgriculture/obj
 .vscode/
 .DS_Store
+.vs/
+*.dll

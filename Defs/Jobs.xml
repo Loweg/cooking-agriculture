@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<JobDef>
-		<defName>CA_TakeFromSaltPan</defName>
-		<driverClass>CookingAgriculture.JobDriver_TakeFromSaltPan</driverClass>
-		<reportString>raking salt in TargetA.</reportString>
-		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<defName>CA_EmptyProcessor</defName>
+		<driverClass>CookingAgriculture.Processors.JobDriver_EmptyProcessor</driverClass>
+		<reportString>taking product out of TargetA.</reportString>
+		<suspendable>false</suspendable>
+	</JobDef>
+	<JobDef>
+		<defName>CA_FillProcessor</defName>
+		<driverClass>CookingAgriculture.Processors.JobDriver_FillProcessor</driverClass>
+		<reportString>filling TargetA.</reportString>
+		<suspendable>false</suspendable>
 	</JobDef>
 
 	<JobDef>
-		<defName>CA_FeedYeastCulture</defName>
-		<driverClass>CookingAgriculture.JobDriver_FeedYeastCulture</driverClass>
-		<reportString>feeding TargetA.</reportString>
-		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+		<defName>CA_TakeFromSaltPan</defName>
+		<reportString>raking salt in TargetA.</reportString>
+		<suspendable>false</suspendable>
 	</JobDef>
 
 	<WorkGiverDef>
@@ -32,28 +37,26 @@
 	</WorkGiverDef>
 
 	<WorkGiverDef>
-		<defName>CA_TakeFromSaltPan</defName>
-		<label>rake salt in salt pans</label>
-		<giverClass>CookingAgriculture.WorkGiver_TakeFromSaltPan</giverClass>
+		<defName>CA_EmptyProcessor</defName>
+		<label>empty processor</label>
+		<giverClass>CookingAgriculture.Processors.WorkGiver_EmptyProcessor</giverClass>
 		<workType>Hauling</workType>
-		<verb>rake salt</verb>
-		<gerund>raking salt in</gerund>
+		<verb>take product</verb>
+		<gerund>taking product from</gerund>
 		<requiredCapacities>
 			<li>Manipulation</li>
 		</requiredCapacities>
-		<canBeDoneByMechs>false</canBeDoneByMechs>
+	</WorkGiverDef>
+	<WorkGiverDef>
+		<defName>CA_FillProcessor</defName>
+		<label>fill processor</label>
+		<giverClass>CookingAgriculture.Processors.WorkGiver_FillProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>fill processor</verb>
+		<gerund>filling</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
 	</WorkGiverDef>
 
-	<WorkGiverDef>
-		<defName>CA_FeedYeastCulture</defName>
-		<label>feed yeast cultures</label>
-		<giverClass>CookingAgriculture.WorkGiver_FeedYeastCulture</giverClass>
-		<workType>Hauling</workType>
-		<verb>feed yeast culture</verb>
-		<gerund>feeding</gerund>
-		<requiredCapacities>
-			<li>Manipulation</li>
-		</requiredCapacities>
-		<canBeDoneByMechs>false</canBeDoneByMechs>
-	</WorkGiverDef>
 </Defs>
