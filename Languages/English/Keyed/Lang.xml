@@ -23,4 +23,6 @@
 	<YeastCultureGrowing>Starting new yeast culture ({0} complete)</YeastCultureGrowing>
 	<YeastCultureInsertFood>Waiting for food...</YeastCultureInsertFood>
 	<YeastCultureFeedThreshold>Will feed below {0} nutrition</YeastCultureFeedThreshold>
+	<YeastCultureNoFeed>No food</YeastCultureNoFeed>
+	<YeastCultureNoFeedNeeded>Filled to threshold</YeastCultureNoFeedNeeded>
 </LanguageData>

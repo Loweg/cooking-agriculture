@@ -189,6 +189,7 @@ namespace CookingAgriculture {
 		public static JobDef CA_EmptyProcessor;
 		public static JobDef CA_FillProcessor;
 		public static JobDef CA_TakeFromSaltPan;
+		public static JobDef CA_FeedYeastCulture;
 		public static StuffCategoryDef CA_ChunkStone;
 		public static ThingDef CA_Soup;
 		public static ThingDef CA_RuinedFood;

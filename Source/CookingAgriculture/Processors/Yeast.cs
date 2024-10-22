@@ -12,7 +12,7 @@ namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
 	public class Building_YeastCulture : Building_Storage, IStorageGroupMember {
 		private bool established = false;
-		private float feedThreshold = 0.1f;
+		private float feedThreshold = 0.5f;
 		private float food = 0f;
 		private float growth = 0f;
 		private int yeast = 0;
@@ -109,7 +109,7 @@ namespace CookingAgriculture {
 			return stringBuilder.ToString().TrimEndNewlines();
 		}
 
-		public override IEnumerable<Gizmo> GetGizmos() {
+        public override IEnumerable<Gizmo> GetGizmos() {
 			foreach (Gizmo c in base.GetGizmos()) {
 				if (!c.ToString().Contains("setting")) yield return c;
 			}
@@ -171,7 +171,7 @@ namespace CookingAgriculture {
 			yeast = Math.Max(yeast - item.stackCount, 0);
 		}
 	}
-	/*
+	
 	public class JobDriver_FeedYeastCulture : JobDriver {
 		private const TargetIndex CultureInd = TargetIndex.A;
 		private const TargetIndex FoodInd = TargetIndex.B;
@@ -219,7 +219,17 @@ namespace CookingAgriculture {
 			return true;
 		}
 
-		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) => t is Building_YeastCulture culture && culture.ShouldFeed  && !t.IsBurning() && !t.IsForbidden(pawn) && pawn.CanReserve(t, ignoreOtherReservations: forced) && pawn.Map.designationManager.DesignationOn(t, DesignationDefOf.Deconstruct) == null && FindFeed(pawn) != null;
+		public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
+			if (!(t is Building_YeastCulture culture)) return false;
+			if (!culture.ShouldFeed) {
+                JobFailReason.Is("YeastCultureNoFeedNeeded".Translate());
+                return false;
+			};
+			if (t.IsBurning() || t.IsForbidden(pawn) || !pawn.CanReserve(t, ignoreOtherReservations: forced) || pawn.Map.designationManager.DesignationOn(t, DesignationDefOf.Deconstruct) != null) return false;
+			if (FindFeed(pawn) != null) return true;
+            JobFailReason.Is("YeastCultureNoFeed".Translate());
+            return false;
+        }
 		public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
 			var feed = FindFeed(pawn);
 			return new Job(CA_DefOf.CA_FeedYeastCulture, t, feed) {
@@ -231,5 +241,5 @@ namespace CookingAgriculture {
 			bool validator(Thing x) => !x.IsForbidden(pawn) && (x.def.defName == "CA_Flour" || x.def.defName == "CA_Wheat") && pawn.CanReserve(x);
 			return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.HaulableAlways), PathEndMode.ClosestTouch, TraverseParms.For(pawn), validator: validator);
 		}
-	}*/
+	}
 }

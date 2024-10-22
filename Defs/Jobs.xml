@@ -12,6 +12,28 @@
 		<reportString>filling TargetA.</reportString>
 		<suspendable>false</suspendable>
 	</JobDef>
+	<WorkGiverDef>
+		<defName>CA_EmptyProcessor</defName>
+		<label>empty processor</label>
+		<giverClass>CookingAgriculture.Processors.WorkGiver_EmptyProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>take product</verb>
+		<gerund>taking product from</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+	<WorkGiverDef>
+		<defName>CA_FillProcessor</defName>
+		<label>fill processor</label>
+		<giverClass>CookingAgriculture.Processors.WorkGiver_FillProcessor</giverClass>
+		<workType>Hauling</workType>
+		<verb>fill processor</verb>
+		<gerund>filling</gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
 
 	<JobDef>
 		<defName>CA_TakeFromSaltPan</defName>
@@ -36,27 +58,22 @@
 		<prioritizeSustains>true</prioritizeSustains>
 	</WorkGiverDef>
 
+	<JobDef>
+		<defName>CA_FeedYeastCulture</defName>
+		<driverClass>CookingAgriculture.JobDriver_FeedYeastCulture</driverClass>
+		<reportString>feeding TargetA.</reportString>
+		<allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+	</JobDef>
 	<WorkGiverDef>
-		<defName>CA_EmptyProcessor</defName>
-		<label>empty processor</label>
-		<giverClass>CookingAgriculture.Processors.WorkGiver_EmptyProcessor</giverClass>
+		<defName>CA_FeedYeastCulture</defName>
+		<label>feed yeast cultures</label>
+		<giverClass>CookingAgriculture.WorkGiver_FeedYeastCulture</giverClass>
 		<workType>Hauling</workType>
-		<verb>take product</verb>
-		<gerund>taking product from</gerund>
+		<verb>feed yeast culture</verb>
+		<gerund>feeding</gerund>
 		<requiredCapacities>
 			<li>Manipulation</li>
 		</requiredCapacities>
+		<canBeDoneByMechs>false</canBeDoneByMechs>
 	</WorkGiverDef>
-	<WorkGiverDef>
-		<defName>CA_FillProcessor</defName>
-		<label>fill processor</label>
-		<giverClass>CookingAgriculture.Processors.WorkGiver_FillProcessor</giverClass>
-		<workType>Hauling</workType>
-		<verb>fill processor</verb>
-		<gerund>filling</gerund>
-		<requiredCapacities>
-			<li>Manipulation</li>
-		</requiredCapacities>
-	</WorkGiverDef>
-
 </Defs>
