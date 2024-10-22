@@ -10,9 +10,9 @@ namespace CookingAgriculture {
 	// Somewhat based on the Replimat
 	[StaticConstructorOnStartup]
 	class Building_StewPot : Building_NutrientPasteDispenser {
-		private int storedMeals = 0;
-		private List<ThingDef> ingredients = new List<ThingDef> {};
+		private List<ThingDef> ingredients = new List<ThingDef> { };
 		private ProgressBar progressBar = new ProgressBar(2000);
+		private int storedMeals = 0;
 
 		private float ProgressPerTickAtCurrentTemp => 1f / progressBar.ticksToComplete;
 
@@ -34,8 +34,8 @@ namespace CookingAgriculture {
 		public override void ExposeData() {
 			base.ExposeData();
 			progressBar.ExposeData();
-			Scribe_Values.Look(ref storedMeals, "storedMeals");
 			Scribe_Values.Look(ref ingredients, "ingredients");
+			Scribe_Values.Look(ref storedMeals, "storedMeals");
 		}
 
 		public override bool HasEnoughFeedstockInHoppers() { return !IsEmpty; }
@@ -43,7 +43,11 @@ namespace CookingAgriculture {
 		public override string GetInspectString() {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.AppendLine(base.GetInspectString());
-			stringBuilder.AppendLine(progressBar.Progress.ToStringPercent());
+			if (IsCooking) {
+				stringBuilder.AppendLine("StewPotCooking".Translate());
+			} else {
+				stringBuilder.AppendLine("StewPotMeals".Translate(storedMeals));
+			}
 			if (!this.IsSociallyProper(null, false))
 				stringBuilder.AppendLine("InPrisonCell".Translate());
 			return stringBuilder.ToString().Trim();

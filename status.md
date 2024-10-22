@@ -7,6 +7,7 @@
 * Some buildings should not be reinstallable
 
 # Need Textures
+* Feed threshold up and down images
 * Grinding machine
 * Centrifuge
 * Jam

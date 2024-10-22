@@ -9,6 +9,9 @@
 	<MustHaveOceanWater>Must have salt water.</MustHaveOceanWater>
 	<MustNotBlockOtherSaltPan>Must not block other salt pan.</MustNotBlockOtherSaltPan>
 
+	<StewPotCooking>Stewing...</StewPotCooking>
+	<StewPotMeals>Servings left: {0}</StewPotMeals>
+
 	<YeastCultureGrowth>Yeast: {0}/25</YeastCultureGrowth>
 	<YeastCultureProgress>Growth: {0}</YeastCultureProgress>
 	<YeastCultureNutrition>Nutrition: {0} full</YeastCultureNutrition>
@@ -19,4 +22,5 @@
 	<YeastCultureFull>Culture fully grown</YeastCultureFull>
 	<YeastCultureGrowing>Starting new yeast culture ({0} complete)</YeastCultureGrowing>
 	<YeastCultureInsertFood>Waiting for food...</YeastCultureInsertFood>
+	<YeastCultureFeedThreshold>Will feed below {0} nutrition</YeastCultureFeedThreshold>
 </LanguageData>
