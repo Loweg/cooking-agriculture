@@ -6,6 +6,7 @@ using Verse;
 using Verse.AI;
 
 namespace CookingAgriculture {
+	[StaticConstructorOnStartup]
 	class ProgressBar {
 		private Material barFilledCachedMat;
 		private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);
@@ -191,5 +192,6 @@ namespace CookingAgriculture {
 		public static StuffCategoryDef CA_ChunkStone;
 		public static ThingDef CA_Soup;
 		public static ThingDef CA_RuinedFood;
+		public static ThingDef CA_Yeast;
 	}
 }

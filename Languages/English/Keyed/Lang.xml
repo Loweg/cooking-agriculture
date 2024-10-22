@@ -9,11 +9,14 @@
 	<MustHaveOceanWater>Must have salt water.</MustHaveOceanWater>
 	<MustNotBlockOtherSaltPan>Must not block other salt pan.</MustNotBlockOtherSaltPan>
 
-	<YeastCultureGrowth>Yeast: {0}/100</YeastCultureGrowth>
+	<YeastCultureGrowth>Yeast: {0}/50</YeastCultureGrowth>
+	<YeastCultureProgress>Growth: {0}</YeastCultureProgress>
 	<YeastCultureNutrition>Nutrition: {0} full</YeastCultureNutrition>
 	<YeastCultureStarving>Dying off due to starvation</YeastCultureStarving>
 	<YeastCultureBadTemperature>Dying off due to bad temperature ({0} severity)</YeastCultureBadTemperature>
 	<YeastCultureGoodTemperature>Culture growing (speed: {0})</YeastCultureGoodTemperature>
-	<YeastCultureEmpty>Empty</YeastCultureEmpty>
+	<YeastCultureEmpty>No yeast culture present</YeastCultureEmpty>
 	<YeastCultureFull>Culture fully grown</YeastCultureFull>
+	<YeastCultureGrowing>Starting new yeast culture ({0} complete)</YeastCultureGrowing>
+	<YeastCultureInsertFood>Waiting for food...</YeastCultureInsertFood>
 </LanguageData>

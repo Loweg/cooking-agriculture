@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ThingDef ParentName="BuildingBase">
+	<ThingDef Name="CA_ProcessorBase" ParentName="BuildingBase" Abstract="True">
+		<building>
+			<buildingTags>
+				<li>Production</li>
+			</buildingTags>
+		</building>
+		<statBases>
+			<Mass>4</Mass>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+			<Flammability>1.0</Flammability>
+		</statBases>
+		<altitudeLayer>Building</altitudeLayer>
+		<canOverlapZones>false</canOverlapZones>
+		<category>Building</category>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<designationCategory>Production</designationCategory>
+		<fillPercent>0.30</fillPercent>
+		<passability>PassThroughOnly</passability>
+		<pathCost>70</pathCost>
+		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_SaltPan</defName>
 		<label>salt pan</label>
 		<thingClass>CookingAgriculture.Building_SaltPan</thingClass>
@@ -11,12 +34,12 @@
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
-		<stuffCategories>
+		<!--<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
 			<li>Stony</li>
 		</stuffCategories>
-		<costStuffCount>10</costStuffCount>
+		<costStuffCount>10</costStuffCount>-->
 		<building>
 			<ai_chillDestination>false</ai_chillDestination>
 			<expandHomeArea>false</expandHomeArea>
@@ -34,44 +57,14 @@
 			<Beauty>-10</Beauty>
 		</statBases>
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
-		<canOverlapZones>false</canOverlapZones>
 		<constructEffect>ConstructDirt</constructEffect>
-		<designationCategory>Production</designationCategory>
 		<fillPercent>0</fillPercent>
 		<passability>Standable</passability>
 		<pathCost>20</pathCost>
 		<rotatable>true</rotatable>
 		<size>(3,3)</size>
 		<terrainAffordanceNeeded>Diggable</terrainAffordanceNeeded>
-		<tickerType>Rare</tickerType>
 		<useHitPoints>false</useHitPoints>
-	</ThingDef>
-
-	<ThingDef Name="CA_ProcessorBase" ParentName="BuildingBase" Abstract="True">
-		<building>
-			<buildingTags>
-				<li>Production</li>
-			</buildingTags>
-		</building>
-		<statBases>
-			<Mass>4</Mass>
-			<MaxHitPoints>80</MaxHitPoints>
-			<WorkToBuild>500</WorkToBuild>
-			<Flammability>1.0</Flammability>
-		</statBases>
-		<thingCategories>
-			<li>BuildingsProduction</li>
-		</thingCategories>
-		<altitudeLayer>Building</altitudeLayer>
-		<canOverlapZones>false</canOverlapZones>
-		<category>Building</category>
-		<drawerType>MapMeshAndRealTime</drawerType>
-		<designationCategory>Production</designationCategory>
-		<fillPercent>0.30</fillPercent>
-		<minifiedDef>MinifiedThing</minifiedDef>
-		<passability>PassThroughOnly</passability>
-		<pathCost>70</pathCost>
-		<tickerType>Rare</tickerType>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -121,6 +114,10 @@
 		</researchPrerequisites>
 		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -171,6 +168,10 @@
 			</li>
 		</comps>
 		<rotatable>false</rotatable>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -238,6 +239,7 @@
 		<pathCost>70</pathCost>
 		<size>(1,1)</size>
 		<surfaceType>Item</surfaceType>
+		<minifiedDef>MinifiedThing</minifiedDef>
 	</ThingDef>
 
 	<ThingDef Name="CA_BigMillBase" ParentName="BuildingBase" Abstract="True">
@@ -296,7 +298,7 @@
 			<MaxHitPoints>120</MaxHitPoints>
 			<WorkToBuild>1000</WorkToBuild>
 		</statBases>
-		<constructEffect>ConstructMetal</constructEffect>
+		<!--<constructEffect>ConstructMetal</constructEffect>-->
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<size>(2,2)</size>
 		<tickerType>Rare</tickerType>

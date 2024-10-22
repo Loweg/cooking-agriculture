@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using HarmonyLib;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -10,22 +10,41 @@ using Verse.AI;
 
 namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
-	public class Building_YeastCulture : Building {
+	public class Building_YeastCulture : Building, IThingHolder, IHaulSource, IHaulDestination, IHaulEnroute, IThingHolderEvents<Thing> {
+		private readonly StorageSettings StorageSettings;
+
+		private ThingOwner<Thing> yeast;
 		private float feedThreshold = 0.1f;
 		private float growth = 0f;
 		private float food = 0f;
+		private bool established = false;
+
+		private int Count() {
+			try { return yeast.First().stackCount; } catch { return 0; }
+		}
 
 		public static readonly SimpleCurve GrowthByTemp = new SimpleCurve() {
 			{new CurvePoint(-30f, -1f), true},
-			{new CurvePoint(30, 1f),  true},
-			{new CurvePoint(60, -1f),  true},
+			{new CurvePoint(25, 1f), true},
+			{new CurvePoint(35, 1f), true},
+			{new CurvePoint(60, -1f), true},
 		};
 		public static readonly SimpleCurve FoodModifierByTemp = new SimpleCurve() {
 			{new CurvePoint(-30f, 0f), true},
-			{new CurvePoint(30, 1f),  true},
+			{new CurvePoint(25, 1f), true},
 		};
-
 		public bool ShouldFeed => food <= 0.1f;
+
+        public Building_YeastCulture() {
+			yeast = new ThingOwner<Thing>(this, true);
+			var s = new StorageSettings();
+			s.Priority = StoragePriority.Important;
+			var f = new ThingFilter();
+			f.SetAllow(CA_DefOf.CA_Yeast, true);
+			s.filter = f;
+			StorageSettings = s;
+        }
+
 		public int WantedFeedOf(ThingDef feed) {
 			if (food <= 0f) {
 				return 20;
@@ -33,14 +52,43 @@ namespace CookingAgriculture {
 				return (int)((1f - food) / 0.05f);
 			}
 		}
-		public override void TickRare() {
+        public void Feed(Thing feed) {
+            float nutrition = feed.stackCount * 0.05f;
+            food = Mathf.Clamp(food + nutrition, 0f, 1f);
+        }
+
+        public override void TickRare() {
 			base.TickRare();
-			food = Mathf.Clamp(food - 0.01f * FoodModifierByTemp.Evaluate(this.AmbientTemperature), 0f, 1f);
-			if (food > 0f) {
-				growth = Mathf.Clamp(growth + GrowthByTemp.Evaluate(this.AmbientTemperature) * 0.01f, 0f, 100f);
+			if (!established) {
+				food = Mathf.Clamp(food - 0.005f * FoodModifierByTemp.Evaluate(this.AmbientTemperature), 0f, 1f);
+				growth += GrowthByTemp.Evaluate(this.AmbientTemperature) / 10f;
 			} else {
-				growth = Mathf.Clamp(growth - 0.05f, 0f, 100f);
+				food = Mathf.Clamp(food - 0.01f * FoodModifierByTemp.Evaluate(this.AmbientTemperature), 0f, 1f);
+				if (food > 0f) {
+					growth += GrowthByTemp.Evaluate(this.AmbientTemperature);
+				} else {
+					growth = Mathf.Max(growth - 5f, 0f);
+				}
 			}
+			if (growth > 100f) {
+				if (yeast.Count == 0) {
+					yeast.TryAdd(ThingMaker.MakeThing(CA_DefOf.CA_Yeast));
+					established = true;
+                } else {
+					yeast.First().stackCount += 1;
+                }
+				growth -= 100f;
+			} else if (growth <= 0f && established) {
+				if (Count() <= 0) {
+					yeast.Clear();
+					established = false;
+					growth = 0f;
+				} else {
+                    yeast.First().stackCount -= 1;
+                    growth = 50f;
+                }
+            }
+			growth = Mathf.Clamp(growth, 0f, 100f);
 		}
 
 		public override string GetInspectString() {
@@ -48,21 +96,30 @@ namespace CookingAgriculture {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
 			if (stringBuilder.Length != 0) stringBuilder.AppendLine();
-			stringBuilder.AppendLine("YeastCultureGrowth".Translate((int)growth));
+			stringBuilder.AppendLine("YeastCultureGrowth".Translate(Count()));
 			stringBuilder.AppendLine("YeastCultureNutrition".Translate(food.ToStringPercent()));
-			if (food <= 0f) {
-				if (growth >= 0f) {
-					stringBuilder.AppendLine("YeastCultureStarving".Translate());
+			if (!established) {
+				stringBuilder.AppendLine("YeastCultureEmpty".Translate());
+				if (currentSpeed < 0f) {
+					stringBuilder.AppendLine("YeastCultureBadTemperature".Translate(Mathf.Abs(currentSpeed).ToStringPercent()));
+				} else if (food > 0f) {
+					stringBuilder.AppendLine("YeastCultureGrowing".Translate((growth / 100f).ToStringPercent()));
+					stringBuilder.AppendLine("YeastCultureGoodTemperature".Translate(currentSpeed.ToStringPercent()));
 				} else {
-					stringBuilder.AppendLine("YeastCultureEmpty".Translate());
+					stringBuilder.AppendLine("YeastCultureInsertFood".Translate());
 				}
-			}
-			if (currentSpeed < 0f) {
-				stringBuilder.AppendLine("YeastCultureBadTemperature".Translate(Mathf.Abs(currentSpeed).ToStringPercent()));
-			} else if (growth >= 100f && food > 0f) {
-				stringBuilder.AppendLine("YeastCultureFull".Translate());
-			} else if (food > 0f) {
-				stringBuilder.AppendLine("YeastCultureGoodTemperature".Translate(currentSpeed.ToStringPercent()));
+			} else {
+                stringBuilder.AppendLine("YeastCultureProgress".Translate((growth / 100f).ToStringPercent()));
+                if (food <= 0f) {
+					stringBuilder.AppendLine("YeastCultureStarving".Translate());
+				}
+				if (currentSpeed < 0f) {
+					stringBuilder.AppendLine("YeastCultureBadTemperature".Translate(Mathf.Abs(currentSpeed).ToStringPercent()));
+				} else if (Count() >= CA_DefOf.CA_Yeast.stackLimit && food > 0f) {
+					stringBuilder.AppendLine("YeastCultureFull".Translate());
+				} else if (food > 0f) {
+					stringBuilder.AppendLine("YeastCultureGoodTemperature".Translate(currentSpeed.ToStringPercent()));
+				}
 			}
 			return stringBuilder.ToString().TrimEndNewlines();
 		}
@@ -74,37 +131,44 @@ namespace CookingAgriculture {
 			if (Prefs.DevMode) {
 				Command_Action gizmo = new Command_Action {
 					defaultLabel = "Debug: Fill",
-					defaultDesc = "Increase yeast amount to 100%.",
+					defaultDesc = "Increase growth amount by 100%.",
 				};
 				gizmo.action = () => {
-					growth = 100f;
+					growth += 100f;
 				};
 				yield return gizmo;
-			}
+                Command_Action feed = new Command_Action {
+                    defaultLabel = "Debug: Feed",
+                    defaultDesc = "Increase food to 100%.",
+                };
+                feed.action = () => {
+                    food = 1f;
+                };
+                yield return feed;
+            }
 		}
-
-		public Thing TakeOutYeast() {
-			if (growth < 10f) {
-				Log.Warning("Tried to get yeast but growth < 10.");
-				return null;
-			}
-			Thing outYeast = ThingMaker.MakeThing(ThingDefOf.MedicineHerbal);
-			outYeast.stackCount = 1;
-			growth -= 10f;
-			return outYeast;
-		}
-
-		public void Feed(Thing feed) {
-			float nutrition = feed.stackCount * 0.05f;
-			food = Mathf.Clamp(food + nutrition, 0f, 1f);
-		}
-
 		public override void ExposeData() {
 			base.ExposeData();
 			Scribe_Values.Look(ref growth, "growth");
 			Scribe_Values.Look(ref food, "food");
+            Scribe_Values.Look(ref established, "established");
+            Scribe_Deep.Look(ref yeast, "yeast", this);
+        }
+
+        public bool StorageTabVisible => true;
+        public void GetChildHolders(List<IThingHolder> outChildren) => ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
+		public ThingOwner GetDirectlyHeldThings() => yeast;
+		public StorageSettings GetStoreSettings() => StorageSettings;
+		public StorageSettings GetParentStoreSettings() => StorageSettings;
+		public void Notify_SettingsChanged() { }
+        public bool Accepts(Thing t) => t.def == CA_DefOf.CA_Yeast && (Count() < CA_DefOf.CA_Yeast.stackLimit || yeast.Contains(t));
+        public int SpaceRemainingFor(ThingDef stuff) => CA_DefOf.CA_Yeast.stackLimit - Count();
+        public void Notify_ItemAdded(Thing item) {
+			if (!established) established = true;
+			food += .04f * item.stackCount;
 		}
-	}
+        public void Notify_ItemRemoved(Thing item) {}
+    }
 	/*
 	public class JobDriver_FeedYeastCulture : JobDriver {
 		private const TargetIndex CultureInd = TargetIndex.A;

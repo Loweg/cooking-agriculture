@@ -165,7 +165,51 @@
 		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
 		<effectWorking>Cook</effectWorking>
 		<soundWorking>Recipe_CookMeal</soundWorking>
-		<allowMixingIngredients>true</allowMixingIngredients>
+	</RecipeDef>
+
+	<RecipeDef>
+		<defName>CA_MakeBread</defName>
+		<label>bake bread</label>
+		<description>Bake leavened bread from flour and yeast.</description>
+		<jobString>Baking bread.</jobString>
+		<workAmount>800</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Flour</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Yeast</li>
+					</thingDefs>
+				</filter>
+				<count>1</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>CA_Flour</li>
+				<li>CA_Yeast</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<CA_RisenBread>25</CA_RisenBread>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<researchPrerequisite>Brewing</researchPrerequisite>
 	</RecipeDef>
 
 	<RecipeDef>
