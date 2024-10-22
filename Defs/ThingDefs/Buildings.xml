@@ -192,6 +192,13 @@
 		<costStuffCount>30</costStuffCount>
 		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
 		<rotatable>false</rotatable>
+		<building>
+			<maxItemsInCell>1</maxItemsInCell>
+		</building>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
+		<surfaceType>Item</surfaceType>
 	</ThingDef>
 
 	<!-- Mills -->

@@ -10,18 +10,12 @@ using Verse.AI;
 
 namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
-	public class Building_YeastCulture : Building, IThingHolder, IHaulSource, IHaulDestination, IHaulEnroute, IThingHolderEvents<Thing> {
-		private readonly StorageSettings StorageSettings;
-
-		private ThingOwner<Thing> yeast;
+	public class Building_YeastCulture : Building_Storage, IStorageGroupMember {
+		private int yeast = 0;
 		private float feedThreshold = 0.1f;
 		private float growth = 0f;
 		private float food = 0f;
 		private bool established = false;
-
-		private int Count() {
-			try { return yeast.First().stackCount; } catch { return 0; }
-		}
 
 		public static readonly SimpleCurve GrowthByTemp = new SimpleCurve() {
 			{new CurvePoint(-30f, -1f), true},
@@ -35,17 +29,15 @@ namespace CookingAgriculture {
 		};
 		public bool ShouldFeed => food <= 0.1f;
 
-        public Building_YeastCulture() {
-			yeast = new ThingOwner<Thing>(this, true);
-			var s = new StorageSettings();
-			s.Priority = StoragePriority.Important;
-			var f = new ThingFilter();
-			f.SetAllow(CA_DefOf.CA_Yeast, true);
-			s.filter = f;
-			StorageSettings = s;
+        public override void PostMake() {
+            base.PostMake();
+            settings.Priority = StoragePriority.Important;
+            var f = new ThingFilter();
+            f.SetAllow(CA_DefOf.CA_Yeast, true);
+            settings.filter = f;
         }
 
-		public int WantedFeedOf(ThingDef feed) {
+        public int WantedFeedOf(ThingDef feed) {
 			if (food <= 0f) {
 				return 20;
 			} else {
@@ -71,20 +63,15 @@ namespace CookingAgriculture {
 				}
 			}
 			if (growth > 100f) {
-				if (yeast.Count == 0) {
-					yeast.TryAdd(ThingMaker.MakeThing(CA_DefOf.CA_Yeast));
-					established = true;
-                } else {
-					yeast.First().stackCount += 1;
-                }
+				established = true;
+				yeast += 1;
 				growth -= 100f;
 			} else if (growth <= 0f && established) {
-				if (Count() <= 0) {
-					yeast.Clear();
+				if (yeast <= 0) {
 					established = false;
 					growth = 0f;
 				} else {
-                    yeast.First().stackCount -= 1;
+                    yeast -= 1;
                     growth = 50f;
                 }
             }
@@ -96,7 +83,7 @@ namespace CookingAgriculture {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.Append(base.GetInspectString());
 			if (stringBuilder.Length != 0) stringBuilder.AppendLine();
-			stringBuilder.AppendLine("YeastCultureGrowth".Translate(Count()));
+			stringBuilder.AppendLine("YeastCultureGrowth".Translate(yeast));
 			stringBuilder.AppendLine("YeastCultureNutrition".Translate(food.ToStringPercent()));
 			if (!established) {
 				stringBuilder.AppendLine("YeastCultureEmpty".Translate());
@@ -115,7 +102,7 @@ namespace CookingAgriculture {
 				}
 				if (currentSpeed < 0f) {
 					stringBuilder.AppendLine("YeastCultureBadTemperature".Translate(Mathf.Abs(currentSpeed).ToStringPercent()));
-				} else if (Count() >= CA_DefOf.CA_Yeast.stackLimit && food > 0f) {
+				} else if (yeast >= CA_DefOf.CA_Yeast.stackLimit && food > 0f) {
 					stringBuilder.AppendLine("YeastCultureFull".Translate());
 				} else if (food > 0f) {
 					stringBuilder.AppendLine("YeastCultureGoodTemperature".Translate(currentSpeed.ToStringPercent()));
@@ -126,7 +113,7 @@ namespace CookingAgriculture {
 
 		public override IEnumerable<Gizmo> GetGizmos() {
 			foreach (Gizmo c in base.GetGizmos()) {
-				yield return c;
+				if (!c.ToString().Contains("setting")) yield return c;
 			}
 			if (Prefs.DevMode) {
 				Command_Action gizmo = new Command_Action {
@@ -154,22 +141,22 @@ namespace CookingAgriculture {
             Scribe_Values.Look(ref established, "established");
             Scribe_Deep.Look(ref yeast, "yeast", this);
         }
+        public override void Notify_ReceivedThing(Thing item) {
+            base.Notify_ReceivedThing(item);
+            if (item.def != CA_DefOf.CA_Yeast) return;
+            if (!established) established = true;
+            food += .04f * item.stackCount;
+			yeast += item.stackCount;
+        }
+        public override void Notify_LostThing(Thing item) {
+            base.Notify_LostThing(item);
+			Log.Message("Lost");
+            if (item.def != CA_DefOf.CA_Yeast) return;
+			yeast = Math.Max(yeast - item.stackCount, 0);
+        }
 
-        public bool StorageTabVisible => true;
-        public void GetChildHolders(List<IThingHolder> outChildren) => ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
-		public ThingOwner GetDirectlyHeldThings() => yeast;
-		public StorageSettings GetStoreSettings() => StorageSettings;
-		public StorageSettings GetParentStoreSettings() => StorageSettings;
-		public void Notify_SettingsChanged() { }
-        public bool Accepts(Thing t) => t.def == CA_DefOf.CA_Yeast && (Count() < CA_DefOf.CA_Yeast.stackLimit || yeast.Contains(t));
-        public int SpaceRemainingFor(ThingDef stuff) => CA_DefOf.CA_Yeast.stackLimit - Count();
-        public void Notify_ItemAdded(Thing item) {
-			if (!established) established = true;
-			food += .04f * item.stackCount;
-		}
-        public void Notify_ItemRemoved(Thing item) {}
     }
-	/*
+    /*
 	public class JobDriver_FeedYeastCulture : JobDriver {
 		private const TargetIndex CultureInd = TargetIndex.A;
 		private const TargetIndex FoodInd = TargetIndex.B;

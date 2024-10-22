@@ -9,7 +9,7 @@
 	<MustHaveOceanWater>Must have salt water.</MustHaveOceanWater>
 	<MustNotBlockOtherSaltPan>Must not block other salt pan.</MustNotBlockOtherSaltPan>
 
-	<YeastCultureGrowth>Yeast: {0}/50</YeastCultureGrowth>
+	<YeastCultureGrowth>Yeast: {0}/25</YeastCultureGrowth>
 	<YeastCultureProgress>Growth: {0}</YeastCultureProgress>
 	<YeastCultureNutrition>Nutrition: {0} full</YeastCultureNutrition>
 	<YeastCultureStarving>Dying off due to starvation</YeastCultureStarving>

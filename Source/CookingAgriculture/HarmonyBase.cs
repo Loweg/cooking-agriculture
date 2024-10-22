@@ -9,6 +9,7 @@ using Verse.AI;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using System.Reflection.Emit;
 
 namespace CookingAgriculture {
 	[StaticConstructorOnStartup]
@@ -60,4 +61,45 @@ namespace CookingAgriculture {
 			}
 		}
 	}
+
+    // From LWM Deep Storage
+    [HarmonyPatch(typeof(SectionLayer_Things), "Regenerate")]
+    public static class PatchYeastDrawing {
+        // We change thingGrid.ThingsListAt(c) to DisplayThingList(map, c):
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+            var code = new List<CodeInstruction>(instructions);
+            int i = 0;
+            var lookingForThisFieldCall = HarmonyLib.AccessTools.Field(typeof(Verse.Map), "thingGrid");
+            for (; i < code.Count; i++) {
+                if (code[i].opcode != OpCodes.Ldfld || (System.Reflection.FieldInfo)code[i].operand != lookingForThisFieldCall) {
+                    yield return code[i];
+                    continue;
+                }
+                // found middle of List<Thing> list = base.Map.thingGrid.ThingsListAt(c);
+                // We are at the original instruction .thingGrid
+                //   and we have the Map on the stack
+                i++;  // go past thingGrid instruction
+                // Need the location c on the stack, but that's what happens next in original code - loading c
+                yield return code[i];
+                i++; // now past c
+                // Next code instruction is to call ThingsListAt.
+                i++; // We want our own list
+                yield return new CodeInstruction(OpCodes.Call, HarmonyLib.AccessTools.Method("CookingAgriculture.PatchYeastDrawing:ThingListToDisplay"));
+                break; // that's all we need to change!
+            }
+            for (; i < code.Count; i++) {
+                yield return code[i];
+            }
+            yield break;
+        }
+
+        static public List<Thing> ThingListToDisplay(Map map, IntVec3 loc) {
+            ThingWithComps building;
+            SlotGroup slotGroup = loc.GetSlotGroup(map);
+            if (slotGroup == null || (building = slotGroup.parent as Building_YeastCulture) == null) {
+                return map.thingGrid.ThingsListAt(loc);
+            }
+            return map.thingGrid.ThingsListAt(loc).FindAll(t => t.def != CA_DefOf.CA_Yeast);
+        }
+    }
 }
