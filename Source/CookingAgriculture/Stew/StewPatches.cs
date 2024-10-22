@@ -1,24 +1,22 @@
 ﻿using System;
 
 using HarmonyLib;
-using UnityEngine;
-
 using RimWorld;
 using Verse;
 using Verse.AI;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Reflection.Emit;
 
 namespace CookingAgriculture.Stew {
 	class StewPatches {
-		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.TryFindBestFoodSourceFor))]
+		[HarmonyPatch(typeof(FoodUtility), nameof(FoodUtility.BestFoodSourceOnMap))]
 		public static class BestFoodSourcePatch {
-			static void Prefix(ref Pawn getter, ref Pawn eater, ref bool allowForbidden, ref bool allowSociallyImproper) {
-				StewUtility.BestFoodSourceOnMap = true;
+            static void Prefix(ref Pawn getter, ref Pawn eater, ref bool allowDispenserFull, ref bool allowForbidden, ref bool allowSociallyImproper) {
+                StewUtility.BestFoodSourceOnMap = true;
 				StewUtility.getter = getter;
 				StewUtility.eater = eater;
-				StewUtility.allowForbidden = allowForbidden;
+                StewUtility.allowDispenserFull = allowDispenserFull;
+                StewUtility.allowForbidden = allowForbidden;
 				StewUtility.allowSociallyImproper = allowSociallyImproper;
 			}
 			static void Postfix() {
@@ -50,17 +48,6 @@ namespace CookingAgriculture.Stew {
 
 		[HarmonyPatch(typeof(FoodUtility), "SpawnedFoodSearchInnerScan")]
 		class SearchInnerPatch {
-			[HarmonyPrefix]
-			static bool Prefix(ref Predicate<Thing> validator) {
-				var originalValidator = validator;
-				bool newValidator(Thing x) => x is Building_StewPot t ? StewUtility.StewPredicate(t) : originalValidator(x);
-				validator = newValidator;
-				return true;
-			}
-		}
-
-		[HarmonyPatch(typeof(GenClosest), nameof(GenClosest.ClosestThingReachable))]
-		class ClosestThingPatch {
 			[HarmonyPrefix]
 			static bool Prefix(ref Predicate<Thing> validator) {
 				var originalValidator = validator;
@@ -118,22 +105,27 @@ namespace CookingAgriculture.Stew {
 
 		[HarmonyPatch(typeof(Toils_Ingest), nameof(Toils_Ingest.TakeMealFromDispenser))]
 		public static class TakeMealFromDispenserPatch {
-			[HarmonyPostfix]
-			static void Postfix(TargetIndex ind, Pawn eater, Toil __result) {
+			static bool Prefix(ref TargetIndex ind, ref Pawn eater, ref Toil __result) {
 				if (eater.jobs.curJob.GetTarget(ind).Thing is Building_StewPot) {
-					__result.initAction = delegate {
-						var actor = __result.actor;
-						var thing = ((Building_StewPot)actor.jobs.curJob.GetTarget(ind).Thing).TryDispenseFood();
+					var index = ind;
+					var toil = new Toil();
+					toil.initAction = delegate {
+						var actor = toil.actor;
+                        var thing = ((Building_StewPot)actor.jobs.curJob.GetTarget(index).Thing).TryDispenseFood();
 						if (thing == null) {
 							actor.jobs.curDriver.EndJobWith(JobCondition.Incompletable);
 							return;
 						}
 
 						actor.carryTracker.TryStartCarry(thing);
-						actor.CurJob.SetTarget(ind, actor.carryTracker.CarriedThing);
+						actor.CurJob.SetTarget(index, actor.carryTracker.CarriedThing);
 					};
-					return;
+                    toil.FailOnCannotTouch(ind, PathEndMode.Touch);
+                    toil.defaultCompleteMode = ToilCompleteMode.Delay;
+					__result = toil;
+					return false;
 				}
+				return true;
 			}
 		}
 		[HarmonyPatch(typeof(JobDriver_FoodDeliver), nameof(JobDriver_FoodDeliver.GetReport))]
@@ -152,5 +144,17 @@ namespace CookingAgriculture.Stew {
 				}
 			}
 		}
-	}
+        [HarmonyPatch(typeof(JobDriver_Ingest), nameof(JobDriver_Ingest.GetReport))]
+        public static class Harmony_JobDriver_Ingest_GetReport {
+            static void Postfix(JobDriver_Ingest __instance, ref string __result, bool ___usingNutrientPasteDispenser) {
+                if (___usingNutrientPasteDispenser) {
+                    if (__instance.job.GetTarget(TargetIndex.A).Thing is Building_StewPot) {
+                        __result = __instance.job.def.reportString.Replace("TargetA", "soup");
+                    } else {
+                        __result = __instance.job.def.reportString.Replace("TargetA", __instance.job.GetTarget(TargetIndex.A).Thing.Label);
+                    }
+                }
+            }
+        }
+    }
 }

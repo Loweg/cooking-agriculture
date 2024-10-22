@@ -10,27 +10,25 @@ namespace CookingAgriculture {
 	// Somewhat based on the Replimat
 	[StaticConstructorOnStartup]
 	class Building_StewPot : Building_NutrientPasteDispenser {
-		public static int CollectDuration = GenTicks.SecondsToTicks(1f);
-
 		private int storedMeals = 0;
-		private List<ThingDef> ingredients;
+		private List<ThingDef> ingredients = new List<ThingDef> {};
 		private ProgressBar progressBar = new ProgressBar(2000);
 
-		private float ProgressPerTickAtCurrentTemp => 1f / progressBar.ticksToComplete, 0f;
+		private float ProgressPerTickAtCurrentTemp => 1f / progressBar.ticksToComplete;
 
 		public bool IsComplete => progressBar.Progress >= 1f;
-		public bool IsEmpty => storedMeals <= 0 && ingredients.IsEmpty();
+		public bool IsEmpty => storedMeals <= 0;
 		public bool ShouldFill => IsEmpty;
 		public bool IsCooking => !IsComplete && storedMeals == 0;
 		public override ThingDef DispensableDef => ThingDef.Named("CA_Soup");
 
 		public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
-		public override void DrawAt(Vector3 drawLoc, bool flip = false) {
-			base.DrawAt(drawLoc, flip;);
+		protected override void DrawAt(Vector3 drawLoc, bool flip = false) {
+			base.DrawAt(drawLoc, flip);
 			drawLoc.y += 0.04054054f;
 			drawLoc.z += 0.25f;
-			progressBar.Draw(drawPos);
+			progressBar.Draw(drawLoc);
 		}
 
 		public override void ExposeData() {
@@ -85,6 +83,7 @@ namespace CookingAgriculture {
 		public static bool allowForbidden;
 		public static Pawn getter;
 		public static Pawn eater;
+		public static bool allowDispenserFull;
 		public static bool allowSociallyImproper;
 		public static bool BestFoodSourceOnMap;
 
