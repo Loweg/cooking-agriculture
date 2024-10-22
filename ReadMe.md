@@ -34,17 +34,19 @@ Jam is cooked at a stove or campfire from fruit and sugar.
 ### Smoked Meat
 Meat can be smoked in a smoker with wood to extend its shelf-life.
 ### Wheat Products
-Wheat is now required to make beer in addition to hops, but not as many hops are required, and beer is more nutritious. The brewing process is also made more efficient if you seed it with a yeast culture.
+Wheat and yeast are now required to make beer in addition to hops, but not as many hops are required, and beer is more nutritious. The brewing process also takes half as long, and wort-making is more time-efficient.
 
 Wheat is also ground into flour at a wind, water, or electric mill, or by hand at a hand mill (sometimes referred to as a quern). Flour is baked by itself into flatbread (great for traveling), or, even better, with yeast to make delightfully fluffy risen bread. Risen bread is particularly delicious, but doesn't last that long and can't be frozen.
 ### Yeast
 Maintaining a yeast culture requires some attention and upkeep, but is well worth the cost.
 
-Yeast can first be obtained as a byproduct of beer-making, or with an initial investment of flour or wheat. Yeast will slowly reproduce to allow you to harvest for cooking, but requires a constant (small) supply of wheat or flour. It also needs to be kept warm, but not too hot.
+Yeast can first with an initial investment of feed and time to start the culture. Yeast will slowly reproduce to allow you to harvest for cooking, but requires a constant (small) supply of wheat or flour. It also needs to be kept warm, but not too hot.
 ### Desserts
 Desserts are sweet treats that are made with a filling and a base. The base should be flour, sugar, or (for you cave-dwellers) fungus. The filling can be chocolate, fruit, or animal products.
 ### Stew
 A stew pot can be used to very efficiently turn ingredients into meals, like a neolithic nutrient paste dispenser. Simply add your ingredients, let it simmer, and help yourself!
 
 ## Fine print
-Some textures are used under the MIT license from RimCuisine2.
+Some textures are used under the MIT license from RimCuisine2:
+* Buildings: Manual mill, Yeast culture
+* Resources: Cheese, Pickles, Smoked meat, Apples, Bananas, Cherries, Sugarcane, Salted Vegetable

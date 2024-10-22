@@ -1,6 +1,5 @@
 # State of the Mod
 ## TODO
-* Yeast, risen bread, beer
 * Salt pan
 * Stew
 * Traders should carry flour and sugar

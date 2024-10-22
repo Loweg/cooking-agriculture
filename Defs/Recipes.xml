@@ -133,6 +133,71 @@
 	</RecipeDef>
 
 	<RecipeDef>
+		<defName>CA_MakeJam</defName>
+		<label>make jam</label>
+		<description>Cook fruit into jam by adding heat and plenty of sugar.</description>
+		<jobString>Making jam.</jobString>
+		<workAmount>800</workAmount>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>CA_Fruit</li>
+					</categories>
+					<thingDefs>
+						<li>RawBerries</li>
+					</thingDefs>
+				</filter>
+				<count>1.0</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>CA_Sugar</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<categories>
+				<li>CA_Fruit</li>
+			</categories>
+			<thingDefs>
+				<li>RawBerries</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<CA_Jam>25</CA_Jam>
+		</products>
+		<recipeUsers>
+			<li>Campfire</li>
+			<li>ElectricStove</li>
+			<li>FueledStove</li>
+		</recipeUsers>
+		<workSpeedStat>CookSpeed</workSpeedStat>
+		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
+		<researchPrerequisite>Pemmican</researchPrerequisite>
+		<effectWorking>Cook</effectWorking>
+		<soundWorking>Recipe_CookMeal</soundWorking>
+		<allowMixingIngredients>true</allowMixingIngredients>
+	</RecipeDef>
+
+	<ProcessorFramework.ProcessDef>
+		<defName>CA_Smoking</defName>
+		<thingDef>CA_SmokedMeat</thingDef>
+		<ingredientFilter>
+			<categories>
+				<li>MeatRaw</li>
+			</categories>
+		</ingredientFilter>
+		<processDays>3</processDays>
+		<unfueledFactor>0.0</unfueledFactor>
+		<fuelUseFactor>500.0</fuelUseFactor>
+	</ProcessorFramework.ProcessDef>
+
+	<!-- Wheat -->
+	<RecipeDef>
 		<defName>CA_MakeFlatbread</defName>
 		<label>bake flatbread</label>
 		<description>Bake simple flatbread from flour.</description>
@@ -211,70 +276,6 @@
 		<soundWorking>Recipe_CookMeal</soundWorking>
 		<researchPrerequisite>Brewing</researchPrerequisite>
 	</RecipeDef>
-
-	<RecipeDef>
-		<defName>CA_MakeJam</defName>
-		<label>make jam</label>
-		<description>Cook fruit into jam by adding heat and plenty of sugar.</description>
-		<jobString>Making jam.</jobString>
-		<workAmount>800</workAmount>
-		<ingredients>
-			<li>
-				<filter>
-					<categories>
-						<li>CA_Fruit</li>
-					</categories>
-					<thingDefs>
-						<li>RawBerries</li>
-					</thingDefs>
-				</filter>
-				<count>1.0</count>
-			</li>
-			<li>
-				<filter>
-					<thingDefs>
-						<li>CA_Sugar</li>
-					</thingDefs>
-				</filter>
-				<count>10</count>
-			</li>
-		</ingredients>
-		<fixedIngredientFilter>
-			<categories>
-				<li>CA_Fruit</li>
-			</categories>
-			<thingDefs>
-				<li>RawBerries</li>
-			</thingDefs>
-		</fixedIngredientFilter>
-		<products>
-			<CA_Jam>25</CA_Jam>
-		</products>
-		<recipeUsers>
-			<li>Campfire</li>
-			<li>ElectricStove</li>
-			<li>FueledStove</li>
-		</recipeUsers>
-		<workSpeedStat>CookSpeed</workSpeedStat>
-		<requiredGiverWorkType>Cooking</requiredGiverWorkType>
-		<researchPrerequisite>Pemmican</researchPrerequisite>
-		<effectWorking>Cook</effectWorking>
-		<soundWorking>Recipe_CookMeal</soundWorking>
-		<allowMixingIngredients>true</allowMixingIngredients>
-	</RecipeDef>
-
-	<ProcessorFramework.ProcessDef>
-		<defName>CA_Smoking</defName>
-		<thingDef>CA_SmokedMeat</thingDef>
-		<ingredientFilter>
-			<categories>
-				<li>MeatRaw</li>
-			</categories>
-		</ingredientFilter>
-		<processDays>3</processDays>
-		<unfueledFactor>0.0</unfueledFactor>
-		<fuelUseFactor>500.0</fuelUseFactor>
-	</ProcessorFramework.ProcessDef>
 
 	<!-- Salt -->
 	<RecipeDef>

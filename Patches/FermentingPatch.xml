@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="BarrelProcessor"]/comps/li[@Class="ProcessorFramework.CompProperties_Processor"]/processes</xpath>
+		<value>
+			<li>CA_Pickling</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ProcessorFramework.ProcessDef[defName="Beer"]/processDays</xpath>
+		<value>
+			<processDays>3</processDays>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ProcessorFramework.ProcessDef[defName="Beer"]/temperatureSafe</xpath>
+		<value>
+			<temperatureSafe>5~36.0</temperatureSafe>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ProcessorFramework.ProcessDef[defName="Beer"]/temperatureIdeal</xpath>
+		<value>
+			<temperatureIdeal>25~32.0</temperatureIdeal>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ProcessorFramework.ProcessDef[defName="Beer"]/speedBelowSafe</xpath>
+		<value>
+			<speedBelowSafe>0.0</speedBelowSafe>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/RecipeDef[defName="Make_Wort"]/description</xpath>
+		<value>
+			<description>Make wort by malting wheat, flavoring with hops, and adding yeast.</description>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/RecipeDef[defName="Make_Wort"]/products/Wort</xpath>
+		<value>
+			<Wort>25</Wort>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="Make_Wort"]/fixedIngredientFilter/thingDefs</xpath>
+		<value>
+			<li>CA_Wheat</li>
+			<li>CA_Yeast</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/RecipeDef[defName="Make_Wort"]/ingredients</xpath>
+		<value>
+			<ingredients>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>RawHops</li>
+						</thingDefs>
+					</filter>
+					<count>5</count>
+				</li>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>CA_Wheat</li>
+						</thingDefs>
+					</filter>
+					<count>25</count>
+				</li>
+				<li>
+					<filter>
+						<thingDefs>
+							<li>CA_Yeast</li>
+						</thingDefs>
+					</filter>
+					<count>1</count>
+				</li>
+			</ingredients>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Beer"]/statBases/Nutrition</xpath>
+		<value>
+			<Nutrition>0.15</Nutrition>
+		</value>
+	</Operation>
+</Patch>
