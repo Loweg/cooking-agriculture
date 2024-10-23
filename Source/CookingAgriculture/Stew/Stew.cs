@@ -7,31 +7,37 @@ using Verse;
 using Verse.AI;
 using CookingAgriculture.Processors;
 using System.Linq;
-using System.Runtime;
+
 namespace CookingAgriculture {
     // Somewhat based on the Replimat
     [StaticConstructorOnStartup]
-    class Building_StewPot : Building_NutrientPasteDispenser, IStoreSettingsParent {
-        private List<ThingDef> ingredients = new List<ThingDef>();
+    class Building_StewPot : Building_NutrientPasteDispenser, IStoreSettingsParent, IThingHolder {
+        private ThingOwner ingredients;
+        private List<ThingDef> ingredientsDef = new List<ThingDef>();
         private ProgressBar progressBar = new ProgressBar(2000);
         private int storedMeals = 0;
+        private bool cooking = false;
+
         public StorageSettings allowedIngredients;
         public ProcessSettings recipe;
 
-        private float ProgressPerTickAtCurrentTemp => 1f / progressBar.ticksToComplete;
-
+        private float ProgressPerTick => 1f / progressBar.ticksToComplete;
         public bool IsComplete => progressBar.Progress >= 1f;
         public bool IsEmpty => storedMeals == 0;
-        public bool ShouldFill => ingredients.Count == 0 && IsEmpty && !GetComp<CompForbiddable>().Forbidden;
-        public bool IsCooking => ingredients.Count >= 1 && IsEmpty;
+        public bool ShouldFill => !cooking && IsEmpty && !GetComp<CompForbiddable>().Forbidden;
+        public bool IsCooking => cooking;
         public override ThingDef DispensableDef => ThingDef.Named("CA_Soup");
 
         public bool StorageTabVisible => Faction == Faction.OfPlayerSilentFail;
+
+        public void Start() { cooking = true; }
 
         public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
         public override void PostMake() {
             base.PostMake();
+            ingredients = new ThingOwner<Thing>(this);
+
             var p = GetComp<CompProcessor>();
             if (p != null && p.Props.processes.Count > 0) {
                 recipe = new ProcessSettings(p.Props.processes[0], this);
@@ -83,11 +89,14 @@ namespace CookingAgriculture {
         public override void Tick() {
             base.Tick();
             if (IsCooking) {
-                progressBar.Progress = Mathf.Min(progressBar.Progress + ProgressPerTickAtCurrentTemp, 1f);
+                progressBar.Progress = Mathf.Min(progressBar.Progress + ProgressPerTick, 1f);
             }
             if (IsComplete) {
                 storedMeals = 10;
                 progressBar.Progress = 0f;
+                foreach (var ingredient in ingredients) ingredientsDef.Add(ingredient.def);
+                ingredients.Clear();
+                cooking = false;
             }
         }
         public override IEnumerable<Gizmo> GetGizmos() {
@@ -107,19 +116,19 @@ namespace CookingAgriculture {
             storedMeals -= 1;
             Thing meal = ThingMaker.MakeThing(CA_DefOf.CA_Soup);
             CompIngredients comp = meal.TryGetComp<CompIngredients>();
-            foreach (var ingredient in ingredients) {
+            foreach (var ingredient in ingredientsDef) {
                 comp.RegisterIngredient(ingredient);
             }
-            if (IsEmpty) ingredients.Clear();
+            if (IsEmpty) ingredientsDef.Clear();
             return meal;
-        }
-        public void Fill(Thing ingredient) {
-            ingredients.Add(ingredient.def);
         }
 
         public StorageSettings GetStoreSettings() => allowedIngredients;
         public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
         public void Notify_SettingsChanged() {}
+
+        public void GetChildHolders(List<IThingHolder> outChildren) => ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
+        public ThingOwner GetDirectlyHeldThings() => ingredients;
     }
 
     public class JobDriver_FillStewPot : JobDriver_FillProcessor {
@@ -144,10 +153,7 @@ namespace CookingAgriculture {
             yield return Toils_Goto.GotoThing(PotInd, PathEndMode.InteractionCell);
             yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(FoodInd).FailOnDestroyedNullOrForbidden(PotInd).FailOnCannotTouch(PotInd, PathEndMode.Touch).WithProgressBarToilDelay(PotInd);
             yield return new Toil {
-                initAction = () => {
-                    StewPot.Fill(job.GetTarget(FoodInd).Thing);
-                    job.GetTarget(FoodInd).Thing.Destroy(DestroyMode.Vanish);
-                },
+                initAction = () => StewPot.Start(),
                 defaultCompleteMode = ToilCompleteMode.Instant,
             };
         }

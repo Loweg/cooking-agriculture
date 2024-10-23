@@ -1,7 +1,6 @@
 # State of the Mod
 ## TODO
 * Salt pan
-* Stew
 * Traders should carry flour and sugar
 * Some buildings should not be reinstallable
 

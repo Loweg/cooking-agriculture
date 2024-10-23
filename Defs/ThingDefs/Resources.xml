@@ -294,7 +294,7 @@
 		<label>syrup</label>
 		<description>Smashed and squeezed sugarcane, the precursor to sugar.</description>
 		<graphicData>
-			<texPath>Things/Item/Resource/Wort</texPath>
+			<texPath>Things/Item/Resource/CA_Syrup</texPath>
 		</graphicData>
 		<comps>
 			<li Class="CompProperties_Rottable">
