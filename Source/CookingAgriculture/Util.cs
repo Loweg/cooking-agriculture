@@ -79,6 +79,33 @@ namespace CookingAgriculture {
         }
     }
 
+    public class JobUtil {
+        public static IEnumerable<Toil> CollectToils(TargetIndex processor, TargetIndex ingredient) {
+            Toil extract = Toils_JobTransforms.ExtractNextTargetFromQueue(ingredient);
+            yield return extract;
+            Toil skipQueued = Toils_Jump.JumpIfHaveTargetInQueue(ingredient, extract);
+            Toil skipStored = new Toil();
+            skipStored.initAction = () => {
+                Thing p = skipStored.actor.CurJob.GetTarget(processor).Thing;
+                if (p == null || !p.Spawned) return;
+                var ing = skipStored.actor.jobs.curJob.GetTarget(ingredient).Thing;
+                if (ing == null) return;
+                ThingOwner interactableThingOwner = p.TryGetInnerInteractableThingOwner();
+                if (interactableThingOwner == null || !interactableThingOwner.Contains(ing)) return;
+                HaulAIUtility.UpdateJobWithPlacedThings(skipStored.actor.jobs.curJob, ing, ing.stackCount);
+                skipStored.actor.jobs.curDriver.JumpToToil(skipQueued);
+            };
+            yield return skipStored;
+            Toil getToHaulTarget = Toils_Goto.GotoThing(ingredient, PathEndMode.ClosestTouch).FailOnDespawnedNullOrForbidden(ingredient).FailOnSomeonePhysicallyInteracting(ingredient);
+            yield return getToHaulTarget;
+            yield return Toils_Haul.StartCarryThing(ingredient, true, reserve: false);
+            yield return JobDriver_DoBill.JumpToCollectNextIntoHandsForBill(getToHaulTarget, TargetIndex.B);
+            yield return Toils_Goto.GotoThing(processor, PathEndMode.InteractionCell).FailOnDestroyedOrNull(ingredient);
+            yield return Toils_Haul.DepositHauledThingInContainer(processor, ingredient);
+            yield return skipQueued;
+        }
+    }
+
     [StaticConstructorOnStartup]
     public class Plant_WinterFlowering : Plant {
         private static readonly Graphic GraphicSowing = GraphicDatabase.Get<Graphic_Single>("Things/Plant/Plant_Sowing", ShaderDatabase.Cutout, Vector2.one, Color.white);
@@ -187,8 +214,6 @@ namespace CookingAgriculture {
 
     [DefOf]
     public static class CA_DefOf {
-        public static JobDef CA_EmptyProcessor;
-        public static JobDef CA_FillProcessor;
         public static JobDef CA_TakeFromSaltPan;
         public static JobDef CA_FillStewPot;
         public static JobDef CA_FeedYeastCulture;

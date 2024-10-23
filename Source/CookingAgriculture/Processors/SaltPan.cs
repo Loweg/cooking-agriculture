@@ -8,13 +8,28 @@ using Verse;
 using Verse.AI;
 
 using CookingAgriculture.Processors;
+using System.Diagnostics;
 
 namespace CookingAgriculture {
     [StaticConstructorOnStartup]
-    public class Building_SaltPan : Building_Processor {
-        public override JobDef Job => CA_DefOf.CA_TakeFromSaltPan;
-        public override float CurrentSpeedFactor() {
-            return GenMath.LerpDouble(0f, 50f, 0f, 2f, this.AmbientTemperature);
+    public class Building_SaltPan : Building {
+        private ProgressBar progressBar = new ProgressBar(6000);
+
+        public JobDef Job => CA_DefOf.CA_TakeFromSaltPan;
+        public float ProgressPerTick => Mathf.Max((1f / progressBar.ticksToComplete) * CurrentSpeedFactor, 0f);
+        public int EstimatedTicksLeft => Mathf.RoundToInt((1f - progressBar.Progress) / ProgressPerTick);
+        public float CurrentSpeedFactor => GenMath.LerpDouble(0f, 50f, 0f, 2f, AmbientTemperature);
+        public bool ShouldEmpty => progressBar.Progress >= 1f;
+        public override void TickRare() {
+            base.TickRare();
+            progressBar.Progress = Mathf.Min(progressBar.Progress + (ProgressPerTick * GenTicks.TickRareInterval), 1f);
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos() {
+            foreach (Gizmo c in base.GetGizmos()) yield return c;
+            if (Prefs.DevMode) {
+                yield return progressBar.GetGizmo();
+            }
         }
 
         public override string GetInspectString() {
@@ -22,28 +37,29 @@ namespace CookingAgriculture {
             stringBuilder.Append(base.GetInspectString());
             if (stringBuilder.Length != 0)
                 stringBuilder.AppendLine();
-            if (ShouldEmpty()) {
+            if (ShouldEmpty) {
                 stringBuilder.AppendLine("SaltPanReady".Translate());
             } else {
-                stringBuilder.AppendLine("SaltPanProgress".Translate(Progress.ToStringPercent(), EstimatedTicksLeft.ToStringTicksToPeriod()));
-                if (this.AmbientTemperature <= 0) {
+                stringBuilder.AppendLine("SaltPanProgress".Translate(progressBar.Progress.ToStringPercent(), EstimatedTicksLeft.ToStringTicksToPeriod()));
+                if (AmbientTemperature <= 0) {
                     stringBuilder.AppendLine("SaltPanTooCold".Translate());
                 } else {
-                    stringBuilder.AppendLine("SaltPanSpeed".Translate(CurrentSpeedFactor().ToStringPercent()));
-                    stringBuilder.AppendLine(("Temperature".Translate() + ": " + this.AmbientTemperature.ToStringTemperature("F0")));
+                    stringBuilder.AppendLine("SaltPanSpeed".Translate(CurrentSpeedFactor.ToStringPercent()));
+                    stringBuilder.AppendLine(("Temperature".Translate() + ": " + AmbientTemperature.ToStringTemperature("F0")));
                 }
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
+        public override void ExposeData() {
+            base.ExposeData();
+            progressBar.ExposeData();
+        }
 
-        public override Thing Empty() {
+        public Thing Empty() {
             Thing outSalt = ThingMaker.MakeThing(ThingDef.Named("CA_Salt"));
             outSalt.stackCount = 25;
-            this.Reset();
+            progressBar.Progress = 0f;
             return outSalt;
-        }
-        public override void Fill(Thing ingredient) {
-
         }
     }
 
@@ -105,6 +121,54 @@ namespace CookingAgriculture {
             int width = rot.IsHorizontal ? 1 : 5;
             int height = rot.IsHorizontal ? 5 : 1;
             return CellRect.CenteredOn(loc + rot.FacingCell * 2, width, height);
+        }
+    }
+
+    public class JobDriver_TakeFromSaltPan : JobDriver {
+        private const TargetIndex PanInd = TargetIndex.A;
+
+        private Building_SaltPan Pan => job.GetTarget(PanInd).Thing as Building_SaltPan;
+
+        public override bool TryMakePreToilReservations(bool errorOnFailed) {
+            return pawn.Reserve(job.GetTarget(PanInd), job, errorOnFailed: errorOnFailed);
+        }
+
+        protected override IEnumerable<Toil> MakeNewToils() {
+            this.FailOnDespawnedNullOrForbidden(PanInd);
+            this.FailOnBurningImmobile(PanInd);
+
+            yield return Toils_Goto.GotoThing(PanInd, PathEndMode.InteractionCell);
+            yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(PanInd).FailOnCannotTouch(PanInd, PathEndMode.Touch).WithProgressBarToilDelay(PanInd);
+            yield return new Toil {
+                initAction = () => {
+                    var salt = Pan.Empty();
+                    GenPlace.TryPlaceThing(salt, pawn.Position, Map, ThingPlaceMode.Near);
+                    StoragePriority storagePriority = StoreUtility.CurrentStoragePriorityOf(salt);
+                    if (StoreUtility.TryFindBestBetterStoreCellFor(salt, pawn, Map, storagePriority, pawn.Faction, out IntVec3 c)) {
+                        job.SetTarget(TargetIndex.B, salt);
+                        job.count = salt.stackCount;
+                        job.SetTarget(TargetIndex.C, c);
+                    } else {
+                        EndJobWith(JobCondition.Succeeded);
+                    }
+
+                },
+                defaultCompleteMode = ToilCompleteMode.Instant,
+            };
+        }
+    }
+
+    public class WorkGiver_TakeFromSaltPan : WorkGiver_Scanner {
+        public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(ThingDef.Named("CA_SaltPan"));
+        public override PathEndMode PathEndMode => PathEndMode.Touch;
+        public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
+            Log.Message("Scanning");
+            return t is Building_SaltPan pan && pan.ShouldEmpty && !t.IsBurning() && !t.IsForbidden(pawn)
+                && pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), ignoreOtherReservations: forced);
+        }
+        public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
+            Building_SaltPan pan = (Building_SaltPan)t;
+            return JobMaker.MakeJob(CA_DefOf.CA_TakeFromSaltPan, pan);
         }
     }
 }

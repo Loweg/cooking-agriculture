@@ -1,45 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<JobDef>
-		<defName>CA_EmptyProcessor</defName>
-		<driverClass>CookingAgriculture.Processors.JobDriver_EmptyProcessor</driverClass>
-		<reportString>taking product out of TargetA.</reportString>
-		<suspendable>false</suspendable>
-	</JobDef>
-	<JobDef>
-		<defName>CA_FillProcessor</defName>
-		<driverClass>CookingAgriculture.Processors.JobDriver_FillProcessor</driverClass>
-		<reportString>filling TargetA.</reportString>
-		<suspendable>false</suspendable>
-	</JobDef>
-	<WorkGiverDef>
-		<defName>CA_EmptyProcessor</defName>
-		<label>empty processor</label>
-		<giverClass>CookingAgriculture.Processors.WorkGiver_EmptyProcessor</giverClass>
-		<workType>Hauling</workType>
-		<verb>take product</verb>
-		<gerund>taking product from</gerund>
-		<requiredCapacities>
-			<li>Manipulation</li>
-		</requiredCapacities>
-	</WorkGiverDef>
-	<WorkGiverDef>
-		<defName>CA_FillProcessor</defName>
-		<label>fill processor</label>
-		<giverClass>CookingAgriculture.Processors.WorkGiver_FillProcessor</giverClass>
-		<workType>Hauling</workType>
-		<verb>fill processor</verb>
-		<gerund>filling</gerund>
-		<requiredCapacities>
-			<li>Manipulation</li>
-		</requiredCapacities>
-	</WorkGiverDef>
-
-	<JobDef>
 		<defName>CA_TakeFromSaltPan</defName>
 		<reportString>raking salt in TargetA.</reportString>
 		<suspendable>false</suspendable>
+		<driverClass>CookingAgriculture.JobDriver_TakeFromSaltPan</driverClass>
 	</JobDef>
+	<WorkGiverDef>
+		<defName>CA_TakeFromSaltPan</defName>
+		<label>rake salt from salt pan</label>
+		<giverClass>CookingAgriculture.WorkGiver_TakeFromSaltPan</giverClass>
+		<workType>Hauling</workType>
+		<verb>rake salt</verb>
+		<gerund>filling </gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
 
 	<JobDef>
 		<defName>CA_FillStewPot</defName>

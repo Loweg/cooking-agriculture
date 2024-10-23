@@ -131,7 +131,7 @@ namespace CookingAgriculture {
         public ThingOwner GetDirectlyHeldThings() => ingredients;
     }
 
-    public class JobDriver_FillStewPot : JobDriver_FillProcessor {
+    public class JobDriver_FillStewPot : JobDriver {
         private const TargetIndex PotInd = TargetIndex.A;
         private const TargetIndex FoodInd = TargetIndex.B;
 
@@ -148,7 +148,7 @@ namespace CookingAgriculture {
             this.FailOnDespawnedNullOrForbidden(PotInd);
             this.FailOnBurningImmobile(PotInd);
 
-            foreach (Toil collectToil in CollectToils(PotInd, FoodInd))
+            foreach (Toil collectToil in JobUtil.CollectToils(PotInd, FoodInd))
                 yield return collectToil;
             yield return Toils_Goto.GotoThing(PotInd, PathEndMode.InteractionCell);
             yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(FoodInd).FailOnDestroyedNullOrForbidden(PotInd).FailOnCannotTouch(PotInd, PathEndMode.Touch).WithProgressBarToilDelay(PotInd);
