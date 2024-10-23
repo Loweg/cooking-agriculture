@@ -6,12 +6,10 @@
 * Some buildings should not be reinstallable
 
 # Need Textures
-* Feed threshold up and down images
 * Grinding machine
 * Centrifuge
 * Jam
 * Flour
-* Syrup
 * Sugar
 * Vinegar
 * Risen bread
@@ -19,7 +17,6 @@
 * Apple tree
 * Cherry tree
 * Date tree
-* Mulberry tree
 * Wheat plant
 * Really all of the textures could use improvements. Only the meals, salt pan, and stew pot are anywhere near where I want them. Replacing open-source RimCuisine textures is a low priority.
 
