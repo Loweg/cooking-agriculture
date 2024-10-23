@@ -2,6 +2,9 @@
 <LanguageData>
 	<FrozenImperfect>Frozen (spoils in {0})</FrozenImperfect>
 
+	<ProcessorNoIngredient>Missing ingredients</ProcessorNoIngredient>
+	<ITab_Processor>Ingredients</ITab_Processor>
+
 	<SaltPanReady>Ready for pickup.</SaltPanReady>
 	<SaltPanProgress>Progress: {0} ({1} left)</SaltPanProgress>
 	<SaltPanSpeed>Evaporation speed: {0}</SaltPanSpeed>
@@ -23,6 +26,5 @@
 	<YeastCultureGrowing>Starting new yeast culture ({0} complete)</YeastCultureGrowing>
 	<YeastCultureInsertFood>Waiting for food...</YeastCultureInsertFood>
 	<YeastCultureFeedThreshold>Will feed below {0} nutrition</YeastCultureFeedThreshold>
-	<YeastCultureNoFeed>No food</YeastCultureNoFeed>
 	<YeastCultureNoFeedNeeded>Filled to threshold</YeastCultureNoFeedNeeded>
 </LanguageData>

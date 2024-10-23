@@ -502,4 +502,19 @@
 		<unpoweredFactor>0.0</unpoweredFactor>
 		<powerUseFactor>8.0</powerUseFactor>
 	</ProcessorFramework.ProcessDef>
+
+	<CookingAgriculture.Processors.ProcessDef>
+		<defName>CA_MakeStew</defName>
+		<ingredients>
+			<li>
+				<filter>
+					<categories>
+						<li>FoodRaw</li>
+					</categories>
+				</filter>
+				<count>4</count>
+			</li>
+		</ingredients>
+		<days>0.5</days>
+	</CookingAgriculture.Processors.ProcessDef>
 </Defs>

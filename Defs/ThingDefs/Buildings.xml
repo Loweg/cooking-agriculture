@@ -21,6 +21,9 @@
 		<passability>PassThroughOnly</passability>
 		<pathCost>70</pathCost>
 		<tickerType>Rare</tickerType>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+		</comps>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -126,6 +129,7 @@
 		<description>The Neolithic nutrient paste dispenser, a stew pot turns raw food into meals very efficiently. Pawns will help themselves to soup from a finished stew pot. Stir, simmer, serve!</description>
 		<thingClass>CookingAgriculture.Building_StewPot</thingClass>
 		<graphicData>
+			<drawSize>(1.3, 1.3)</drawSize>
 			<texPath>Things/Building/Production/CA_StewPot</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
@@ -140,6 +144,50 @@
 		<costStuffCount>20</costStuffCount>
 		<rotatable>false</rotatable>
 		<tickerType>Normal</tickerType>
+		<comps>
+			<li Class="CookingAgriculture.Processors.CompProperties_Processor">
+				<processes>
+					<li>CA_MakeStew</li>
+				</processes>
+			</li>
+		</comps>
+		<building>
+			<fixedStorageSettings>
+				<filter>
+					<categories>
+						<li>Foods</li>
+					</categories>
+					<disallowedCategories>
+						<li>FoodMeals</li>
+					</disallowedCategories>
+					<disallowedThingDefs>
+						<li>Hay</li>
+					</disallowedThingDefs>
+				</filter>
+			</fixedStorageSettings>
+			<defaultStorageSettings>
+				<filter>
+					<categories>
+						<li>Foods</li>
+					</categories>
+					<disallowedCategories>
+						<li>EggsFertilized</li>
+						<li>CA_PreservedFood</li>
+					</disallowedCategories>
+					<disallowedThingDefs>
+						<li>InsectJelly</li>
+						<li>Chocolate</li>
+						<li>Kibble</li>
+						<li>CA_RuinedFood</li>
+						<li>Meat_Human</li>
+						<li>Meat_Megaspider</li>
+						<li MayRequire="Ludeon.RimWorld.Anomaly">Meat_Twisted</li>
+						<li MayRequire="Ludeon.RimWorld.Biotech">HemogenPack</li>
+						<li MayRequire="Ludeon.RimWorld.Biotech">BabyFood</li>
+					</disallowedThingDefs>
+				</filter>
+			</defaultStorageSettings>
+		</building>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -265,6 +313,9 @@
 		<passability>Impassable</passability>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
 		<drawerType>MapMeshAndRealTime</drawerType>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+		</comps>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_BigMillBase">

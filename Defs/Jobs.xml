@@ -41,6 +41,24 @@
 		<suspendable>false</suspendable>
 	</JobDef>
 
+	<JobDef>
+		<defName>CA_FillStewPot</defName>
+		<reportString>filling TargetA.</reportString>
+		<suspendable>false</suspendable>
+		<driverClass>CookingAgriculture.JobDriver_FillStewPot</driverClass>
+	</JobDef>
+	<WorkGiverDef>
+		<defName>CA_FillStewPot</defName>
+		<label>fill stew pot</label>
+		<giverClass>CookingAgriculture.WorkGiver_FillStewPot</giverClass>
+		<workType>Cooking</workType>
+		<verb>make stew</verb>
+		<gerund>filling </gerund>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>
+
 	<WorkGiverDef>
 		<defName>CA_DoBillsMill</defName>
 		<label>mill</label>
