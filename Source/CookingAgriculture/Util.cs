@@ -8,6 +8,10 @@ using Unity.Jobs;
 
 namespace CookingAgriculture {
     [StaticConstructorOnStartup]
+    public static class ModCompatibility {
+        public static bool DeepStorageActive = ModsConfig.IsActive("LWM.DeepStorage");
+    }
+    [StaticConstructorOnStartup]
     class ProgressBar {
         private Material barFilledCachedMat;
         private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);

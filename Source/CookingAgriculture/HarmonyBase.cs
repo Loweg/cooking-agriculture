@@ -65,41 +65,36 @@ namespace CookingAgriculture {
     // From LWM Deep Storage
     [HarmonyPatch(typeof(SectionLayer_Things), "Regenerate")]
     public static class PatchYeastDrawing {
-        // We change thingGrid.ThingsListAt(c) to DisplayThingList(map, c):
-        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator il) {
             var code = new List<CodeInstruction>(instructions);
+            Label continueLabel = il.DefineLabel();
             int i = 0;
-            var lookingForThisFieldCall = HarmonyLib.AccessTools.Field(typeof(Verse.Map), "thingGrid");
+            var thingField = AccessTools.Field(typeof(Thing), "def");
             for (; i < code.Count; i++) {
-                if (code[i].opcode != OpCodes.Ldfld || (System.Reflection.FieldInfo)code[i].operand != lookingForThisFieldCall) {
+                if (code[i].opcode != OpCodes.Ldfld || (FieldInfo)code[i].operand != thingField) {
                     yield return code[i];
                     continue;
                 }
-                // found middle of List<Thing> list = base.Map.thingGrid.ThingsListAt(c);
-                // We are at the original instruction .thingGrid
-                //   and we have the Map on the stack
-                i++;  // go past thingGrid instruction
-                // Need the location c on the stack, but that's what happens next in original code - loading c
-                yield return code[i];
-                i++; // now past c
-                // Next code instruction is to call ThingsListAt.
-                i++; // We want our own list
-                yield return new CodeInstruction(OpCodes.Call, HarmonyLib.AccessTools.Method("CookingAgriculture.PatchYeastDrawing:ThingListToDisplay"));
-                break; // that's all we need to change!
+                var loadThingInstruction = code[i-1];
+
+                // if (IsYeast(t)) continue;
+                yield return new CodeInstruction(OpCodes.Call, AccessTools.Method("CookingAgriculture.PatchYeastDrawing:IsYeast"));
+                yield return new CodeInstruction(OpCodes.Brtrue, continueLabel);
+                // put t back on the stack
+                yield return loadThingInstruction;
+                break;
             }
             for (; i < code.Count; i++) {
                 yield return code[i];
+                if (code[i].opcode == OpCodes.Pop) code[i+1].labels.Add(continueLabel);
             }
             yield break;
         }
 
-        static public List<Thing> ThingListToDisplay(Map map, IntVec3 loc) {
-            ThingWithComps building;
-            SlotGroup slotGroup = loc.GetSlotGroup(map);
-            if (slotGroup == null || (building = slotGroup.parent as Building_YeastCulture) == null) {
-                return map.thingGrid.ThingsListAt(loc);
-            }
-            return map.thingGrid.ThingsListAt(loc).FindAll(t => t.def != CA_DefOf.CA_Yeast);
+        static public bool IsYeast(Thing t) {
+            var building = t.Position.GetFirstBuilding(t.Map);
+            bool cellHasCulture = building != null && building is Building_YeastCulture;
+            return cellHasCulture && t.def.EverStorable(false);
         }
     }
 }
