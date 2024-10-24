@@ -6,6 +6,7 @@
 		<description>Curdle milk into cheese using vinegar.</description>
 		<jobString>Making cheese.</jobString>
 		<workAmount>800</workAmount>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 		<ingredients>
 			<li>
 				<filter>
@@ -49,7 +50,7 @@
 	<RecipeDef>
 		<defName>CA_CookDessert</defName>
 		<label>cook dessert</label>
-		<description>Cook two servings of a dessert from a filling and a base. The filling must be chocolate, fruit, or an animal product. The base must be flour, sugar, or fungus.</description>
+		<description>Cook several servings of a dessert from a filling and a base. The filling must be chocolate, fruit, or an animal product. The base must be flour, sugar, or fungus.</description>
 		<jobString>Cooking dessert.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
@@ -62,10 +63,9 @@
 					</categories>
 					<thingDefs>
 						<li>Chocolate</li>
-						<li>RawBerries</li>
 					</thingDefs>
 				</filter>
-				<count>0.25</count>
+				<count>0.5</count>
 			</li>
 			<li>
 				<filter>
@@ -76,7 +76,7 @@
 						<li>RawFungus</li>
 					</thingDefs>
 				</filter>
-				<count>0.5</count>
+				<count>1</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -115,7 +115,7 @@
 			</disallowedThingDefs>
 		</defaultIngredientFilter>
 		<products>
-			<CA_Dessert>2</CA_Dessert>
+			<CA_Dessert>4</CA_Dessert>
 		</products>
 		<skillRequirements>
 			<Cooking>6</Cooking>
@@ -138,6 +138,7 @@
 		<description>Cook fruit into jam by adding heat and plenty of sugar.</description>
 		<jobString>Making jam.</jobString>
 		<workAmount>800</workAmount>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 		<ingredients>
 			<li>
 				<filter>
@@ -203,6 +204,7 @@
 		<description>Bake simple flatbread from flour. Flatbread can be eaten like a meal, and is an efficient source of nutrition.</description>
 		<jobString>Baking flatbread.</jobString>
 		<workAmount>300</workAmount>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 		<ingredients>
 			<li>
 				<filter>
@@ -238,6 +240,7 @@
 		<description>Bake leavened bread from flour and yeast. Bread can be eaten like a meal, and is a very efficient source of nutrition.</description>
 		<jobString>Baking bread.</jobString>
 		<workAmount>400</workAmount>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 		<ingredients>
 			<li>
 				<filter>
@@ -284,6 +287,7 @@
 		<description>Chop and salt vegetables to prepare them for pickling.</description>
 		<jobString>Salting vegetables.</jobString>
 		<workAmount>200</workAmount>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 		<ingredients>
 			<li>
 				<filter>
@@ -353,6 +357,7 @@
 		<description>Cook and smash raw sugarcane into a sugary syrup that can be evaporated into sugar.</description>
 		<jobString>Making syrup.</jobString>
 		<workAmount>400</workAmount>
+		<ingredientValueGetterClass>IngredientValueGetter_Nutrition</ingredientValueGetterClass>
 		<ingredients>
 			<li>
 				<filter>

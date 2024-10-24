@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Meals -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[@Name="CookMealBase"]/fixedIngredientFilter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_PickledVegetable</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_Jam</li>
+				<li>CA_RisenBread</li>
+				<li>CA_Flatbread</li>
+				<li>CA_SmokedMeat</li>
+			</thingDefs>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="CookMealSimple" or defName="CookMealSimpleBulk"]/ingredients/li/filter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_PickledVegetable</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_Jam</li>
+				<li>CA_SmokedMeat</li>
+			</thingDefs>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="CookMealFine_Veg" or defName="CookMealFineBulk_Veg" or defName="CookMealLavish_Veg" or defName="CookMealLavishBulk_Veg"]/ingredients/li/filter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_PickledVegetable</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_Jam</li>
+				<li>CA_RisenBread</li>
+				<li>CA_Flatbread</li>
+			</thingDefs>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="CookMealFine" or defName="CookMealFineBulk" or
+			defName="CookMealLavish" or defName="CookMealLavishBulk"
+			or defName="CookMealSurvival" or defName="CookMealSurvivalBulk"
+			or defName="Make_Kibble" or defName="Make_Pemmican" or defName="Make_PemmicanBulk"]/ingredients/li[1]/filter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_SmokedMeat</li>
+			</thingDefs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="CookMealFine" or defName="CookMealFineBulk" or
+			defName="CookMealLavish" or defName="CookMealLavishBulk" or
+			defName="CookMealSurvival" or defName="CookMealSurvivalBulk" or
+			defName="Make_Pemmican" or defName="Make_PemmicanBulk"]/ingredients/li[2]/filter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_PickledVegetable</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_Jam</li>
+				<li>CA_RisenBread</li>
+				<li>CA_Flatbread</li>
+			</thingDefs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="CookMealFine_Meat" or defName="CookMealFineBulk_Meat" or defName="CookMealLavish_Meat" or defName="CookMealLavishBulk_Meat"]/ingredients/li/filter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_SmokedMeat</li>
+			</thingDefs>
+		</value>
+	</Operation>
+
+	<!-- Other -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="Make_Kibble"]/ingredients/li[2]/filter/thingDefs</xpath>
+		<value>
+			<li>CA_PickledVegetable</li>
+			<li>CA_SaltedVegetable</li>
+			<li>CA_Jam</li>
+			<li>CA_RisenBread</li>
+			<li>CA_Flatbread</li>
+			<li>CA_Flour</li>
+			<li>CA_Wheat</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="Make_Kibble"]/fixedIngredientFilter/thingDefs</xpath>
+		<value>
+			<li>CA_Flour</li>
+			<li>CA_Wheat</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="Make_Kibble"]/fixedIngredientFilter/categories</xpath>
+		<value>
+			<li>CA_PreservedFood</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RecipeDef[defName="Make_Kibble"]/defaultIngredientFilter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_Flour</li>
+				<li>CA_Wheat</li>
+			</thingDefs>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Biotech">
+		<xpath>/Defs/RecipeDef[defName="Make_BabyFood"]/ingredients/li/filter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_PickledVegetable</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_Jam</li>
+				<li>CA_RisenBread</li>
+				<li>CA_Flatbread</li>
+			</thingDefs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd" MayRequire="Ludeon.RimWorld.Biotech">
+		<xpath>/Defs/RecipeDef[defName="Make_BabyFood"]/fixedIngredientFilter</xpath>
+		<value>
+			<thingDefs>
+				<li>CA_PickledVegetable</li>
+				<li>CA_SaltedVegetable</li>
+				<li>CA_Jam</li>
+				<li>CA_RisenBread</li>
+				<li>CA_Flatbread</li>
+			</thingDefs>
+		</value>
+	</Operation>
+</Patch>

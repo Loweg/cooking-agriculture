@@ -130,7 +130,7 @@
 		<description>The Neolithic nutrient paste dispenser, a stew pot turns raw food into meals very efficiently. Pawns will help themselves to soup from a finished stew pot. Stir, simmer, serve!</description>
 		<thingClass>CookingAgriculture.Building_StewPot</thingClass>
 		<graphicData>
-			<drawSize>(1.3, 1.3)</drawSize>
+			<drawSize>(1.2, 1.2)</drawSize>
 			<texPath>Things/Building/Production/CA_StewPot</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
@@ -198,7 +198,7 @@
 	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_YeastCulture</defName>
 		<label>yeast culture</label>
-		<description>A vessel where a yeast culture is kept and fed. Yeast cultures must be started with the dregs from beer brewing, or simply food and time. They must be fed wheat or flour to stay alive and grow, and can't get too hot or cold. Yeast can be periodically harvested for brewing or baking.</description>
+		<description>A vessel where a yeast culture is kept and fed. Yeast cultures must be started with food and time. They must be fed wheat or flour to stay alive and grow, and can't get too hot or cold. Yeast can be periodically harvested for brewing or baking.</description>
 		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
 		<building>
 			<haulToContainerDuration>100</haulToContainerDuration>
