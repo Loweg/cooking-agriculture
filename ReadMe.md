@@ -77,5 +77,4 @@ Some textures are used under the MIT license from RimCuisine2:
 * Masks don't work in the architect menu because of a vanilla rimworld bug.
 * Processors don't display progress properly due to processor framework bug.
 * Stew pot mask not working.
-* Stew pot doesn't survive save/load
-* Stew pot occasionally eats ingredients without starting process
+* Stew pot occasionally eats ingredients without starting process (maybe fixed?)

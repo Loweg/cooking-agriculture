@@ -10,7 +10,7 @@ using Verse.AI;
 namespace CookingAgriculture {
     [StaticConstructorOnStartup]
     public class Building_SaltPan : Building {
-        private ProgressBar progressBar = new ProgressBar(6000);
+        private ProgressBar progressBar = new ProgressBar(60000);
 
         public JobDef Job => CA_DefOf.CA_TakeFromSaltPan;
         public float ProgressPerTick => Mathf.Max((1f / progressBar.ticksToComplete) * CurrentSpeedFactor, 0f);

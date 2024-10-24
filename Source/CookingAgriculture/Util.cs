@@ -12,7 +12,7 @@ namespace CookingAgriculture {
         public static bool DeepStorageActive = ModsConfig.IsActive("LWM.DeepStorage");
     }
     [StaticConstructorOnStartup]
-    class ProgressBar {
+    class ProgressBar: IExposable {
         private Material barFilledCachedMat;
         private static readonly Vector2 BarSize = new Vector2(0.55f, 0.1f);
         private static readonly Color BarEmptyColor = new Color(0.4f, 0.27f, 0.22f);
@@ -20,7 +20,7 @@ namespace CookingAgriculture {
         private static readonly Material BarUnfilledMat = SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.3f, 0.3f, 0.3f));
 
         private float progress = 0f;
-        public readonly int ticksToComplete;
+        public int ticksToComplete = 60000;
 
         public float Progress {
             get => progress;
@@ -39,6 +39,7 @@ namespace CookingAgriculture {
             }
         }
 
+        public ProgressBar() {}
         public ProgressBar(int duration) {
             ticksToComplete = duration;
         }
@@ -80,6 +81,7 @@ namespace CookingAgriculture {
 
         public void ExposeData() {
             Scribe_Values.Look(ref progress, "progress");
+            Scribe_Values.Look(ref ticksToComplete, "ticksToComplete");
         }
     }
 

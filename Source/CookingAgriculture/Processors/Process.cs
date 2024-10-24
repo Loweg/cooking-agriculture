@@ -30,7 +30,6 @@ namespace CookingAgriculture.Processors {
         public ProcessSettings(ProcessDef def, Building parent) {
             this.def = def;
             this.parent = parent;
-
             storageSettings = new StorageSettings();
             if (def.defaultIngredientFilter != null) {
                 storageSettings.filter = def.defaultIngredientFilter;
@@ -132,58 +131,6 @@ namespace CookingAgriculture.Processors {
             return carriedCount;
         }
 
-        // From TryFindBestIngredientsHelper
-        public bool FindIngredients(Pawn pawn, List<ThingCount> chosen, List<IngredientCount> missingIngredients) {
-            if (def.ingredients.Count == 0) return true;
-
-            // First, make a list of everything around that might be useful
-            Predicate<Thing> validator = t => t.Spawned && IngredientFilter.Allows(t) && !t.IsForbidden(pawn) && pawn.CanReserve(t, 1);
-            Region rootReg = parent.InteractionCell.GetRegion(pawn.Map);
-            if (rootReg == null) return false;
-
-            List<Thing> foundThings = new List<Thing>();
-            RegionProcessor regionProcessor = r => {
-                List<Thing> ingredients = r.ListerThings.ThingsMatching(ThingRequest.ForGroup(ThingRequestGroup.HaulableEver));
-                for (int i = 0; i < ingredients.Count; ++i) {
-                    Thing thing = ingredients[i];
-                    if (!foundThings.Contains(thing) && ReachabilityWithinRegion.ThingFromRegionListerReachable(thing, r, PathEndMode.ClosestTouch, pawn) && validator(thing)) {
-                        foundThings.Add(thing);
-                    }
-                }
-                return false;
-            };
-
-            TraverseParms traverseParams = TraverseParms.For(pawn);
-            RegionEntryPredicate entryCondition = (_, r) => r.Allows(traverseParams, false);
-            RegionTraverser.BreadthFirstTraverse(rootReg, entryCondition, regionProcessor);
-
-            // Chose which ingredients to use
-            Comparison<Thing> comparison = (t1, t2) => ((float)(t1.PositionHeld - parent.InteractionCell).LengthHorizontalSquared).CompareTo((t2.PositionHeld - parent.InteractionCell).LengthHorizontalSquared);
-            foundThings.Sort(comparison);
-            for (int i = 0; i < def.ingredients.Count; i++) {
-                IngredientCount ingredient = def.ingredients[i];
-                float baseCount = ingredient.GetBaseCount();
-                for (int j = 0; j < foundThings.Count; ++j) {
-                    Thing thing = foundThings[j];
-                    if (ingredient.filter.Allows(thing) && (ingredient.IsFixedIngredient || IngredientFilter.Allows(thing))) {
-                        float value = 1f;
-                        if (def.valueType == ValueType.Nutrition) {
-                            if (!thing.def.IsNutritionGivingIngestible) continue;
-                            value = thing.def.GetStatValueAbstract(StatDefOf.Nutrition);
-                        }
-                        int countToAdd = Mathf.Min(Mathf.CeilToInt(baseCount / value), thing.stackCount);
-                        ThingCountUtility.AddToList(chosen, thing, countToAdd);
-                        baseCount -= countToAdd * value;
-                        if ((double)baseCount <= 0d) break;
-                    }
-                }
-                if ((double)baseCount > 0d) {
-                    missingIngredients.Add(ingredient);
-                }
-            }
-            return missingIngredients.Count == 0;
-        }
-
         // * Interface *
         protected virtual void DoConfigInterface(Rect rect, Color baseColor) {
             rect.yMin += 29f;
@@ -221,14 +168,7 @@ namespace CookingAgriculture.Processors {
         public float days = 0.5f;
 
         public ProcessCancelAction cancelAction = ProcessCancelAction.Drop;
-        public ValueType valueType = 0;
-
-        public ProcessDef() {}
-        public ProcessDef(List<IngredientCount> ingredients, float days, ValueType valueType) {
-            this.ingredients = ingredients;
-            this.days = days;
-            this.valueType = valueType;
-        }
+        public RecipeValueType valueType = 0;
 
         public ThingFilter GetFixedIngredientFilter() {
             var f = new ThingFilter();
@@ -251,7 +191,7 @@ namespace CookingAgriculture.Processors {
         Delete,
         Drop,
     }
-    public enum ValueType {
+    public enum RecipeValueType {
         Count,
         Nutrition,
     }
