@@ -55,7 +55,7 @@
 		<ingestible>
 			<preferability>MealAwful</preferability> <!-- After simple meals, but before raw food -->
 			<foodType>Processed</foodType>
-			<joy>0.60</joy>
+			<joy>0.50</joy>
 			<joyKind>Gluttonous</joyKind>
 			<ingestSound>Meal_Eat</ingestSound>
 		</ingestible>

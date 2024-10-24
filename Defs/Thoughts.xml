@@ -8,8 +8,19 @@
 		<stages>
 			<li>
 				<label>ate mush</label>
-				<description>That freezer burned slop belongs in the garbage.</description>
+				<description>That freezer burned slop belonged in the garbage.</description>
 				<baseMoodEffect>-10</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>
+	<ThoughtDef>
+		<defName>CA_AteYummy</defName>
+		<durationDays>1</durationDays>
+		<stages>
+			<li>
+				<label>ate yummy food</label>
+				<description>That ingredient was filled with delicious flavors!</description>
+				<baseMoodEffect>4</baseMoodEffect>
 			</li>
 		</stages>
 	</ThoughtDef>

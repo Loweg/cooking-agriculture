@@ -56,8 +56,6 @@ Some textures are used under the MIT license from RimCuisine2:
 * Meat maybe should use salt to preserve
 * Balance
 * Salt pan UI, general second pass
-* Bread and cheese thoughts
-* Dessert joygiver patch
 ### Need Textures
 * Grinding machine
 * Centrifuge

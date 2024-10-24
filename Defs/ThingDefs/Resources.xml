@@ -137,6 +137,7 @@
 		<ingestible>
 			<foodType>AnimalProduct, Fluid</foodType>
 			<babiesCanIngest>true</babiesCanIngest>
+			<tasteThought>CA_AteYummy</tasteThought>
 		</ingestible>
 		<thingCategories Inherit="false">
 			<li>AnimalProductRaw</li>
@@ -161,6 +162,9 @@
 			<Mass>0.015</Mass>
 			<Nutrition>0.1</Nutrition>
 		</statBases>
+		<ingestible>
+			<babiesCanIngest>true</babiesCanIngest> <!-- I was told that babies can eat bread -->
+		</ingestible>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ResourcePreservedFoodBase">
@@ -171,6 +175,10 @@
 			<graphicClass>Graphic_StackCount</graphicClass>
 			<texPath>Things/Item/Resource/CA_RisenBread</texPath>
 		</graphicData>
+		<ingestible>
+			<babiesCanIngest>true</babiesCanIngest>
+			<tasteThought>CA_AteYummy</tasteThought>
+		</ingestible>
 		<comps>
 			<li Class="CompProperties_Rottable">
 				<daysToRotStart>15</daysToRotStart>
