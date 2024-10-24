@@ -159,7 +159,6 @@ namespace CookingAgriculture {
         public override ThingRequest PotentialWorkThingRequest => ThingRequest.ForDef(ThingDef.Named("CA_SaltPan"));
         public override PathEndMode PathEndMode => PathEndMode.Touch;
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false) {
-            Log.Message("Scanning");
             return t is Building_SaltPan pan && pan.ShouldEmpty && !t.IsBurning() && !t.IsForbidden(pawn)
                 && pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), ignoreOtherReservations: forced);
         }

@@ -192,23 +192,24 @@ namespace CookingAgriculture.Processors {
         }
 
         public virtual void ExposeData() {
-            Scribe_Values.Look(ref def, "def");
-            Scribe_Deep.Look(ref storageSettings, "storageSettings");
+            storageSettings.ExposeData();
+
+            Scribe_References.Look(ref storeZone, "storeZone");
+            Scribe_References.Look(ref includeFromZone, "includeFromZone");
+
+            Scribe_Defs.Look(ref def, "def");
 
             Scribe_Values.Look(ref suspended, "suspended");
             Scribe_Values.Look(ref paused, "paused");
-
-            Scribe_Values.Look(ref includeFromZone, "includeFromZone");
             Scribe_Values.Look(ref limitToAllowedStuff, "limitToAllowedStuff");
 
-            Scribe_Values.Look(ref repeatMode, "repeatMode");
+            Scribe_Defs.Look(ref repeatMode, "repeatMode");
             Scribe_Values.Look(ref repeatCount, "repeatCount");
             Scribe_Values.Look(ref targetCount, "targetCount");
             Scribe_Values.Look(ref pauseWhenSatisfied, "pauseWhenSatisfied");
             Scribe_Values.Look(ref unpauseWhenYouHave, "unpauseWhenYouHave");
 
-            Scribe_Values.Look(ref storeMode, "storeMode");
-            Scribe_Values.Look(ref storeZone, "storeZone");
+            Scribe_Defs.Look(ref storeMode, "storeMode");
         }
     }
 

@@ -29,13 +29,14 @@ namespace CookingAgriculture {
 
         public bool StorageTabVisible => Faction == Faction.OfPlayerSilentFail;
 
-        public void Start() { Log.Message("Start process"); cooking = true; }
+        public void Start() => cooking = true;
         public bool IsReady() {
             var n = ingredients.Sum(i => i.def.GetStatValueAbstract(StatDefOf.Nutrition));
-            Log.Message("Sum: " + n);
             return n >= recipe.def.ingredients.First().GetBaseCount();
         }
-
+        public float Nutrition() {
+            return ingredients.Sum(i => i.def.GetStatValueAbstract(StatDefOf.Nutrition));
+        }
         public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
         public override void PostMake() {
@@ -70,7 +71,7 @@ namespace CookingAgriculture {
             base.ExposeData();
             progressBar.ExposeData();
             recipe.ExposeData();
-            Scribe_Values.Look(ref ingredients, "ingredients");
+            ingredients.ExposeData();
             Scribe_Values.Look(ref storedMeals, "storedMeals");
         }
 
@@ -163,8 +164,10 @@ namespace CookingAgriculture {
                 return JobCondition.Ongoing;
             });
 
-            foreach (Toil collectToil in JobUtil.CollectToils(PotInd, FoodInd))
+            foreach (Toil collectToil in JobUtil.CollectToils(PotInd, FoodInd)) {
+                Log.Message(StewPot.Nutrition());
                 yield return collectToil;
+            }
             yield return Toils_Goto.GotoThing(PotInd, PathEndMode.InteractionCell);
             yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(FoodInd).FailOnDestroyedNullOrForbidden(PotInd).FailOnCannotTouch(PotInd, PathEndMode.Touch).WithProgressBarToilDelay(PotInd);
             yield return new Toil {

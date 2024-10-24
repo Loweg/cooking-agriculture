@@ -63,7 +63,6 @@ namespace CookingAgriculture.Stew {
             static bool Prefix(ref JobDriver_Feed __instance, ref IEnumerable<Toil> __result) {
                 var targetThing = typeof(JobDriver_Feed).GetField("TargetThingA", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(__instance);
                 if (targetThing is Building_StewPot) {
-                    Log.Message("JobDriver_Feed: StewPot");
                     __instance.FailOnDespawnedNullOrForbidden(TargetIndex.B);
                     __result.AddItem(Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell).FailOnForbidden(TargetIndex.A));
                     __result.AddItem(Toils_Ingest.TakeMealFromDispenser(TargetIndex.A, __instance.pawn));

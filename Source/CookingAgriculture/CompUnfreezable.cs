@@ -20,7 +20,6 @@ namespace CookingAgriculture {
                 var totalNutrition = parent.def.ingestible.CachedNutrition * parent.stackCount;
                 var position = parent.Position;
                 var map = parent.Map;
-                Log.Message($"Getting nutrition as {totalNutrition}");
                 parent.Destroy(DestroyMode.WillReplace);
                 Thing ruinedFood = ThingMaker.MakeThing(CA_DefOf.CA_RuinedFood);
                 ruinedFood.stackCount = (int)((totalNutrition + 0.00001) / ruinedFood.def.ingestible.CachedNutrition);
