@@ -53,7 +53,7 @@
 			</li>
 		</comps>
 		<ingestible>
-			<preferability>DesperateOnly</preferability>
+			<preferability>MealAwful</preferability> <!-- After simple meals, but before raw food -->
 			<foodType>Processed</foodType>
 			<joy>0.60</joy>
 			<joyKind>Gluttonous</joyKind>

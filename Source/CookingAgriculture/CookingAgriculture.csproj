@@ -62,13 +62,11 @@
     <Compile Include="CompUnfreezable.cs" />
     <Compile Include="CookingAgriculture.cs" />
     <Compile Include="HarmonyBase.cs" />
-    <Compile Include="Processors\ProcessorJobs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Processors\SaltPan.cs" />
     <Compile Include="Stew\Stew.cs" />
     <Compile Include="Stew\StewPatches.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="Processors\WaterMill.cs" />
     <Compile Include="Processors\Yeast.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

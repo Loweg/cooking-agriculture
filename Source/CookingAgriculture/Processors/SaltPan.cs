@@ -7,9 +7,6 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-using CookingAgriculture.Processors;
-using System.Diagnostics;
-
 namespace CookingAgriculture {
     [StaticConstructorOnStartup]
     public class Building_SaltPan : Building {

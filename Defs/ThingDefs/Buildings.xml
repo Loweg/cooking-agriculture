@@ -7,9 +7,6 @@
 			</buildingTags>
 		</building>
 		<statBases>
-			<Mass>4</Mass>
-			<MaxHitPoints>80</MaxHitPoints>
-			<WorkToBuild>500</WorkToBuild>
 			<Flammability>1.0</Flammability>
 		</statBases>
 		<altitudeLayer>Building</altitudeLayer>
@@ -17,8 +14,7 @@
 		<category>Building</category>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<designationCategory>Production</designationCategory>
-		<fillPercent>0.30</fillPercent>
-		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
 		<pathCost>70</pathCost>
 		<tickerType>Rare</tickerType>
 		<comps>
@@ -31,23 +27,17 @@
 		<label>salt pan</label>
 		<thingClass>CookingAgriculture.Building_SaltPan</thingClass>
 		<description>A large pond where seawater is evaporated in order to concentrate salt for collection.</description>
+		<building>
+			<ai_chillDestination>false</ai_chillDestination>
+			<expandHomeArea>false</expandHomeArea>
+			<deconstructible>true</deconstructible>
+		</building>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_SaltPan</texPath>
 			<drawSize>(3,3)</drawSize>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
-		<!--<stuffCategories>
-			<li>Metallic</li>
-			<li>Woody</li>
-			<li>Stony</li>
-		</stuffCategories>
-		<costStuffCount>10</costStuffCount>-->
-		<building>
-			<ai_chillDestination>false</ai_chillDestination>
-			<expandHomeArea>false</expandHomeArea>
-			<deconstructible>true</deconstructible>
-		</building>
 		<placeWorkers>
 			<li>CookingAgriculture.PlaceWorker_SaltPan</li>
 		</placeWorkers>
@@ -55,10 +45,16 @@
 			<li>CA_SaltEvaporation</li>
 		</researchPrerequisites>
 		<statBases>
+			<Beauty>-10</Beauty>
 			<Flammability>0</Flammability>
 			<WorkToBuild>1600</WorkToBuild>
-			<Beauty>-10</Beauty>
 		</statBases>
+		<!--<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>10</costStuffCount>-->
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
 		<constructEffect>ConstructDirt</constructEffect>
 		<fillPercent>0</fillPercent>
@@ -78,12 +74,26 @@
 			<texPath>Things/Building/Production/CA_Smoker</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
+		<researchPrerequisites>
+			<li>Pemmican</li>
+		</researchPrerequisites>
+		<statBases>
+			<Mass>10</Mass>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+		</statBases>
 		<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
 			<li>Stony</li>
 		</stuffCategories>
-		<costStuffCount>30</costStuffCount>
+		<costStuffCount>40</costStuffCount>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<rotatable>false</rotatable>
+		<tickerType>Normal</tickerType>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<comps>
 			<li Class="CompProperties_Refuelable">
 				<fuelConsumptionRate>0.01</fuelConsumptionRate>
@@ -112,15 +122,6 @@
 				</processes>
 			</li>
 		</comps>
-		<researchPrerequisites>
-			<li>Pemmican</li>
-		</researchPrerequisites>
-		<rotatable>false</rotatable>
-		<tickerType>Normal</tickerType>
-		<minifiedDef>MinifiedThing</minifiedDef>
-		<thingCategories>
-			<li>BuildingsProduction</li>
-		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -134,9 +135,13 @@
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
-		<researchPrerequisites>
-			<li>CA_Stew</li>
-		</researchPrerequisites>
+		<statBases>
+			<MaxHitPoints>40</MaxHitPoints>
+			<WorkToBuild>500</WorkToBuild>
+		</statBases>
+		<costList>
+			<Steel>20</Steel>
+		</costList>
 		<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
@@ -151,43 +156,6 @@
 				</processes>
 			</li>
 		</comps>
-		<building>
-			<fixedStorageSettings>
-				<filter>
-					<categories>
-						<li>Foods</li>
-					</categories>
-					<disallowedCategories>
-						<li>FoodMeals</li>
-					</disallowedCategories>
-					<disallowedThingDefs>
-						<li>Hay</li>
-					</disallowedThingDefs>
-				</filter>
-			</fixedStorageSettings>
-			<defaultStorageSettings>
-				<filter>
-					<categories>
-						<li>Foods</li>
-					</categories>
-					<disallowedCategories>
-						<li>EggsFertilized</li>
-						<li>CA_PreservedFood</li>
-					</disallowedCategories>
-					<disallowedThingDefs>
-						<li>InsectJelly</li>
-						<li>Chocolate</li>
-						<li>Kibble</li>
-						<li>CA_RuinedFood</li>
-						<li>Meat_Human</li>
-						<li>Meat_Megaspider</li>
-						<li MayRequire="Ludeon.RimWorld.Anomaly">Meat_Twisted</li>
-						<li MayRequire="Ludeon.RimWorld.Biotech">HemogenPack</li>
-						<li MayRequire="Ludeon.RimWorld.Biotech">BabyFood</li>
-					</disallowedThingDefs>
-				</filter>
-			</defaultStorageSettings>
-		</building>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
@@ -198,12 +166,22 @@
 			<texPath>Things/Building/Production/CA_Evaporator</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
+		<statBases>
+			<Mass>3</Mass>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>450</WorkToBuild>
+		</statBases>
 		<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
 			<li>Stony</li>
 		</stuffCategories>
-		<costStuffCount>20</costStuffCount>
+		<costStuffCount>25</costStuffCount>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<rotatable>false</rotatable>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<comps>
 			<li Class="ProcessorFramework.CompProperties_Processor">
 				<showProductIcon>false</showProductIcon>
@@ -215,37 +193,36 @@
 				</processes>
 			</li>
 		</comps>
-		<rotatable>false</rotatable>
-		<minifiedDef>MinifiedThing</minifiedDef>
-		<thingCategories>
-			<li>BuildingsProduction</li>
-		</thingCategories>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_ProcessorBase">
 		<defName>CA_YeastCulture</defName>
 		<label>yeast culture</label>
 		<description>A vessel where a yeast culture is kept and fed. Yeast cultures must be started with the dregs from beer brewing, or simply food and time. They must be fed wheat or flour to stay alive and grow, and can't get too hot or cold. Yeast can be periodically harvested for brewing or baking.</description>
+		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
+		<building>
+			<maxItemsInCell>1</maxItemsInCell>
+		</building>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_YeastCulture</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
+		<inspectorTabs>
+			<li>ITab_Storage</li>
+		</inspectorTabs>
 		<researchPrerequisites>
 			<li>Brewing</li>
 		</researchPrerequisites>
+		<statBases>
+			<MaxHitPoints>80</MaxHitPoints>
+			<WorkToBuild>800</WorkToBuild>
+		</statBases>
 		<stuffCategories>
 			<li>Metallic</li>
 			<li>Woody</li>
 		</stuffCategories>
-		<costStuffCount>30</costStuffCount>
-		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
+		<costStuffCount>40</costStuffCount>
 		<rotatable>false</rotatable>
-		<building>
-			<maxItemsInCell>1</maxItemsInCell>
-		</building>
-		<inspectorTabs>
-			<li>ITab_Storage</li>
-		</inspectorTabs>
 		<surfaceType>Item</surfaceType>
 	</ThingDef>
 
@@ -255,22 +232,15 @@
 		<label>hand mill</label>
 		<thingClass>Building_WorkTable</thingClass>
 		<description>A hand-powered mill for grinding grains, sometimes called a quern, made of two large stones and a handle. The top stone has a hole to allow material to be added, and the ground product is caught as it comes out the bottom.</description>
+		<building>
+			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+		</building>
 		<graphicData>
 			<texPath>Things/Building/Production/CA_Mill/CA_MillManual</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<shaderType>CutoutComplex</shaderType>
 			<drawSize>(.9,.9)</drawSize>
 		</graphicData>
-		<building>
-			<spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
-		</building>
-		<costList>
-			<WoodLog>10</WoodLog>
-		</costList>
-		<costStuffCount>2</costStuffCount>
-		<stuffCategories Inherit="False">
-			<li>CA_ChunkStone</li>
-		</stuffCategories>
 		<inspectorTabs>
 			<li>ITab_Bills</li>
 		</inspectorTabs>
@@ -285,6 +255,13 @@
 			<MaxHitPoints>120</MaxHitPoints>
 			<WorkToBuild>500</WorkToBuild>
 		</statBases>
+		<costList>
+			<WoodLog>10</WoodLog>
+		</costList>
+		<stuffCategories Inherit="False">
+			<li>CA_ChunkStone</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
 		<altitudeLayer>Building</altitudeLayer>
 		<designationCategory>Production</designationCategory>
 		<fillPercent>0.5</fillPercent>
@@ -294,7 +271,6 @@
 		<pathCost>70</pathCost>
 		<size>(1,1)</size>
 		<surfaceType>Item</surfaceType>
-		<minifiedDef>MinifiedThing</minifiedDef>
 	</ThingDef>
 
 	<ThingDef Name="CA_BigMillBase" ParentName="BuildingBase" Abstract="True">
@@ -305,14 +281,20 @@
 				<li>Production</li>
 			</buildingTags>
 		</building>
+		<statBases>
+			<Flammability>1.0</Flammability>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>2000</WorkToBuild>
+		</statBases>
 		<altitudeLayer>Building</altitudeLayer>
 		<blockWind>true</blockWind>
 		<canOverlapZones>false</canOverlapZones>
 		<designationCategory>Production</designationCategory>
+		<drawerType>MapMeshAndRealTime</drawerType>
 		<fillPercent>1</fillPercent>
 		<passability>Impassable</passability>
 		<terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-		<drawerType>MapMeshAndRealTime</drawerType>
+		<tickerType>Rare</tickerType>
 		<comps>
 			<li Class="CompProperties_Forbiddable" />
 		</comps>
@@ -327,6 +309,22 @@
 			<graphicClass>Graphic_Multi</graphicClass>
 			<drawSize>(1.8,1.8)</drawSize>
 		</graphicData>
+		<placeWorkers>
+			<li>PlaceWorker_WindTurbine</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>CA_MillingAutomatic</li>
+		</researchPrerequisites>
+		<costList>
+			<WoodLog>250</WoodLog>
+		</costList>
+		<stuffCategories Inherit="False">
+			<li>CA_ChunkStone</li>
+		</stuffCategories>
+		<costStuffCount>2</costStuffCount>
+		<!--<constructEffect>ConstructMetal</constructEffect>-->
+		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<size>(2,2)</size>
 		<comps>
 			<li Class="ProcessorFramework.CompProperties_Processor">
 				<showProductIcon>false</showProductIcon>
@@ -338,28 +336,6 @@
 				</processes>
 			</li>
 		</comps>
-		<costList>
-			<WoodLog>200</WoodLog>
-		</costList>
-		<costStuffCount>2</costStuffCount>
-		<stuffCategories Inherit="False">
-			<li>CA_ChunkStone</li>
-		</stuffCategories>
-		<placeWorkers>
-			<li>PlaceWorker_WindTurbine</li>
-		</placeWorkers>
-		<researchPrerequisites>
-			<li>CA_MillingAutomatic</li>
-		</researchPrerequisites>
-		<statBases>
-			<Flammability>1.0</Flammability>
-			<MaxHitPoints>120</MaxHitPoints>
-			<WorkToBuild>1000</WorkToBuild>
-		</statBases>
-		<!--<constructEffect>ConstructMetal</constructEffect>-->
-		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-		<size>(2,2)</size>
-		<tickerType>Rare</tickerType>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_BigMillBase">
@@ -382,22 +358,24 @@
 				<rectW>(1.25,0.2,3.5,4.7)</rectW>
 			</damageData>
 		</graphicData>
-		<castEdgeShadows>false</castEdgeShadows>
-		<staticSunShadowHeight>0</staticSunShadowHeight>
-		<blockLight>true</blockLight>
-		<statBases>
-			<MaxHitPoints>400</MaxHitPoints>
-			<WorkToBuild>4000</WorkToBuild>
-			<Flammability>1.0</Flammability>
-			<Beauty>-20</Beauty>
-		</statBases>
-		<tickerType>Rare</tickerType>
-		<size>(5,6)</size>
+		<placeWorkers>
+			<li>PlaceWorker_WatermillGenerator</li>
+		</placeWorkers>
+		<constructEffect>ConstructWood</constructEffect>
+		<researchPrerequisites>
+			<li>CA_MillingAutomatic</li>
+		</researchPrerequisites>
 		<costList>
 			<WoodLog>280</WoodLog>
 			<Steel>80</Steel>
-			<ComponentIndustrial>3</ComponentIndustrial>
 		</costList>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<blockLight>true</blockLight>
+		<castEdgeShadows>false</castEdgeShadows>
+		<staticSunShadowHeight>0</staticSunShadowHeight>
+		<size>(5,6)</size>
+		<rotatable>true</rotatable>
+		<terrainAffordanceNeeded></terrainAffordanceNeeded> <!-- handled by the placeworker -->
 		<comps>
 			<li Class="ProcessorFramework.CompProperties_Processor">
 				<showProductIcon>false</showProductIcon>
@@ -409,30 +387,41 @@
 				</processes>
 			</li>
 		</comps>
-		<rotatable>true</rotatable>
-		<terrainAffordanceNeeded></terrainAffordanceNeeded> <!-- handled by the placeworker -->
-		<placeWorkers>
-			<li>PlaceWorker_WatermillGenerator</li>
-		</placeWorkers>
-		<constructEffect>ConstructWood</constructEffect>
-		<researchPrerequisites>
-			<li>CA_MillingAutomatic</li>
-		</researchPrerequisites>
-		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 	</ThingDef>
 
 	<ThingDef ParentName="CA_BigMillBase">
 		<defName>CA_MillElectric</defName>
 		<label>grinding machine</label>
 		<description>The electric grinding machine allows the grinding of plant matter using electricity.</description>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+		</building>
 		<graphicData>
 			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<drawSize>(2,2)</drawSize>
 		</graphicData>
-		<building>
-			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
-		</building>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
+		<researchPrerequisites>
+			<li>CA_MillingElectric</li>
+		</researchPrerequisites>
+		<statBases>
+			<Flammability>0.2</Flammability>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>1500</WorkToBuild>
+			<Beauty>-5</Beauty>
+			<Mass>35</Mass>
+		</statBases>
+		<constructEffect>ConstructMetal</constructEffect>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<size>(2,2)</size>
+		<rotatable>false</rotatable>
 		<comps>
 			<li Class="ProcessorFramework.CompProperties_Processor">
 				<showProductIcon>false</showProductIcon>
@@ -451,10 +440,20 @@
 			<li Class="CompProperties_Breakdownable" />
 			<li Class="CompProperties_Flickable" />
 		</comps>
-		<costList>
-			<Steel>200</Steel>
-			<ComponentIndustrial>3</ComponentIndustrial>
-		</costList>
+	</ThingDef>
+
+	<ThingDef ParentName="CA_BigMillBase">
+		<defName>CA_Centrifuge</defName>
+		<label>centrifuge</label>
+		<description>This food-grade centrifuge can be used as a rotary evaporator, quickly turning syrup into solid sugar.</description>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
+		</building>
+		<graphicData>
+			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2,2)</drawSize>
+		</graphicData>
 		<researchPrerequisites>
 			<li>CA_MillingElectric</li>
 		</researchPrerequisites>
@@ -465,24 +464,17 @@
 			<Beauty>-5</Beauty>
 			<Mass>35</Mass>
 		</statBases>
+		<costList>
+			<Steel>200</Steel>
+			<ComponentIndustrial>3</ComponentIndustrial>
+		</costList>
+		<thingCategories>
+			<li>BuildingsProduction</li>
+		</thingCategories>
 		<constructEffect>ConstructMetal</constructEffect>
-		<size>(2,2)</size>
+		<minifiedDef>MinifiedThing</minifiedDef>
 		<rotatable>false</rotatable>
-		<tickerType>Normal</tickerType>
-	</ThingDef>
-
-	<ThingDef ParentName="CA_BigMillBase">
-		<defName>CA_Centrifuge</defName>
-		<label>centrifuge</label>
-		<description>This food-grade centrifuge can be used as a rotary evaporator, quickly turning syrup into solid sugar.</description>
-		<graphicData>
-			<texPath>Things/Building/Special/InfiniteChemreactor</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
-			<drawSize>(2,2)</drawSize>
-		</graphicData>
-		<building>
-			<destroySound>BuildingDestroyed_Metal_Big</destroySound>
-		</building>
+		<size>(2,2)</size>
 		<comps>
 			<li Class="ProcessorFramework.CompProperties_Processor">
 				<showProductIcon>false</showProductIcon>
@@ -500,23 +492,5 @@
 			<li Class="CompProperties_Breakdownable" />
 			<li Class="CompProperties_Flickable" />
 		</comps>
-		<costList>
-			<Steel>200</Steel>
-			<ComponentIndustrial>3</ComponentIndustrial>
-		</costList>
-		<researchPrerequisites>
-			<li>CA_MillingElectric</li>
-		</researchPrerequisites>
-		<statBases>
-			<Flammability>0.2</Flammability>
-			<MaxHitPoints>200</MaxHitPoints>
-			<WorkToBuild>1500</WorkToBuild>
-			<Beauty>-5</Beauty>
-			<Mass>35</Mass>
-		</statBases>
-		<constructEffect>ConstructMetal</constructEffect>
-		<size>(2,2)</size>
-		<rotatable>false</rotatable>
-		<tickerType>Normal</tickerType>
 	</ThingDef>
 </Defs>

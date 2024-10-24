@@ -4,7 +4,6 @@ using UnityEngine;
 using RimWorld;
 using Verse;
 using Verse.AI;
-using System;
 
 namespace CookingAgriculture {
     [StaticConstructorOnStartup]

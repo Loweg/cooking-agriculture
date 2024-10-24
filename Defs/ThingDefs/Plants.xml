@@ -12,29 +12,29 @@
 		</plant>
 	</ThingDef>
 
-	<ThingDef ParentName="CA_PlantBase">
+	<ThingDef ParentName="PlantBase">
 		<defName>CA_Grass</defName>
 		<label>grass</label>
 		<description>Simple grass that can be sown to feed animals. Can not be harvested or blighted.</description>
-		<statBases>
-			<MaxHitPoints>85</MaxHitPoints>
-			<Flammability>1.3</Flammability>
-			<Nutrition>0.25</Nutrition>
-		</statBases>
 		<graphicData>
 			<texPath>Things/Plant/Grass</texPath>
 		</graphicData>
-		<pathCost>15</pathCost>
+		<statBases>
+			<MaxHitPoints>85</MaxHitPoints>
+			<Flammability>1.3</Flammability>
+			<Nutrition>0.4</Nutrition>
+		</statBases>
+		<pathCost>10</pathCost>
 		<hideAtSnowDepth>0.5</hideAtSnowDepth>
 		<ingestible />
 		<plant>
-			<fertilityMin>0.05</fertilityMin>
-			<fertilitySensitivity>0.7</fertilitySensitivity>
-			<growDays>2.6</growDays>
+			<fertilityMin>0.5</fertilityMin>
+			<fertilitySensitivity>0.5</fertilitySensitivity>
+			<growDays>3</growDays>
 			<leaflessGraphicPath>Things/Plant/Grass_Leafless</leaflessGraphicPath>
 			<harvestWork>60</harvestWork>
 			<maxMeshCount>9</maxMeshCount>
-			<visualSizeRange>0.5~0.8</visualSizeRange>
+			<visualSizeRange>0.5~0.7</visualSizeRange>
 			<topWindExposure>0.4</topWindExposure>
 			<wildOrder>1</wildOrder>
 			<neverBlightable>true</neverBlightable>
@@ -45,13 +45,13 @@
 		<defName>CA_SugarcanePlant</defName>
 		<label>sugarcane plant</label>
 		<description>Harvested sugarcane can be processed into sugar and used to cook deserts or preserve fruits as jam.</description>
+		<graphicData>
+			<texPath>Things/Plant/CA_Sugarcane</texPath>
+		</graphicData>
 		<statBases>
 			<MaxHitPoints>85</MaxHitPoints>
 			<Nutrition>0.2</Nutrition>
 		</statBases>
-		<graphicData>
-			<texPath>Things/Plant/CA_Sugarcane</texPath>
-		</graphicData>
 		<plant>
 			<fertilityMin>1</fertilityMin>
 			<dieIfLeafless>true</dieIfLeafless>
@@ -82,13 +82,13 @@
 		<defName>CA_WheatPlant</defName>
 		<label>wheat plant</label>
 		<description>Wheat grains can be milled into flour to be used in baking.</description>
+		<graphicData>
+			<texPath>Things/Plant/CA_Wheat</texPath>
+		</graphicData>
 		<statBases>
 			<MaxHitPoints>30</MaxHitPoints>
 			<Nutrition>0.18</Nutrition>
 		</statBases>
-		<graphicData>
-			<texPath>Things/Plant/CA_Wheat</texPath>
-		</graphicData>
 		<plant>
 			<dieIfLeafless>false</dieIfLeafless>
 			<harvestTag>Standard</harvestTag>

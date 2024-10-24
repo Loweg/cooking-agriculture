@@ -52,7 +52,14 @@ Some textures are used under the MIT license from RimCuisine2:
 * Resources: Cheese, Pickles, Smoked meat, Apples, Bananas, Cherries, Sugarcane, Salted Vegetable
 
 ## TODO
-Distilling!
+* Distilling!
+* Meat maybe should use salt to preserve
+* Millstones
+* Balance
+* Salt pan UI, general second pass
+* Bread and cheese thoughts
+* Dessert joygiver patch
+* Chunk second pass
 ### Need Textures
 * Grinding machine
 * Centrifuge

@@ -52,19 +52,6 @@
 
 	<!-- Other -->
 	<ResearchProjectDef>
-		<defName>CA_Stew</defName>
-		<label>stew</label>
-		<description>Build a stew pot to simmer ingredients into efficient soups.</description>
-		<baseCost>400</baseCost>
-		<tab>CookingAgriculture</tab>
-		<techLevel>Neolithic</techLevel>
-		<tags>
-			<li>TribalStart</li>
-		</tags>
-		<researchViewX>0.00</researchViewX>
-		<researchViewY>0.70</researchViewY>
-	</ResearchProjectDef>
-	<ResearchProjectDef>
 		<defName>CA_SaltEvaporation</defName>
 		<label>salt pans</label>
 		<description>Build salt pans to evaporate valuable salt from sea water.</description>
