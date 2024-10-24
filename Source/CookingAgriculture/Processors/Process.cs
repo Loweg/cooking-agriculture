@@ -1,9 +1,6 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Xml;
 
 using UnityEngine;
 using Verse;
@@ -14,8 +11,8 @@ namespace CookingAgriculture.Processors {
     public class ProcessSettings : IExposable {
         public ProcessDef def;
         public Building parent;
-
-        public ThingFilter ingredientFilter = new ThingFilter();
+        public StorageSettings storageSettings;
+        public ThingFilter IngredientFilter => storageSettings.filter;
         public BillRepeatModeDef repeatMode = BillRepeatModeDefOf.RepeatCount;
         public int repeatCount = 1;
         public int targetCount = 10;
@@ -33,7 +30,13 @@ namespace CookingAgriculture.Processors {
         public ProcessSettings(ProcessDef def, Building parent) {
             this.def = def;
             this.parent = parent;
-            ingredientFilter = def.defaultIngredientFilter ?? new ThingFilter();
+
+            storageSettings = new StorageSettings();
+            if (def.defaultIngredientFilter != null) {
+                storageSettings.filter = def.defaultIngredientFilter;
+            } else {
+                storageSettings.filter = def.GetFixedIngredientFilter();
+            }
         }
 
         public bool ShouldStart(Map map) {
@@ -112,7 +115,7 @@ namespace CookingAgriculture.Processors {
         }
 
         public bool IsValidThing(Thing thing, ThingDef def) {
-            return !limitToAllowedStuff || ingredientFilter.Allows(thing.Stuff);
+            return !limitToAllowedStuff || IngredientFilter.Allows(thing.Stuff);
         }
 
         public int GetCarriedCount(Map map, ThingDef prodDef) {
@@ -134,7 +137,7 @@ namespace CookingAgriculture.Processors {
             if (def.ingredients.Count == 0) return true;
 
             // First, make a list of everything around that might be useful
-            Predicate<Thing> validator = t => t.Spawned && ingredientFilter.Allows(t) && !t.IsForbidden(pawn) && pawn.CanReserve(t, 1);
+            Predicate<Thing> validator = t => t.Spawned && IngredientFilter.Allows(t) && !t.IsForbidden(pawn) && pawn.CanReserve(t, 1);
             Region rootReg = parent.InteractionCell.GetRegion(pawn.Map);
             if (rootReg == null) return false;
 
@@ -162,7 +165,7 @@ namespace CookingAgriculture.Processors {
                 float baseCount = ingredient.GetBaseCount();
                 for (int j = 0; j < foundThings.Count; ++j) {
                     Thing thing = foundThings[j];
-                    if (ingredient.filter.Allows(thing) && (ingredient.IsFixedIngredient || ingredientFilter.Allows(thing))) {
+                    if (ingredient.filter.Allows(thing) && (ingredient.IsFixedIngredient || IngredientFilter.Allows(thing))) {
                         float value = 1f;
                         if (def.valueType == ValueType.Nutrition) {
                             if (!thing.def.IsNutritionGivingIngestible) continue;
@@ -190,11 +193,11 @@ namespace CookingAgriculture.Processors {
 
         public virtual void ExposeData() {
             Scribe_Values.Look(ref def, "def");
+            Scribe_Deep.Look(ref storageSettings, "storageSettings");
 
             Scribe_Values.Look(ref suspended, "suspended");
             Scribe_Values.Look(ref paused, "paused");
 
-            Scribe_Values.Look(ref ingredientFilter, "ingredientFilter");
             Scribe_Values.Look(ref includeFromZone, "includeFromZone");
             Scribe_Values.Look(ref limitToAllowedStuff, "limitToAllowedStuff");
 
@@ -211,7 +214,7 @@ namespace CookingAgriculture.Processors {
 
     public class ProcessDef : Def {
         public List<IngredientCount> ingredients = new List<IngredientCount>();
-        public ThingFilter defaultIngredientFilter = new ThingFilter();
+        public ThingFilter defaultIngredientFilter;
         public List<ThingDefCountClass> outputs = new List<ThingDefCountClass>();
 
         public float days = 0.5f;
@@ -224,6 +227,12 @@ namespace CookingAgriculture.Processors {
             this.ingredients = ingredients;
             this.days = days;
             this.valueType = valueType;
+        }
+
+        public ThingFilter GetFixedIngredientFilter() {
+            var f = new ThingFilter();
+            foreach (var i in ingredients) f.SetAllowAll(i.filter);
+            return f;
         }
 
         public override void ResolveReferences() {

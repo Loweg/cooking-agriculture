@@ -14,11 +14,10 @@ namespace CookingAgriculture {
     class Building_StewPot : Building_NutrientPasteDispenser, IStoreSettingsParent, IThingHolder {
         private ThingOwner ingredients;
         private List<ThingDef> ingredientsDef = new List<ThingDef>();
-        private ProgressBar progressBar = new ProgressBar(2000);
+        private ProgressBar progressBar;
         private int storedMeals = 0;
         private bool cooking = false;
 
-        public StorageSettings allowedIngredients;
         public ProcessSettings recipe;
 
         private float ProgressPerTick => 1f / progressBar.ticksToComplete;
@@ -30,7 +29,12 @@ namespace CookingAgriculture {
 
         public bool StorageTabVisible => Faction == Faction.OfPlayerSilentFail;
 
-        public void Start() { cooking = true; }
+        public void Start() { Log.Message("Start process"); cooking = true; }
+        public bool IsReady() {
+            var n = ingredients.Sum(i => i.def.GetStatValueAbstract(StatDefOf.Nutrition));
+            Log.Message("Sum: " + n);
+            return n >= recipe.def.ingredients.First().GetBaseCount();
+        }
 
         public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
@@ -42,16 +46,15 @@ namespace CookingAgriculture {
             if (p != null && p.Props.processes.Count > 0) {
                 recipe = new ProcessSettings(p.Props.processes[0], this);
                 recipe.def.valueType = ValueType.Nutrition;
-            } else {
-                Log.Warning("Stew pot failed to construct recipe");
+                progressBar = new ProgressBar((int)(recipe.def.days * 60000));
+            }
+            else {
+                Log.Error("Stew pot failed to construct recipe");
             }
             if (def.inspectorTabsResolved == null) def.inspectorTabsResolved = new List<InspectTabBase>();
             if (!def.inspectorTabsResolved.Any(t => t is ITab_IngredientSelection)) {
                 def.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(typeof(ITab_IngredientSelection)));
             }
-            allowedIngredients = new StorageSettings(this);
-            if (def.building.defaultStorageSettings != null)
-                allowedIngredients.CopyFrom(def.building.defaultStorageSettings);
         }
 
         protected override void DrawAt(Vector3 drawLoc, bool flip = false) {
@@ -66,9 +69,9 @@ namespace CookingAgriculture {
         public override void ExposeData() {
             base.ExposeData();
             progressBar.ExposeData();
+            recipe.ExposeData();
             Scribe_Values.Look(ref ingredients, "ingredients");
             Scribe_Values.Look(ref storedMeals, "storedMeals");
-            Scribe_Deep.Look(ref allowedIngredients, "allowedIngredients");
         }
 
         public override bool HasEnoughFeedstockInHoppers() { return !IsEmpty; }
@@ -104,7 +107,7 @@ namespace CookingAgriculture {
                 if (c == BuildCopyCommandUtility.FindAllowedDesignator(ThingDefOf.Hopper)) continue;
                 yield return c;
             }
-            foreach (Gizmo gizmo in StorageSettingsClipboard.CopyPasteGizmosFor(allowedIngredients))
+            foreach (Gizmo gizmo in StorageSettingsClipboard.CopyPasteGizmosFor(recipe.storageSettings))
                 yield return gizmo;
             if (Prefs.DevMode) {
                 yield return progressBar.GetGizmo();
@@ -123,8 +126,13 @@ namespace CookingAgriculture {
             return meal;
         }
 
-        public StorageSettings GetStoreSettings() => allowedIngredients;
-        public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
+        public StorageSettings GetStoreSettings() => recipe.storageSettings;
+        public StorageSettings GetParentStoreSettings() => GetParentSS();
+        private StorageSettings GetParentSS() {
+            var s = new StorageSettings();
+            s.filter = recipe.def.GetFixedIngredientFilter();
+            return s;
+        }
         public void Notify_SettingsChanged() {}
 
         public void GetChildHolders(List<IThingHolder> outChildren) => ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
@@ -148,6 +156,13 @@ namespace CookingAgriculture {
             this.FailOnDespawnedNullOrForbidden(PotInd);
             this.FailOnBurningImmobile(PotInd);
 
+            AddEndCondition(delegate {
+                if (StewPot.IsReady()) {
+                    return JobCondition.Succeeded;
+                }
+                return JobCondition.Ongoing;
+            });
+
             foreach (Toil collectToil in JobUtil.CollectToils(PotInd, FoodInd))
                 yield return collectToil;
             yield return Toils_Goto.GotoThing(PotInd, PathEndMode.InteractionCell);
@@ -166,7 +181,6 @@ namespace CookingAgriculture {
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false) {
             Building_StewPot pot = (Building_StewPot)t;
             if (pot == null) return null;
-            pot.recipe.ingredientFilter = pot.allowedIngredients.filter;
             if (!pot.ShouldFill || t.IsBurning() || t.IsForbidden(pawn) || !pawn.CanReserve(t, ignoreOtherReservations: forced) || pawn.Map.designationManager.DesignationOn(t, DesignationDefOf.Deconstruct) != null) return null;
             var chosen = new List<ThingCount>();
             var missing = new List<IngredientCount>();
