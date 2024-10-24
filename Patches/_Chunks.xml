@@ -28,7 +28,7 @@
 			</operations>
 		</nomatch>
 		<match Class="PatchOperationReplace">
-			<xpath>/Defs/ThingDef[defName="CA_MillManual" or defName="CA_MillWind"]/stuffCategories</xpath>
+			<xpath>/Defs/ThingDef[defName="CA_MillManual"]/stuffCategories</xpath>
 			<value>
 				<stuffCategories>
 					<li>VFEM_StoneChunks</li>

@@ -256,9 +256,6 @@
 			<MaxHitPoints>120</MaxHitPoints>
 			<WorkToBuild>500</WorkToBuild>
 		</statBases>
-		<costList>
-			<WoodLog>10</WoodLog>
-		</costList>
 		<stuffCategories Inherit="False">
 			<li>CA_ChunkStone</li>
 		</stuffCategories>
@@ -317,13 +314,16 @@
 			<li>CA_MillingAutomatic</li>
 		</researchPrerequisites>
 		<costList>
-			<WoodLog>250</WoodLog>
+			<Cloth>75</Cloth>
+			<CA_Millstone>1</CA_Millstone>
 		</costList>
 		<stuffCategories Inherit="False">
-			<li>CA_ChunkStone</li>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
 		</stuffCategories>
-		<costStuffCount>2</costStuffCount>
-		<!--<constructEffect>ConstructMetal</constructEffect>-->
+		<costStuffCount>250</costStuffCount>
+		<constructionSkillPrerequisite>7</constructionSkillPrerequisite>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<size>(2,2)</size>
 		<comps>
@@ -362,14 +362,18 @@
 		<placeWorkers>
 			<li>PlaceWorker_WatermillGenerator</li>
 		</placeWorkers>
-		<constructEffect>ConstructWood</constructEffect>
 		<researchPrerequisites>
 			<li>CA_MillingAutomatic</li>
 		</researchPrerequisites>
 		<costList>
-			<WoodLog>280</WoodLog>
-			<Steel>80</Steel>
+			<CA_Millstone>1</CA_Millstone>
 		</costList>
+		<stuffCategories Inherit="False">
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>280</costStuffCount>
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 		<blockLight>true</blockLight>
 		<castEdgeShadows>false</castEdgeShadows>

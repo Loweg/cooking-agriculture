@@ -86,9 +86,31 @@
 			<ingestSound>Meal_Eat</ingestSound>
 		</ingestible>
 		<statBases>
-			<MarketValue>15</MarketValue>
+			<MarketValue>12</MarketValue>
 			<Nutrition>0.9</Nutrition>
 		</statBases>
 		<tickerType>Rare</tickerType>
+	</ThingDef>
+
+	<ThingDef ParentName="ResourceBase">
+		<defName>CA_Millstone</defName>
+		<label>millstone</label>
+		<description>Millstone.</description>
+		<graphicData>
+			<texPath>Things/Item/Resource/CA_Millstone</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<soundDrop>ChunkRock_Drop</soundDrop>
+		<soundInteract>Stone_Drop</soundInteract>
+		<stackLimit>50</stackLimit>
+		<healthAffectsPrice>false</healthAffectsPrice>
+		<statBases>
+			<Mass>10</Mass>
+			<MaxHitPoints>200</MaxHitPoints>
+			<MarketValue>20</MarketValue>
+		</statBases>
+		<thingCategories>
+			<li>Manufactured</li>
+		</thingCategories>
 	</ThingDef>
 </Defs>
