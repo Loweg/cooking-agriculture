@@ -201,6 +201,7 @@
 		<description>A vessel where a yeast culture is kept and fed. Yeast cultures must be started with the dregs from beer brewing, or simply food and time. They must be fed wheat or flour to stay alive and grow, and can't get too hot or cold. Yeast can be periodically harvested for brewing or baking.</description>
 		<thingClass>CookingAgriculture.Building_YeastCulture</thingClass>
 		<building>
+			<haulToContainerDuration>100</haulToContainerDuration>
 			<maxItemsInCell>1</maxItemsInCell>
 		</building>
 		<graphicData>

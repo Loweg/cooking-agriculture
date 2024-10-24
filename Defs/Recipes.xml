@@ -21,7 +21,7 @@
 						<li>CA_Vinegar</li>
 					</thingDefs>
 				</filter>
-				<count>10</count>
+				<count>5</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -49,7 +49,7 @@
 	<RecipeDef>
 		<defName>CA_CookDessert</defName>
 		<label>cook dessert</label>
-		<description>Cook a dessert from a filling and a base. The filling must be chocolate, fruit, or an animal product. The base must be flour, sugar, or fungus.</description>
+		<description>Cook two servings of a dessert from a filling and a base. The filling must be chocolate, fruit, or an animal product. The base must be flour, sugar, or fungus.</description>
 		<jobString>Cooking dessert.</jobString>
 		<workAmount>800</workAmount>
 		<ingredients>
@@ -168,7 +168,7 @@
 			</thingDefs>
 		</fixedIngredientFilter>
 		<products>
-			<CA_Jam>25</CA_Jam>
+			<CA_Jam>30</CA_Jam>
 		</products>
 		<recipeUsers>
 			<li>Campfire</li>
@@ -200,9 +200,9 @@
 	<RecipeDef>
 		<defName>CA_MakeFlatbread</defName>
 		<label>bake flatbread</label>
-		<description>Bake simple flatbread from flour.</description>
+		<description>Bake simple flatbread from flour. Flatbread can be eaten like a meal, and is an efficient source of nutrition.</description>
 		<jobString>Baking flatbread.</jobString>
-		<workAmount>800</workAmount>
+		<workAmount>300</workAmount>
 		<ingredients>
 			<li>
 				<filter>
@@ -210,7 +210,7 @@
 						<li>CA_Flour</li>
 					</thingDefs>
 				</filter>
-				<count>10</count>
+				<count>1.0</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -219,7 +219,7 @@
 			</thingDefs>
 		</fixedIngredientFilter>
 		<products>
-			<CA_Flatbread>25</CA_Flatbread>
+			<CA_Flatbread>20</CA_Flatbread>
 		</products>
 		<recipeUsers>
 			<li>Campfire</li>
@@ -235,9 +235,9 @@
 	<RecipeDef>
 		<defName>CA_MakeBread</defName>
 		<label>bake bread</label>
-		<description>Bake leavened bread from flour and yeast.</description>
+		<description>Bake leavened bread from flour and yeast. Bread can be eaten like a meal, and is a very efficient source of nutrition.</description>
 		<jobString>Baking bread.</jobString>
-		<workAmount>800</workAmount>
+		<workAmount>400</workAmount>
 		<ingredients>
 			<li>
 				<filter>
@@ -245,7 +245,7 @@
 						<li>CA_Flour</li>
 					</thingDefs>
 				</filter>
-				<count>10</count>
+				<count>1.0</count>
 			</li>
 			<li>
 				<filter>
@@ -310,7 +310,7 @@
 		<label>salt vegetables</label>
 		<description>Chop and salt vegetables to prepare them for pickling.</description>
 		<jobString>Salting vegetables.</jobString>
-		<workAmount>800</workAmount>
+		<workAmount>200</workAmount>
 		<ingredients>
 			<li>
 				<filter>
@@ -326,7 +326,7 @@
 						<li>CA_Salt</li>
 					</thingDefs>
 				</filter>
-				<count>10</count>
+				<count>5</count>
 			</li>
 		</ingredients>
 		<fixedIngredientFilter>
@@ -344,7 +344,7 @@
 			</disallowedThingDefs>
 		</fixedIngredientFilter>
 		<products>
-			<CA_SaltedVegetable>25</CA_SaltedVegetable>
+			<CA_SaltedVegetable>20</CA_SaltedVegetable>
 		</products>
 		<recipeUsers>
 			<li>Campfire</li>
@@ -367,7 +367,7 @@
 				<li>CA_SaltedVegetable</li>
 			</thingDefs>
 		</ingredientFilter>
-		<processDays>3</processDays>
+		<processDays>4</processDays>
 		<bonusOutputs>
 			<CA_Vinegar>(1.0, 10)</CA_Vinegar>
 		</bonusOutputs>
@@ -379,7 +379,7 @@
 		<label>make syrup</label>
 		<description>Cook and smash raw sugarcane into a sugary syrup that can be evaporated into sugar.</description>
 		<jobString>Making syrup.</jobString>
-		<workAmount>800</workAmount>
+		<workAmount>400</workAmount>
 		<ingredients>
 			<li>
 				<filter>
@@ -387,11 +387,11 @@
 						<li>CA_Sugarcane</li>
 					</thingDefs>
 				</filter>
-				<count>25</count>
+				<count>1.0</count>
 			</li>
 		</ingredients>
 		<products>
-			<CA_Syrup>25</CA_Syrup>
+			<CA_Syrup>20</CA_Syrup>
 		</products>
 		<recipeUsers>
 			<li>Campfire</li>
@@ -412,13 +412,13 @@
 				<li>CA_Syrup</li>
 			</thingDefs>
 		</ingredientFilter>
-		<processDays>0.67</processDays>
+		<processDays>2</processDays>
 		<temperatureIdeal>10~100</temperatureIdeal>
 		<temperatureSafe>-50~200</temperatureSafe>
 		<sunFactor>0.4~1.0</sunFactor>
 		<rainFactor>1~0</rainFactor>
 		<snowFactor>1~0</snowFactor>
-		<windFactor>0.8~1.0</windFactor>
+		<windFactor>0.7~1.0</windFactor>
 	</ProcessorFramework.ProcessDef>
 
 	<ProcessorFramework.ProcessDef>
@@ -443,7 +443,7 @@
 				<li>CA_Sugarcane</li>
 			</thingDefs>
 		</ingredientFilter>
-		<efficiency>0.333</efficiency>
+		<efficiency>1</efficiency>
 		<processDays>0.5</processDays>
 		<usesTemperature>false</usesTemperature>
 		<unpoweredFactor>0.0</unpoweredFactor>

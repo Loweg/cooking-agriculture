@@ -70,4 +70,9 @@
     <Compile Include="Processors\Yeast.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="CopyDLL" AfterTargets="Build">
+    <Message Text="Copying DLL" Importance="High" />
+    <Copy SourceFiles="$(TargetDir)CookingAgriculture.dll" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\CookingAgriculture\Assemblies" />
+    <Message Text="Copied DLL" Importance="High" />
+  </Target>
 </Project>

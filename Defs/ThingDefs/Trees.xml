@@ -12,18 +12,20 @@
 			<BeautyOutdoors>2</BeautyOutdoors>
 			<Nutrition>1.25</Nutrition>
 		</statBases>
-		<ingestible />
 		<plant>
 			<dieIfLeafless>false</dieIfLeafless>
-			<growDays>32.51</growDays>
-			<visualSizeRange>0.8~2.0</visualSizeRange>
 			<fertilityMin>0.7</fertilityMin>
-			<topWindExposure>0.15</topWindExposure>
-			<mustBeWildToSow>true</mustBeWildToSow>
-			<harvestWork>800</harvestWork>
+			<growDays>25</growDays>
+			<harvestWork>500</harvestWork>
 			<harvestYield>50</harvestYield>
 			<harvestFailable>true</harvestFailable>
 			<harvestAfterGrowth>0.20</harvestAfterGrowth>
+			<mustBeWildToSow>true</mustBeWildToSow>
+			<topWindExposure>0.15</topWindExposure>
+			<visualSizeRange>0.8~2.0</visualSizeRange>
+			<sowTags>
+				<li>Ground</li>
+			</sowTags>
 		</plant>
 	</ThingDef>
 
@@ -65,8 +67,8 @@
 			<texPath>Things/Plant/CA_TreeCherry</texPath>
 		</graphicData>
 		<statBases>
-			<Beauty>5</Beauty>
-			<BeautyOutdoors>5</BeautyOutdoors>
+			<Beauty>6</Beauty>
+			<BeautyOutdoors>6</BeautyOutdoors>
 		</statBases>
 		<plant>
 			<immatureGraphicPath>Things/Plant/CA_TreeCherry/Immature</immatureGraphicPath>

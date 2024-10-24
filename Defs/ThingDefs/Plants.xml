@@ -60,7 +60,7 @@
 			<dieIfLeafless>true</dieIfLeafless>
 			<harvestTag>Standard</harvestTag>
 			<harvestedThingDef>CA_Sugarcane</harvestedThingDef>
-			<harvestYield>6</harvestYield>
+			<harvestYield>15</harvestYield>
 			<harvestWork>300</harvestWork>
 			<immatureGraphicPath>Things/Plant/CA_Sugarcane/Immature</immatureGraphicPath>
 			<topWindExposure>0.1</topWindExposure>
@@ -84,7 +84,7 @@
 	<ThingDef ParentName="CA_PlantBase">
 		<defName>CA_WheatPlant</defName>
 		<label>wheat plant</label>
-		<description>Wheat grains can be milled into flour to be used in baking.</description>
+		<description>Wheat plants take a long time to grow, but yield both wheat and hay and are quick to harvest. Wheat grains can be milled into flour to be used in baking.</description>
 		<graphicData>
 			<texPath>Things/Plant/CA_Wheat</texPath>
 		</graphicData>
@@ -98,11 +98,11 @@
 			<harvestedThingDef>
 				<li>CA_WheatHayItemSpawner</li>
 			</harvestedThingDef>
-			<harvestYield>5</harvestYield>
+			<harvestYield>10</harvestYield>
 			<sowMinSkill>6</sowMinSkill>
-			<harvestWork>200</harvestWork>
+			<harvestWork>150</harvestWork>
 			<topWindExposure>0.2</topWindExposure>
-			<growDays>15</growDays>
+			<growDays>13</growDays>
 			<visualSizeRange>0.3~0.8</visualSizeRange>
 			<purpose>Food</purpose>
 		</plant>
