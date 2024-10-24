@@ -38,6 +38,9 @@
 			<topWindExposure>0.4</topWindExposure>
 			<wildOrder>1</wildOrder>
 			<neverBlightable>true</neverBlightable>
+			<sowTags>
+				<li>Ground</li>
+			</sowTags>
 		</plant>
 	</ThingDef>
 
