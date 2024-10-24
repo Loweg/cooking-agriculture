@@ -23,4 +23,9 @@
 		<resourceReadoutRoot>false</resourceReadoutRoot>
 		<iconPath>Things/Item/Resource/CA_Salt</iconPath>
 	</ThingCategoryDef>
+
+	<StuffCategoryDef>
+		<defName>CA_ChunkStone</defName>
+		<label>stone chunks</label>
+	</StuffCategoryDef>
 </Defs>

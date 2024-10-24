@@ -27,5 +27,6 @@
 	<loadAfter>
 		<li>brrainz.harmony</li>
 		<li>syrchalis.processor.framework</li>
+		<li>OskarPotocki.VFE.Tribals</li>
 	</loadAfter>
 </ModMetaData>
