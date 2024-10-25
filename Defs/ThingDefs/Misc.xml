@@ -33,7 +33,7 @@
 			<isResourceRock>true</isResourceRock>
 			<mineableThing>CA_ChunkSalt</mineableThing>
 			<mineableDropChance>1</mineableDropChance>
-			<mineableScatterCommonality>0.1</mineableScatterCommonality>
+			<mineableScatterCommonality>0.2</mineableScatterCommonality>
 			<mineableScatterLumpSizeRange>5~9</mineableScatterLumpSizeRange>
 		</building>
 	</ThingDef>

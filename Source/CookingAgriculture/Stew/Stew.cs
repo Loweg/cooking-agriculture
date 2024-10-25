@@ -148,12 +148,6 @@ namespace CookingAgriculture {
 
         // From TryFindBestIngredientsHelper
         public bool FindIngredients(Pawn pawn, List<ThingCount> chosen, List<IngredientCount> missingIngredients) {
-            if (recipe == null) Log.Warning("recipe null");
-            if (recipe.ingredients == null) Log.Warning("recipe ingredients null");
-            if (storageSettings == null) Log.Warning("storageSettings null");
-            if (storageSettings.filter == null) Log.Warning("storageSettings filter null");
-
-
             if (recipe.ingredients.Count == 0) return true;
 
             // First, make a list of everything around that might be useful

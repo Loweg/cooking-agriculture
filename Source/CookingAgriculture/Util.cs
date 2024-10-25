@@ -5,12 +5,10 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 using Unity.Jobs;
+using System.Linq;
+using System;
 
 namespace CookingAgriculture {
-    [StaticConstructorOnStartup]
-    public static class ModCompatibility {
-        public static bool DeepStorageActive = ModsConfig.IsActive("LWM.DeepStorage");
-    }
     [StaticConstructorOnStartup]
     class ProgressBar: IExposable {
         private Material barFilledCachedMat;
@@ -168,25 +166,25 @@ namespace CookingAgriculture {
         private static void ConstructChunkProperties(ThingDef stoneChunk, StuffProperties referenceProps) {
             stoneChunk.resourceReadoutPriority = ResourceCountPriority.Middle;
             stoneChunk.smeltable = false;
-            stoneChunk.stuffProps = new StuffProperties() {
-                stuffAdjective = referenceProps.stuffAdjective,
-                commonality = referenceProps.commonality,
-                categories = new List<StuffCategoryDef> { CA_DefOf.CA_ChunkStone },
-                statOffsets = new List<StatModifier>(),
-                statFactors = new List<StatModifier>(),
-                color = referenceProps.color,
-                constructEffect = referenceProps.constructEffect,
-                appearance = referenceProps.appearance,
-                soundImpactBullet = referenceProps.soundImpactBullet,
-                soundImpactMelee = referenceProps.soundImpactMelee,
-                soundMeleeHitSharp = referenceProps.soundMeleeHitSharp,
-                soundMeleeHitBlunt = referenceProps.soundMeleeHitBlunt
-            };
-            StuffProperties chunkProps = stoneChunk.stuffProps;
+            var stuffProps = stoneChunk.stuffProps ?? new StuffProperties();
+            stuffProps.stuffAdjective = referenceProps.stuffAdjective;
+            stuffProps.commonality = referenceProps.commonality;
+            var categories = stuffProps.categories ?? new List<StuffCategoryDef>();
+            categories.Add(CA_DefOf.CA_ChunkStone);
+            stuffProps.categories = categories;
+            stuffProps.statOffsets = new List<StatModifier>();
+            stuffProps.statFactors = new List<StatModifier>();
+            stuffProps.color = referenceProps.color;
+            stuffProps.constructEffect = referenceProps.constructEffect;
+            stuffProps.appearance = referenceProps.appearance;
+            stuffProps.soundImpactBullet = referenceProps.soundImpactBullet;
+            stuffProps.soundImpactMelee = referenceProps.soundImpactMelee;
+            stuffProps.soundMeleeHitSharp = referenceProps.soundMeleeHitSharp;
+            stuffProps.soundMeleeHitBlunt = referenceProps.soundMeleeHitBlunt;
             if (referenceProps.statOffsets != null) {
                 for (int i = 0; i < referenceProps.statOffsets.Count; i++) {
                     StatModifier statOffset = referenceProps.statOffsets[i];
-                    chunkProps.statOffsets.Add(new StatModifier() {
+                    stuffProps.statOffsets.Add(new StatModifier() {
                         stat = statOffset.stat,
                         value = statOffset.value
                     });
@@ -195,14 +193,15 @@ namespace CookingAgriculture {
             if (referenceProps.statFactors != null) {
                 for (int i = 0; i < referenceProps.statFactors.Count; i++) {
                     StatModifier statFactor = referenceProps.statFactors[i];
-                    chunkProps.statFactors.Add(new StatModifier() {
+                    stuffProps.statFactors.Add(new StatModifier() {
                         stat = statFactor.stat,
                         value = statFactor.value
                     });
                 }
             }
-            ModifyStatModifier(ref chunkProps.statFactors, StatDefOf.WorkToMake, ToStringNumberSense.Factor, 1.5f);
-            ModifyStatModifier(ref chunkProps.statFactors, StatDefOf.WorkToBuild, ToStringNumberSense.Factor, 1.5f);
+            stoneChunk.stuffProps = stuffProps;
+            ModifyStatModifier(ref stoneChunk.stuffProps.statFactors, StatDefOf.WorkToMake, ToStringNumberSense.Factor, 1.5f);
+            ModifyStatModifier(ref stoneChunk.stuffProps.statFactors, StatDefOf.WorkToBuild, ToStringNumberSense.Factor, 1.5f);
         }
 
         private static void ModifyStatModifier(ref List<StatModifier> modifierList, StatDef stat, ToStringNumberSense mode, float factor) {

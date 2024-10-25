@@ -76,5 +76,4 @@ Some textures are used under the MIT license from RimCuisine2:
 * Traders should carry flour and sugar
 * Masks don't work in the architect menu because of a vanilla rimworld bug.
 * Processors don't display progress properly due to processor framework bug.
-* Stew pot mask not working.
 * Stew pot occasionally eats ingredients without starting process (maybe fixed?)
