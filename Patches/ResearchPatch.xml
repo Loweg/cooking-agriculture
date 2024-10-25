@@ -44,7 +44,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">
-					<xpath>/Defs/ThingDef[defName = "CA_SugarcanePlant"]</xpath>
+					<xpath>/Defs/ThingDef[defName = "CA_SugarcanePlant"]/plant</xpath>
 					<value>
 						<sowResearchPrerequisites>
 							<li>VFET_Cultivation</li>
