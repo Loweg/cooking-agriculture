@@ -33,8 +33,12 @@ namespace CookingAgriculture {
     class RotRatePatch {
         [HarmonyPrefix]
         static bool Prefix(ref float __result, ref float temperature) {
-            __result = GenMath.LerpDoubleClamped(0f, 10f, 0.2f, 1f, temperature);
-            return false;
+            var settings = LoadedModManager.GetMod<CookingAgriculture>().GetSettings<Settings>();
+            if (settings != null && settings.ineffective_freezing) {
+                __result = GenMath.LerpDoubleClamped(0f, 10f, 0.2f, 1f, temperature);
+                return false;
+            }
+            return true;
         }
     }
 
@@ -42,7 +46,8 @@ namespace CookingAgriculture {
     class RotStringPatch {
         [HarmonyPostfix]
         static void Postfix(ref string __result, ref CompRottable __instance) {
-            if (__result != null && __instance.PropsRot.TicksToRotStart - __instance.RotProgress > 0.0 && GenTemperature.RotRateAtTemperature(Mathf.RoundToInt(__instance.parent.AmbientTemperature)) <= 0.21) {
+            var settings = LoadedModManager.GetMod<CookingAgriculture>().GetSettings<Settings>();
+            if (settings != null && settings.ineffective_freezing && __result != null && __instance.PropsRot.TicksToRotStart - __instance.RotProgress > 0.0 && GenTemperature.RotRateAtTemperature(Mathf.RoundToInt(__instance.parent.AmbientTemperature)) <= 0.21) {
                 StringBuilder stringBuilder = new StringBuilder();
                 switch (__instance.Stage) {
                     case RotStage.Fresh:

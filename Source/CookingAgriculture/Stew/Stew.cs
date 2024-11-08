@@ -8,13 +8,13 @@ using Verse;
 using Verse.AI;
 using CookingAgriculture.Processors;
 using System.Linq;
+using System.Reflection;
 
 namespace CookingAgriculture {
     // Somewhat based on the Replimat
     [StaticConstructorOnStartup]
-    class Building_StewPot : Building_NutrientPasteDispenser, IStoreSettingsParent, IThingHolder, INotifyHauledTo {
-        private ThingOwner ingredients;
-        private List<ThingDef> ingredientsDef = new List<ThingDef>();
+    class Building_StewPot : Building_NutrientPasteDispenser, IStoreSettingsParent {
+        public List<ThingDef> ingredients = new List<ThingDef>();
         private ProgressBar progressBar;
         private int storedMeals = 0;
         private bool cooking = false;
@@ -31,18 +31,10 @@ namespace CookingAgriculture {
         public bool StorageTabVisible => Faction == Faction.OfPlayerSilentFail;
 
         public void Start() => cooking = true;
-        public bool IsReady() {
-            var n = ingredients.Sum(i => i.def.GetStatValueAbstract(StatDefOf.Nutrition));
-            return n >= recipe.ingredients.First().GetBaseCount();
-        }
-        public float Nutrition() {
-            return ingredients.Sum(i => i.def.GetStatValueAbstract(StatDefOf.Nutrition));
-        }
         public override Building AdjacentReachableHopper(Pawn reacher) { return null; }
 
         public override void PostMake() {
             base.PostMake();
-            ingredients = new ThingOwner<Thing>(this);
 
             var p = GetComp<CompProcessor>();
             if (p != null && p.Props.processes.Count > 0) {
@@ -75,8 +67,8 @@ namespace CookingAgriculture {
 
         public override void ExposeData() {
             base.ExposeData();
+            Scribe_Collections.Look(ref ingredients, "ingredients");
             Scribe_Deep.Look(ref progressBar, "progressBar");
-            Scribe_Deep.Look(ref ingredients, "ingredients");
             Scribe_Values.Look(ref storedMeals, "storedMeals");
             Scribe_Defs.Look(ref recipe, "recipe");
             Scribe_Deep.Look(ref storageSettings, "storageSettings");
@@ -105,8 +97,6 @@ namespace CookingAgriculture {
             if (IsComplete) {
                 storedMeals = 10;
                 progressBar.Progress = 0f;
-                foreach (var ingredient in ingredients) ingredientsDef.Add(ingredient.def);
-                ingredients.Clear();
                 cooking = false;
             }
         }
@@ -127,10 +117,10 @@ namespace CookingAgriculture {
             storedMeals -= 1;
             Thing meal = ThingMaker.MakeThing(CA_DefOf.CA_Soup);
             CompIngredients comp = meal.TryGetComp<CompIngredients>();
-            foreach (var ingredient in ingredientsDef) {
+            foreach (var ingredient in ingredients) {
                 comp.RegisterIngredient(ingredient);
             }
-            if (IsEmpty) ingredientsDef.Clear();
+            if (IsEmpty) ingredients.Clear();
             return meal;
         }
 
@@ -142,9 +132,6 @@ namespace CookingAgriculture {
             return s;
         }
         public void Notify_SettingsChanged() {}
-
-        public void GetChildHolders(List<IThingHolder> outChildren) => ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
-        public ThingOwner GetDirectlyHeldThings() => ingredients;
 
         // From TryFindBestIngredientsHelper
         public bool FindIngredients(Pawn pawn, List<ThingCount> chosen, List<IngredientCount> missingIngredients) {
@@ -197,15 +184,13 @@ namespace CookingAgriculture {
             }
             return missingIngredients.Count == 0;
         }
-
-        public void Notify_HauledTo(Pawn hauler, Thing thing, int count) {
-            Log.Message("CA Stew Pot debug. Hauled: " + thing + " : " + count);
-        }
     }
 
     public class JobDriver_FillStewPot : JobDriver {
         private const TargetIndex PotInd = TargetIndex.A;
         private const TargetIndex FoodInd = TargetIndex.B;
+
+        public int ticksSpent = 200;
 
         private Building_StewPot StewPot => job.GetTarget(PotInd).Thing as Building_StewPot;
 
@@ -220,20 +205,43 @@ namespace CookingAgriculture {
             this.FailOnDespawnedNullOrForbidden(PotInd);
             this.FailOnBurningImmobile(PotInd);
 
-            AddEndCondition(delegate {
-                if (StewPot.IsReady()) {
-                    return JobCondition.Succeeded;
-                }
-                return JobCondition.Ongoing;
-            });
-
-            foreach (Toil collectToil in JobUtil.CollectToils(PotInd, FoodInd)) {
+            foreach (Toil collectToil in JobUtil.CollectToils(PotInd, FoodInd, TargetIndex.C)) {
                 yield return collectToil;
             }
             yield return Toils_Goto.GotoThing(PotInd, PathEndMode.InteractionCell);
-            yield return Toils_General.Wait(200).FailOnDestroyedNullOrForbidden(FoodInd).FailOnDestroyedNullOrForbidden(PotInd).FailOnCannotTouch(PotInd, PathEndMode.Touch).WithProgressBarToilDelay(PotInd);
+            yield return Toils_General.Wait(200).FailOnDespawnedNullOrForbiddenPlacedThings(PotInd).FailOnCannotTouch(PotInd, PathEndMode.Touch).WithProgressBarToilDelay(PotInd);
             yield return new Toil {
-                initAction = () => StewPot.Start(),
+                initAction = () => {
+                    //if (pawn.skills != null) {
+                    //    float xp = ticksSpent * 0.1f;
+                    //    pawn.skills.GetSkill(SkillDefOf.Cooking).Learn(xp);
+                    //}
+                    List<Thing> ingredients = new List<Thing>();
+                    if (job.placedThings != null) {
+                        for (int i = 0; i < job.placedThings.Count; i++) {
+                            if (job.placedThings[i].Count <= 0) {
+                                Log.Error(string.Concat("PlacedThing ", job.placedThings[i], " with count ", job.placedThings[i].Count, " for job ", job));
+                                continue;
+                            }
+                            Thing thing = (job.placedThings[i].Count >= job.placedThings[i].thing.stackCount) ? job.placedThings[i].thing : job.placedThings[i].thing.SplitOff(job.placedThings[i].Count);
+                            job.placedThings[i].Count = 0;
+                            if (ingredients.Contains(thing)) {
+                                Log.Error("Tried to add ingredient from job placed targets twice: " + thing);
+                                continue;
+                            }
+                            ingredients.Add(thing);
+                        }
+                        job.placedThings = null;
+                    }
+                    Log.Message("Ingredients: " + ingredients.Count);
+                    foreach (var ingredient in ingredients) {
+                        Log.Message("Ingredient: " + ingredient);
+                        StewPot.ingredients.Add(ingredient.def);
+                        ingredient.Destroy();
+                    }
+
+                    StewPot.Start();
+                },
                 defaultCompleteMode = ToilCompleteMode.Instant,
             };
         }
@@ -252,6 +260,7 @@ namespace CookingAgriculture {
             var found = pot.FindIngredients(pawn, chosen, missing);
             if (found) {
                 Job job = JobMaker.MakeJob(CA_DefOf.CA_FillStewPot, pot);
+                job.targetC = pot.InteractionCell;
                 job.targetQueueB = new List<LocalTargetInfo>(chosen.Count);
                 job.countQueue = new List<int>(chosen.Count);
                 for (int j = 0; j < chosen.Count; ++j) {

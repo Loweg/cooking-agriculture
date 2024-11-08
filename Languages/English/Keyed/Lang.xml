@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+	<SettingIneffectiveFreezing>Imperfect freezing</SettingIneffectiveFreezing>
+	<SettingIneffectiveFreezingDesc>Makes freezing an imperfect way of stopping spoilage, reducing the spoilage by at most 80%.</SettingIneffectiveFreezingDesc>
 	<FrozenImperfect>Frozen (spoils in {0})</FrozenImperfect>
 
 	<ProcessorNoIngredient>Missing ingredients</ProcessorNoIngredient>

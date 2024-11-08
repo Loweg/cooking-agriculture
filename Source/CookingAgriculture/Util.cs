@@ -84,28 +84,57 @@ namespace CookingAgriculture {
     }
 
     public class JobUtil {
-        public static IEnumerable<Toil> CollectToils(TargetIndex processor, TargetIndex ingredient) {
+        public static IEnumerable<Toil> CollectToils(TargetIndex processor, TargetIndex ingredient, TargetIndex ingredientPlaceCell) {
             Toil extract = Toils_JobTransforms.ExtractNextTargetFromQueue(ingredient);
             yield return extract;
             Toil skipQueued = Toils_Jump.JumpIfHaveTargetInQueue(ingredient, extract);
-            Toil skipStored = new Toil();
-            skipStored.initAction = () => {
-                Thing p = skipStored.actor.CurJob.GetTarget(processor).Thing;
-                if (p == null || !p.Spawned) return;
-                var ing = skipStored.actor.jobs.curJob.GetTarget(ingredient).Thing;
-                if (ing == null) return;
-                ThingOwner interactableThingOwner = p.TryGetInnerInteractableThingOwner();
-                if (interactableThingOwner == null || !interactableThingOwner.Contains(ing)) return;
-                HaulAIUtility.UpdateJobWithPlacedThings(skipStored.actor.jobs.curJob, ing, ing.stackCount);
-                skipStored.actor.jobs.curDriver.JumpToToil(skipQueued);
-            };
-            yield return skipStored;
             Toil getToHaulTarget = Toils_Goto.GotoThing(ingredient, PathEndMode.ClosestTouch).FailOnDespawnedNullOrForbidden(ingredient).FailOnSomeonePhysicallyInteracting(ingredient);
             yield return getToHaulTarget;
             yield return Toils_Haul.StartCarryThing(ingredient, true, reserve: false);
             yield return JobDriver_DoBill.JumpToCollectNextIntoHandsForBill(getToHaulTarget, TargetIndex.B);
             yield return Toils_Goto.GotoThing(processor, PathEndMode.InteractionCell).FailOnDestroyedOrNull(ingredient);
-            yield return Toils_Haul.DepositHauledThingInContainer(processor, ingredient);
+            Toil findPlaceTarget = Toils_JobTransforms.SetTargetToIngredientPlaceCell(processor, ingredient, ingredientPlaceCell);
+            yield return findPlaceTarget;
+            Toil placeHauledThing = new Toil();
+            findPlaceTarget.initAction = delegate {
+                Pawn actor = findPlaceTarget.actor;
+                Job curJob = actor.jobs.curJob;
+                IntVec3 cell = curJob.GetTarget(processor).Cell;
+                if (actor.carryTracker.CarriedThing == null) {
+                    Log.Error(string.Concat(actor, " tried to place hauled thing in cell but is not hauling anything. [Cooking and Agriculture]"));
+                } else {
+                    Action<Thing, int> placedAction = delegate (Thing t, int added) {
+                        Log.Message("Placing thing");
+                        HaulAIUtility.UpdateJobWithPlacedThings(curJob, t, added);
+                    };
+                    // Returning item on job cancel
+                    if (!actor.carryTracker.TryDropCarriedThing(cell, ThingPlaceMode.Direct, out var _, placedAction)) {
+                        IntVec3 storeCell;
+                        if (StoreUtility.TryFindBestBetterStoreCellFor(actor.carryTracker.CarriedThing, actor, actor.Map, StoragePriority.Unstored, actor.Faction, out var foundCell)) {
+                            if (actor.CanReserve(foundCell)) {
+                                actor.Reserve(foundCell, actor.CurJob);
+                            }
+                            actor.CurJob.SetTarget(processor, foundCell);
+                            actor.jobs.curDriver.JumpToToil(findPlaceTarget);
+                        } else if (HaulAIUtility.CanHaulAside(actor, actor.carryTracker.CarriedThing, out storeCell)) {
+                            curJob.SetTarget(processor, storeCell);
+                            curJob.count = int.MaxValue;
+                            curJob.haulOpportunisticDuplicates = false;
+                            curJob.haulMode = HaulMode.ToCellNonStorage;
+                            actor.jobs.curDriver.JumpToToil(findPlaceTarget);
+                        } else {
+                            Log.Warning($"[Cooking and Agriculture] Incomplete haul for {actor}: Could not find anywhere to put {actor.carryTracker.CarriedThing} near {actor.Position}. Destroying. This should be very uncommon!");
+                            actor.carryTracker.CarriedThing.Destroy();
+                        }
+                    }
+                }
+            };
+            yield return placeHauledThing;   
+            Toil physReserveToil = new Toil();
+            physReserveToil.initAction = delegate {
+                physReserveToil.actor.Map.physicalInteractionReservationManager.Reserve(physReserveToil.actor, physReserveToil.actor.CurJob, physReserveToil.actor.CurJob.GetTarget(ingredient));
+            };
+            yield return physReserveToil;
             yield return skipQueued;
         }
     }
@@ -144,8 +173,8 @@ namespace CookingAgriculture {
         }
         public override void SpawnSetup(Map map, bool respawningAfterLoad) {
             base.SpawnSetup(map, respawningAfterLoad);
-            this.SpawnQuantity(ThingDef.Named("CA_Wheat"), 2, map);
-            this.SpawnQuantity(ThingDef.Named("Hay"), 3, map);
+            this.SpawnQuantity(ThingDef.Named("CA_Wheat"), 1, map);
+            this.SpawnQuantity(ThingDef.Named("Hay"), 1, map);
             this.Destroy();
         }
     }
